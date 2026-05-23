@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0d;
+  --surface: #111116;
+  --surface-soft: #181820;
+  --foreground: #f6f7fb;
+  --muted: #b5b8c5;
+  --brand: #2ce5b0;
+  --brand-2: #ff7a59;
+  --stroke: #2a2b35;
+
+  /* Figma export tokens */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --padding-0: 0px;
+  --padding-20: 20px;
+  --padding-72: 72px;
+  --gap-24: 24px;
+  --gap-22: 22px;
+  --gap-18: 18px;
+  --width-1908: 1908px;
+  --width-24: 24px;
+  --height-25: 25px;
+  --height-12: 12px;
+  --height-96: 96px;
+  --fs-48: 48px;
+  --fs-38: 38px;
+  --fs-33: 33px;
+  --fs-32: 32px;
+  --fs-29: 29px;
+  --fs-26: 26px;
+  --fs-19: 19px;
+  --lh-41: 41px;
+  --lh-31: 31px;
+  --lh-26: 26px;
+  --lh-19: 19px;
+  --Linear: linear-gradient(90deg, #96ffa7 0%, #4fdab3 100%);
+  --font-placebo-fm: var(--font-rubik), Arial, sans-serif;
+  --font-ploni-ml-v2-aaa: var(--font-rubik), Arial, sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-soft: var(--surface-soft);
+  --color-muted: var(--muted);
+  --color-brand: var(--brand);
+  --color-brand-2: var(--brand-2);
+  --color-stroke: var(--stroke);
+  --font-sans: var(--font-rubik);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-rubik), Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(1100px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.chip {
+  border: 1px solid var(--stroke);
+  background: var(--surface-soft);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+}
+
+.chip-active {
+  background: var(--brand);
+  color: #041410;
+  border-color: transparent;
+}
+
+.section-notch {
+  position: relative;
+}
+
+.section-notch::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -22px;
+  width: 64px;
+  height: 34px;
+  transform: translateX(-50%);
+  background: inherit;
+  border-bottom-left-radius: 999px;
+  border-bottom-right-radius: 999px;
+}
+
+.star-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  color: #50efc1;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* Elegant circle for programs link */
+.nav-circle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+  min-height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(84, 239, 192, 0.5);
+  color: #54efc0;
+  text-decoration: none;
+  transition: border-color 0.3s ease;
+}
+
+.nav-circle:hover {
+  border-color: rgba(84, 239, 192, 0.8);
+}

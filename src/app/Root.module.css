@@ -1,0 +1,367 @@
+.root,
+.vectorParent {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  isolation: isolate;
+}
+.root {
+  height: 9365px;
+  position: relative;
+  background-color: var(--color-black);
+  overflow: hidden;
+  flex-direction: column;
+  padding: var(--padding-72) var(--padding-0) 199px;
+  box-sizing: border-box;
+  gap: 199px;
+  line-height: normal;
+  letter-spacing: normal;
+}
+.vectorParent {
+  margin: 0 !important;
+  position: absolute;
+  top: 1007.2px;
+  left: 0;
+  max-width: 100%;
+  flex-shrink: 0;
+  text-align: right;
+  font-size: 130.5px;
+  font-family: var(--font-placebo-fm);
+}
+.vectorIcon {
+  height: 684px;
+  flex: 1;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+.vectorIcon2 {
+  height: 114.7px;
+  width: 124.4px;
+  top: 190px;
+  left: 760px;
+  object-fit: contain;
+  z-index: 2;
+}
+.elementsIcon,
+.h1,
+.vectorGroup,
+.vectorIcon2 {
+  margin: 0 !important;
+  position: absolute;
+}
+.h1 {
+  width: 448px;
+  top: 140px;
+  right: 481px;
+  background: var(--Linear);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  z-index: 2;
+}
+.elementsIcon,
+.vectorGroup {
+  flex-shrink: 0;
+}
+.elementsIcon {
+  width: var(--width-1908);
+  height: 253px;
+  top: 3466px;
+  right: -2px;
+}
+.vectorGroup {
+  width: 100%;
+  top: 3601px;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  isolation: isolate;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--fs-32);
+  color: var(--color-white);
+  font-family: var(--font-ploni-ml-v2-aaa);
+}
+.vectorIcon3 {
+  height: 1188px;
+  flex: 1;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+.div {
+  height: var(--height-96);
+  width: 641px;
+  position: absolute;
+  margin: 0 !important;
+  top: 372px;
+  left: calc(50% - 320.5px);
+  line-height: 100%;
+  font-weight: 300;
+  display: inline-block;
+  z-index: 3;
+}
+.vectorIcon4 {
+  height: 64.8px;
+  width: 22.2px;
+  bottom: 66.2px;
+  left: 940.7px;
+  object-fit: contain;
+  z-index: 3;
+}
+.elementsIcon2,
+.vectorIcon4,
+.vectorIcon5 {
+  position: absolute;
+  margin: 0 !important;
+}
+.elementsIcon2 {
+  width: var(--width-1908);
+  height: 253px;
+  right: -2px;
+  bottom: 4414px;
+  z-index: 2;
+  flex-shrink: 0;
+}
+.vectorIcon5 {
+  width: 100%;
+  height: 614px;
+  right: 0;
+  bottom: 3807px;
+  left: 0;
+  overflow: hidden;
+  z-index: 3;
+}
+.frameChild,
+.frameParent,
+.vectorIcon5 {
+  max-width: 100%;
+  flex-shrink: 0;
+}
+.frameParent {
+  width: 1905px;
+  margin: 0 !important;
+  position: absolute;
+  top: 7616px;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  isolation: isolate;
+}
+.frameChild {
+  height: 1338px;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+.vectorIcon6 {
+  height: 114.7px;
+  width: 124.4px;
+  bottom: -25.7px;
+  left: 482px;
+  z-index: 5;
+}
+.vectorIcon6,
+.vectorIcon7,
+.vectorIcon8 {
+  position: absolute;
+  margin: 0 !important;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.vectorIcon7 {
+  width: 99.6px;
+  height: 39.1px;
+  top: 311px;
+  left: 878.3px;
+  z-index: 1;
+}
+.vectorIcon8 {
+  width: 7.5px;
+  height: 15.8px;
+  top: 328.7px;
+  right: 696px;
+}
+.vectorIcon9 {
+  width: 9.7px;
+  height: 14.7px;
+  top: 331.9px;
+  right: 712px;
+}
+.vectorIcon10,
+.vectorIcon11,
+.vectorIcon9 {
+  position: absolute;
+  margin: 0 !important;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.vectorIcon10 {
+  width: 7.8px;
+  height: 13.5px;
+  top: 333.7px;
+  right: 676.7px;
+}
+.vectorIcon11 {
+  width: 25px;
+  height: var(--height-12);
+  right: 426px;
+  bottom: 2980px;
+  z-index: 1;
+}
+.yearsExperience {
+  width: 1737px;
+  padding: var(--padding-0) var(--padding-20) 164px var(--padding-0);
+  box-sizing: border-box;
+  gap: 145px;
+  max-width: 100%;
+  flex-shrink: 0;
+  text-align: right;
+  font-size: var(--fs-48);
+  color: var(--color-black);
+  font-family: var(--font-placebo-fm);
+}
+.recommendationArea,
+.socialFocus,
+.yearsExperience {
+  display: flex;
+  align-items: flex-start;
+}
+.socialFocus {
+  flex: 1;
+  gap: 44px;
+  max-width: 100%;
+}
+.recommendationArea {
+  width: 191px;
+  flex-direction: column;
+  padding: 15px var(--padding-0) var(--padding-0);
+  box-sizing: border-box;
+}
+.vectorContainer {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--gap-24);
+}
+.vectorIcon12 {
+  width: var(--width-24);
+  height: var(--height-25);
+  position: relative;
+  z-index: 4;
+}
+.h12,
+.vectorIcon13 {
+  align-self: stretch;
+  position: relative;
+}
+.h12 {
+  margin: 0;
+  z-index: 4;
+}
+.vectorIcon13 {
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  display: none;
+  z-index: 17;
+  flex-shrink: 0;
+}
+.frameGroup {
+  width: var(--width-1908);
+  margin: 0 !important;
+  position: absolute;
+  top: 6645px;
+  left: -1px;
+  display: flex;
+  align-items: flex-start;
+  isolation: isolate;
+  flex-shrink: 0;
+}
+.frameItem {
+  height: 968px;
+  flex: 1;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+}
+.vectorIcon14 {
+  height: 39.1px;
+  width: 99.6px;
+  position: absolute;
+  margin: 0 !important;
+  top: 194px;
+  right: 780.4px;
+  object-fit: contain;
+  z-index: 2;
+}
+.elementsIcon3 {
+  margin-left: -3px;
+  align-self: stretch;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  z-index: 2;
+  flex-shrink: 0;
+}
+@media screen and (max-width: 1200px) {
+  .root {
+    gap: 99px;
+  }
+  .yearsExperience {
+    gap: 72px;
+  }
+  .socialFocus {
+    flex-wrap: wrap;
+    min-width: 100%;
+  }
+}
+@media screen and (max-width: 825px) {
+  .root {
+    height: auto;
+    gap: 50px;
+  }
+  .h1 {
+    font-size: 52px;
+    line-height: 64px;
+  }
+  .div {
+    font-size: var(--fs-26);
+    line-height: var(--lh-26);
+  }
+  .yearsExperience {
+    gap: 36px;
+    padding-bottom: 107px;
+    box-sizing: border-box;
+  }
+  .socialFocus {
+    gap: var(--gap-22);
+  }
+  .h12 {
+    font-size: var(--fs-38);
+    line-height: var(--lh-41);
+  }
+}
+@media screen and (max-width: 450px) {
+  .h1 {
+    font-size: var(--fs-33);
+    line-height: 43px;
+  }
+  .div {
+    font-size: var(--fs-19);
+    line-height: var(--lh-19);
+  }
+  .yearsExperience {
+    gap: var(--gap-18);
+  }
+  .h12 {
+    font-size: var(--fs-29);
+    line-height: var(--lh-31);
+  }
+}
+
