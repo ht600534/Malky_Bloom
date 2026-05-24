@@ -26,7 +26,11 @@
 
 ## מסד נתונים Supabase
 
+- `NEXT_PUBLIC_SUPABASE_URL` = רק `https://XXXX.supabase.co` **בלי** `/rest/v1`
 - יש להריץ את הקובץ: `supabase/migrations/20260426_init.sql`
+- אם יש שגיאת `permission denied` — להריץ גם: `supabase/migrations/20260524_api_grants.sql`
+- שדות תוכנית מלאים (נושא, קהל יעד, חומרים, תמונות…): `supabase/migrations/20260525_program_fields.sql`
+- העלאת קבצים מהמחשב (Storage): `supabase/migrations/20260526_storage_bucket.sql`
 - הקובץ יוצר טבלאות:
   - `programs`
   - `program_categories`

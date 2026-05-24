@@ -1,34 +1,39 @@
 import { z } from "zod";
+import { generateProgramSlug } from "@/lib/slug";
 
-export const programSchema = z.object({
+const optionalText = z.string().trim().optional().or(z.literal(""));
+
+export const programImageInputSchema = z.object({
+  url: z.string().url("כתובת קובץ/תמונה לא תקינה"),
+  alt: optionalText,
+  assetType: z.enum(["photo", "graphic"]).default("photo"),
+  isCover: z.boolean().optional(),
+});
+
+export const programFileInputSchema = z.object({
+  label: optionalText,
+  url: z.string().url("כתובת חומר לא תקינה"),
+});
+
+const programSchemaBase = z.object({
   title: z.string().min(2, "נדרש שם תוכנית"),
-  slug: z
-    .string()
-    .min(2, "נדרש slug")
-    .regex(/^[a-z0-9-]+$/, "רק אותיות קטנות באנגלית, מספרים ומקף"),
-  shortDescription: z.string().min(10, "נדרש תיאור קצר"),
-  fullDescription: z.string().min(30, "נדרש פירוט מלא"),
-  category: z.enum(["events", "camp", "year-circle", "workshops"]),
-  status: z.enum(["draft", "published"]),
+  slug: optionalText,
+  shortDescription: optionalText,
+  fullDescription: optionalText,
+  topic: optionalText,
+  targetAudience: optionalText,
+  duration: optionalText,
+  notes: optionalText,
+  category: z.enum(["events", "camp", "year-circle", "workshops"]).optional(),
+  status: z.enum(["draft", "published"]).default("draft"),
+  images: z.array(programImageInputSchema).optional(),
+  materials: z.array(programFileInputSchema).optional(),
 });
 
-export const newsletterSchema = z.object({
-  email: z.string().email("אימייל לא תקין"),
-});
+export const programSchema = programSchemaBase.transform((data) => ({
+  ...data,
+  slug: generateProgramSlug(data.title, data.slug),
+}));
 
-export const contactSchema = z.object({
-  name: z.string().min(2, "שם קצר מדי"),
-  phone: z.string().min(8, "טלפון קצר מדי"),
-  email: z.string().email("אימייל לא תקין"),
-  message: z.string().min(10, "הודעה קצרה מדי"),
-  programId: z.string().optional(),
-});
-
-export const categorySchema = z.object({
-  name: z.string().min(2, "נדרש שם קטגוריה"),
-  slug: z
-    .string()
-    .min(2, "נדרש slug")
-    .regex(/^[a-z0-9-]+$/, "רק אותיות קטנות באנגלית, מספרים ומקף"),
-  sortOrder: z.number().int().min(0),
-});
+export type ProgramInput = z.input<typeof programSchemaBase>;
+export type ProgramPayload = z.output<typeof programSchema>;

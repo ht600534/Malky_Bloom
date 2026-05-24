@@ -1,6 +1,6 @@
 "use server";
 
-import { contactSchema, newsletterSchema } from "@/lib/validations/program";
+import { contactSchema, newsletterSchema } from "@/lib/validations/forms";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { headers } from "next/headers";
 import { hitRateLimit } from "@/lib/rate-limit";
@@ -34,10 +34,14 @@ export async function subscribeNewsletter(formData: FormData): Promise<ActionRes
     });
 
     if (error) {
-      return { ok: false, message: "לא ניתן לשמור כרגע. נסי שוב." };
+      if (error.code === "23505") {
+        return { ok: false, message: "האימייל כבר רשום." };
+      }
+      return { ok: false, message: `לא ניתן לשמור: ${error.message}` };
     }
-  } catch {
-    return { ok: false, message: "חסר חיבור למסד נתונים בסביבה הנוכחית." };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "חסר חיבור למסד נתונים";
+    return { ok: false, message };
   }
 
   return { ok: true, message: "נרשמת בהצלחה לרשימת התפוצה." };

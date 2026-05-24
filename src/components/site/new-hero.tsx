@@ -28,12 +28,12 @@ export function NewHeroSection() {
           pointerEvents: "none",
         }}
       >
-        <Image
+        {/* <Image
           src="/figma/elements-decoration-1.svg"
           alt=""
           width={300}
           height={300}
-        />
+        /> */}
       </Box>
       <Box
         sx={{
@@ -44,12 +44,12 @@ export function NewHeroSection() {
           pointerEvents: "none",
         }}
       >
-        <Image
+        {/* <Image
           src="/figma/elements-decoration-2.svg"
           alt=""
           width={350}
           height={350}
-        />
+        /> */}
       </Box>
 
       <Container maxWidth="lg">

@@ -19,13 +19,19 @@ import {
   Menu as MenuIcon,
   Close as CloseIcon,
 } from "@mui/icons-material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export function SiteHeaderMUI() {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobileQuery = useMediaQuery(theme.breakpoints.down("md"), { noSsr: true });
+  const isMobile = mounted && isMobileQuery;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleDrawer = (open: boolean) => {
     setDrawerOpen(open);

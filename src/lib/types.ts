@@ -5,14 +5,25 @@ export type ProgramImage = {
   alt: string;
 };
 
+export type ProgramMaterial = {
+  label: string;
+  url: string;
+};
+
 export type Program = {
   id: string;
   slug: string;
   title: string;
   shortDescription: string;
   fullDescription: string;
-  category: ProgramCategory;
+  topic: string;
+  targetAudience: string;
+  duration: string;
+  notes: string;
+  category: ProgramCategory | null;
   tags: string[];
   images: ProgramImage[];
+  graphics: ProgramImage[];
+  materials: ProgramMaterial[];
   status: "draft" | "published";
 };

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Rubik } from "next/font/google";
+import { EmotionCacheProvider } from "@/components/providers/emotion-cache-provider";
 import { MUIProvider } from "@/components/providers/mui-provider";
 import "./globals.css";
 
@@ -43,7 +44,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${rubik.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <MUIProvider>{children}</MUIProvider>
+        <EmotionCacheProvider>
+          <MUIProvider>{children}</MUIProvider>
+        </EmotionCacheProvider>
       </body>
     </html>
   );

@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { ensureAdminRequest } from "@/lib/admin-api";
+import {
+  dbProgramToAdminForm,
+  listProgramsAdmin,
+  programPayloadToRow,
+  syncProgramAssets,
+} from "@/lib/supabase/program-repository";
+import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { programSchema } from "@/lib/validations/program";
-import { samplePrograms } from "@/lib/data/programs";
 
 export async function GET(request: NextRequest) {
   if (!ensureAdminRequest(request)) {
@@ -10,14 +15,18 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const supabase = getSupabaseServerClient();
-    const { data, error } = await supabase.from("programs").select("*").order("created_at", { ascending: false });
+    const { data, error } = await listProgramsAdmin();
     if (error) {
-      return NextResponse.json({ programs: samplePrograms });
+      return NextResponse.json({ programs: [], message: error.message }, { status: 500 });
     }
-    return NextResponse.json({ programs: data });
-  } catch {
-    return NextResponse.json({ programs: samplePrograms });
+    const programs = (data ?? []).map((row) => ({
+      ...row,
+      form: dbProgramToAdminForm(row),
+    }));
+    return NextResponse.json({ programs });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Supabase is not configured yet";
+    return NextResponse.json({ programs: [], message }, { status: 500 });
   }
 }
 
@@ -35,20 +44,20 @@ export async function POST(request: NextRequest) {
 
   try {
     const supabase = getSupabaseServerClient();
-    const { error } = await supabase.from("programs").insert({
-      title: parsed.data.title,
-      slug: parsed.data.slug,
-      short_description: parsed.data.shortDescription,
-      full_description: parsed.data.fullDescription,
-      category: parsed.data.category,
-      status: parsed.data.status,
-    });
+    const { data, error } = await supabase
+      .from("programs")
+      .insert(programPayloadToRow(parsed.data))
+      .select("id")
+      .single();
 
-    if (error) {
-      return NextResponse.json({ message: "Failed to create program" }, { status: 500 });
+    if (error || !data) {
+      return NextResponse.json({ message: error?.message || "Failed to create program" }, { status: 500 });
     }
-  } catch {
-    return NextResponse.json({ message: "Supabase is not configured yet" }, { status: 500 });
+
+    await syncProgramAssets(data.id, parsed.data);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Supabase is not configured yet";
+    return NextResponse.json({ message }, { status: 500 });
   }
 
   return NextResponse.json({ message: "התוכנית נוצרה בהצלחה." });

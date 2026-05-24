@@ -12,6 +12,7 @@ export function WhyChooseUs() {
         direction: "rtl",
       }}
     >
+      
       <Container maxWidth="lg">
         <Stack spacing={6}>
           {/* כותרת */}

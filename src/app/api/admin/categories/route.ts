@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ensureAdminRequest } from "@/lib/admin-api";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
-import { categorySchema } from "@/lib/validations/program";
+import { categorySchema } from "@/lib/validations/category";
 
 export async function GET(request: NextRequest) {
   if (!ensureAdminRequest(request)) {

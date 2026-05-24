@@ -1,7 +1,8 @@
 "use client";
 
-import { Box, Container, Grid, Typography, Link, Stack, TextField, Button } from "@mui/material";
+import { Box, Button, Container, Grid, Typography, Link, Stack } from "@mui/material";
 import Image from "next/image";
+import { NewsletterSubscribeMUI } from "@/components/site/newsletter-subscribe-mui";
 
 export function FooterMUI() {
 
@@ -53,78 +54,28 @@ export function FooterMUI() {
                 </Typography>
               </Box>
 
-              {/* שדה קלט וכפתורים */}
-              <Stack direction="row" spacing={1.5} sx={{ alignItems: "center" }}>
-                <TextField
-                  placeholder="מייל..."
-                  variant="outlined"
-                  size="small"
-                  sx={{
-                    flex: 1,
-                    "& .MuiOutlinedInput-root": {
-                      background: "transparent",
-                      borderRadius: "6px",
-                      "& fieldset": {
-                        borderColor: "rgba(255, 255, 255, 0.3)",
-                      },
-                      "&:hover fieldset": {
-                        borderColor: "rgba(255, 255, 255, 0.5)",
-                      },
-                    },
-                    "& .MuiOutlinedInput-input": {
-                      color: "#fff",
-                      padding: "8px 12px",
-                      fontSize: "0.85rem",
-                      textAlign: "right",
-                      "&::placeholder": {
-                        color: "rgba(255, 255, 255, 0.5)",
-                        opacity: 1,
-                      },
-                    },
-                  }}
-                />
-
-                <Button
-                  sx={{
-                    background: "#2ce5b0",
-                    color: "#000",
-                    px: 2,
-                    py: 0.7,
-                    fontWeight: 600,
-                    borderRadius: "6px",
-                    fontSize: "0.8rem",
-                    textTransform: "none",
-                    minWidth: "fit-content",
-                    transition: "all 0.3s",
-                    "&:hover": {
-                      background: "#1dd99a",
-                    },
-                  }}
-                >
-                  שלח
-                </Button>
-
-                <Button
-                  sx={{
-                    border: "1px solid rgba(255, 255, 255, 0.5)",
-                    color: "#fff",
-                    px: 2,
-                    py: 0.7,
-                    fontWeight: 600,
-                    borderRadius: "6px",
-                    fontSize: "0.8rem",
-                    textTransform: "none",
-                    minWidth: "fit-content",
-                    transition: "all 0.3s",
-                    "&:hover": {
-                      borderColor: "#2ce5b0",
-                      color: "#2ce5b0",
-                    },
-                  }}
-                >
-                  מידע נוסף
-                </Button>
-              </Stack>
+              <NewsletterSubscribeMUI variant="footer" />
+              <Button
+                component={Link}
+                href="/about"
+                sx={{
+                  border: "1px solid rgba(255, 255, 255, 0.5)",
+                  color: "#fff",
+                  px: 2,
+                  py: 0.7,
+                  fontWeight: 600,
+                  borderRadius: "6px",
+                  fontSize: "0.8rem",
+                  textTransform: "none",
+                  alignSelf: "flex-start",
+                  "&:hover": {
+                    borderColor: "#2ce5b0",
+                    color: "#2ce5b0",
+                  },
+                }}
+              >
+                מידע נוסף
+              </Button>
             </Stack>
           </Grid>
 
