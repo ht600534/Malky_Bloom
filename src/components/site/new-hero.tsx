@@ -1,3 +1,4 @@
+// DEPRECATED: עובר ל-Tailwind בלבד. אין להשתמש בקומפוננטה זו יותר.
 "use client";
 
 import { Box, Container, Typography, Button, Stack } from "@mui/material";
@@ -134,8 +135,8 @@ export function NewHeroSection() {
 
             <Button
               sx={{
-                color: "#2ce5b0",
-                border: "2px solid #2ce5b0",
+                color: "#e52c2c",
+                border: "2px solid #e52c2c",
                 px: 4,
                 py: 1.5,
                 fontSize: "1rem",
@@ -144,8 +145,8 @@ export function NewHeroSection() {
                 borderRadius: "30px",
                 transition: "all 0.3s",
                 "&:hover": {
-                  background: "rgba(44, 229, 176, 0.1)",
-                  borderColor: "#50efc1",
+                  background: "rgba(229, 44, 44, 0.82)",
+                  borderColor: "#ff0000",
                 },
               }}
             >

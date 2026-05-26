@@ -1,3 +1,4 @@
+// DEPRECATED: עובר ל-Tailwind בלבד. אין להשתמש בקומפוננטה זו יותר.
 "use client";
 
 import { Box, Container, Typography, Button, Stack } from "@mui/material";

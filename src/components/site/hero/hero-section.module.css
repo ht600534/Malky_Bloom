@@ -1,0 +1,119 @@
+/* hero-section.module.css */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, #0a0a0f 60%, #181a23 100%);
+  border-radius: 2.5rem;
+  margin: 2rem auto;
+  padding: 4rem 2rem 6rem 2rem;
+  max-width: 1200px;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
+}
+.circleLeft {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle at 60% 40%, #4be6b5 60%, #1e9e7e 100%);
+  border-radius: 50%;
+  opacity: 0.85;
+  z-index: 1;
+}
+.circleRight {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle at 40% 60%, #ff7a6b 60%, #c23c2a 100%);
+  border-radius: 50%;
+  opacity: 0.85;
+  z-index: 1;
+}
+.content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+}
+.title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 1.2rem;
+  line-height: 1.2;
+}
+.success {
+  color: #ff7a6b;
+  font-weight: 900;
+}
+.subtitle {
+  font-size: 2.2rem;
+  color: #4be6b5;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+.desc {
+  color: #bfc9d1;
+  font-size: 1.1rem;
+  margin-bottom: 2.2rem;
+}
+.buttons {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+}
+.cta {
+  background: linear-gradient(90deg, #7b6cff 0%, #4be6b5 100%);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.8rem 2.2rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px 0 rgba(75,230,181,0.15);
+  transition: background 0.2s;
+}
+.cta:hover {
+  background: linear-gradient(90deg, #4be6b5 0%, #7b6cff 100%);
+}
+.secondary {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #4be6b5;
+  border-radius: 2rem;
+  padding: 0.8rem 2.2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.secondary:hover {
+  background: #4be6b5;
+  color: #181a23;
+}
+@media (max-width: 700px) {
+  .hero {
+    padding: 2rem 0.5rem 3rem 0.5rem;
+    min-height: 320px;
+  }
+  .title {
+    font-size: 1.5rem;
+  }
+  .subtitle {
+    font-size: 1.1rem;
+  }
+  .circleLeft, .circleRight {
+    width: 70px;
+    height: 70px;
+    top: 1rem;
+  }
+  .circleLeft { left: 1rem; }
+  .circleRight { right: 1rem; }
+}

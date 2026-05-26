@@ -4,7 +4,7 @@ import { FeaturesSection } from "@/components/site/features-section";
 import { CTASection } from "@/components/site/cta-section";
 import { FooterMUI } from "@/components/site/footer-mui";
 
-export default function Home() {
+// נמחק – קובץ לא רלוונטי
   return (
     <>
       <SiteHeaderMUI />

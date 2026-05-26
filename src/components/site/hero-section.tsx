@@ -1,9 +1,11 @@
+// DEPRECATED: עובר ל-Tailwind בלבד. אין להשתמש בקומפוננטה זו יותר.
 "use client";
 
 import { Box, Container, Typography, Button, Stack } from "@mui/material";
 import { ArrowForward } from "@mui/icons-material";
+import HeroGraphics from "@/components/site/hero-graphics";
 
-export function HeroSection() {
+export default function HeroSection() {
   return (
     <Box
       component="section"
@@ -17,7 +19,11 @@ export function HeroSection() {
         direction: "rtl",
       }}
     >
-      <Container maxWidth="lg">
+      {/* שכבת גרפיקה ברקע */}
+      <Box sx={{ position: "absolute", inset: 0, zIndex: 1, pointerEvents: "none" }}>
+        <HeroGraphics />
+      </Box>
+      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
         <Stack spacing={3} sx={{ alignItems: "center" }}>
           <Typography
             component="h1"
@@ -79,8 +85,8 @@ export function HeroSection() {
             <Button
               variant="outlined"
               sx={{
-                color: "#fff",
-                borderColor: "#54EFC0",
+                color: "#ff0000",
+                borderColor: "#a11010",
                 px: 4,
                 py: 1.5,
                 fontSize: "1rem",
@@ -88,8 +94,8 @@ export function HeroSection() {
                 textTransform: "none",
                 borderRadius: "8px",
                 "&:hover": {
-                  borderColor: "#54EFC0",
-                  backgroundColor: "rgba(84, 239, 192, 0.1)",
+                  borderColor: "#ef5454",
+                  backgroundColor: "rgba(240, 10, 6, 0.91)",
                 },
               }}
             >

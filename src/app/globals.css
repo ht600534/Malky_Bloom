@@ -1,3 +1,43 @@
+@font-face {
+  font-family: 'asimon';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/fonts/asimon-regular-aaa.woff2') format('woff2'),
+       url('/fonts/asimon-regular-aaa.woff') format('woff');
+}
+@font-face {
+  font-family: 'asimon';
+  font-weight: 700;
+  font-style: normal;
+  src: url('/fonts/asimon-bold-aaa.woff2') format('woff2'),
+       url('/fonts/asimon-bold-aaa.woff') format('woff');
+}
+@font-face {
+  font-family: 'asimon';
+  font-weight: 900;
+  font-style: normal;
+  src: url('/fonts/asimon-black-aaa.woff2') format('woff2'),
+       url('/fonts/asimon-black-aaa.woff') format('woff');
+}
+/* Tailwind utility for Placebo font */
+.font-placebo {
+  font-family: 'Placebo_FM', Arial, sans-serif;
+}
+/* === Custom Fonts === */
+@font-face {
+  font-family: 'Placebo_FM';
+  src: url('/fonts/placebo-bold-fm.woff2') format('woff2'),
+       url('/fonts/placebo-bold-fm.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 @import "tailwindcss";
 
 :root {
