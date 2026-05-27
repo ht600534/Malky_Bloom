@@ -40,14 +40,14 @@ export function TheaterImageBlock() {
       /> */}
       {/* תוכן ממורכז מעל התמונה */}
       <div className="relative z-20 flex flex-col items-center justify-center w-full max-w-2xl px-4 py-12 text-center">
-        <span className="inline-block text-4xl md:text-6xl font-black leading-tight bg-gradient-to-r from-[#96ffa7] to-[#4fdab3] bg-clip-text text-transparent mb-2 md:mb-4 mt-2 drop-shadow-lg" style={{letterSpacing: '-2px'}}>
+        <span className="inline-block text-4xl md:text-6xl font-black leading-tight bg-gradient-to-r from-[#96ffa7] to-[#4fdab3] bg-clip-text text-transparent mb-2 md:mb-4 mt-2 drop-shadow-lg" style={{letterSpacing: '-2px',fontFamily: "'Placebo_FM', Arial, sans-serif"}}>
           מרכזות אונליין
         </span>
-        <div className="text-white text-base md:text-xl font-light leading-snug max-w-md mb-4 drop-shadow-lg" >
+        <div className="text-white text-base md:text-xl font-light leading-snug max-w-md mb-4 drop-shadow-lg" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
           פלטפורמה חדשנית ומיוחדת <br /> לרכזות תיכון שרוצות הצלחה,<br />עם מגוון ענק של תוכניות מקצועיות <br /> ויצירתיות מוכנות להפעלה
         </div>
         <br />
-        <button className="bg-[#ff7a6b] hover:bg-[#ff7458] text-white rounded-full px-8 py-2 text-lg font-bold transition-all shadow-lg mx-auto mb-8">
+        <button className="bg-[#ff7a6b] hover:bg-[#ff7458] text-white rounded-full px-8 py-2 text-lg font-bold transition-all shadow-lg mx-auto mb-8" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
           לתוכניות שלנו
         </button>
       </div>

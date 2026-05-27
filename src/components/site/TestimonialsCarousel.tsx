@@ -29,7 +29,7 @@ const testimonials = [
 export default function TestimonialsCarousel() {
   return (
     <section className="w-full bg-white py-24" dir="rtl">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 flex">
          
         <div className=" flex-col items-end mb-12" style={{direction: 'rtl'}}>
           <img src="/figma/Vector-9.svg" alt="סמל המלצות" className="w-6 h-6 mb-2 mr-1" style={{display:'inline-block'}} />

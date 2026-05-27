@@ -41,6 +41,8 @@ html, body {
 @import "tailwindcss";
 
 :root {
+  --background: #ffffff00;
+
   --background: #0a0a0d;
   --surface: #111116;
   --surface-soft: #181820;

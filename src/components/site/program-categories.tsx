@@ -4,32 +4,38 @@ export function ProgramCategories() {
   return (
     // flex-row items-end
     <section className="w-full bg-[#0a0a0d]  rtl relative overflow-visible">
-      <div className="max-w-7xl mx-auto flex  justify-center  md:gap-40 relative z-10">
+      <div className="max-w-7xl mx-auto flex justify-center md:gap-30 relative z-10">
         {/* עיגול שמאלי - ירוק בתוך ריבוע */}
-        <div className="flex flex-col items-center" style={{ marginTop: '150px' }}>
-          <div className="w-[320px] h-[320px] rounded-3xl bg-[#101012] flex flex-col items-center justify-center shadow-lg">
+        <div className="flex flex-col items-center" style={{ marginTop: '250px' }}>
+          <div className="w-[300px] h-[300px] rounded-3xl bg-[#101012] flex flex-col items-center justify-center shadow-lg">
             <div className="w-[80px] h-[80px] rounded-full bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] flex items-center justify-center">
               <img src="/figma/Vector-6.svg" alt="מעגל השנה" className="w-10 h-10" />
             </div>
-            <div className="mt-8 text-2xl font-bold bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] bg-clip-text text-transparent text-center leading-tight">סביב<br />מעגל השנה</div>
+            <div className="mt-8 text-2xl font-bold bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] bg-clip-text text-transparent text-center leading-tight" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+              סביב<br />מעגל השנה
+            </div>
           </div>
         </div>
         {/* עיגול אמצעי - לבן בתוך ריבוע */}
-        <div className="flex flex-col items-o" style={{ marginTop: '250px' }}>
-          <div className="w-[320px] h-[320px] rounded-3xl bg-[#101012] flex flex-col items-center justify-center shadow-lg">
+        <div className="flex flex-col items-o" style={{ marginTop: '350px', marginBottom: '-350px'}}>
+          <div className="w-[300px] h-[300px] rounded-3xl bg-[#101012] flex flex-col items-center justify-center shadow-lg">
             <div className="w-[80px] h-[80px] rounded-full bg-white flex items-center justify-center border-4 border-[#111116]">
               <img src="/figma/spark-orange.svg" alt="תוכניות נושא" className="w-8 h-8 filter invert-0 brightness-0" />
             </div>
-            <div className="mt-8 text-2xl font-bold text-white text-center leading-tight">תוכניות<br />נושא</div>
+            <div className="mt-8 text-2xl font-bold text-white text-center leading-tight" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+              תוכניות<br />נושא
+            </div>
           </div>
         </div>
         {/* עיגול ימני - כתום בתוך ריבוע */}
-        <div className="flex flex-col items-center" style={{ marginTop: '150px' }}>
-          <div className="w-[320px] h-[320px] rounded-3xl bg-[#101012] flex flex-col items-center justify-center shadow-lg">
+        <div className="flex flex-col items-center" style={{ marginTop: '250px' }}>
+          <div className="w-[300px] h-[300px] rounded-3xl bg-[#101012] flex flex-col items-center justify-center shadow-lg">
             <div className="w-[80px] h-[80px] rounded-full bg-[#FF7458] flex items-center justify-center">
               <img src="/figma/11.svg" alt="מחנות קיץ וחורף" className="w-10 h-10" />
             </div>
-            <div className="mt-8 text-2xl font-bold text-[#FF7458] text-center leading-tight">מחנות<br />קיץ וחורף</div>
+            <div className="mt-8 text-2xl font-bold text-[#FF7458] text-center leading-tight" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+              מחנות<br />קיץ וחורף
+            </div>
           </div>
         </div>
       </div>
@@ -44,6 +50,8 @@ export function ProgramCategories() {
           </div>
         </div>
       </div> */}
+      {/* ריווח שחור קצר מתחת לריבועים */}
+    
       {/* מעבר לרקע לבן בהמשך - רווח בלבד */}
       <div className="w-full h-100 bg-transparent" />
       {/* בלוק תוכנית ערכית ומיוחדת ממורכז לימין, צמוד לריבועים */}
@@ -61,7 +69,7 @@ export function ProgramCategories() {
             <div className="flex-1 text-right text-green-300 text-4xl font-bold leading-10 flex items-center justify-end" style={{fontFamily: "'Placebo_FM', Arial, sans-serif", marginRight: '-100px' }}>
               <span>תוכנית<br />ערכית<br />ומיוחדת</span>
             </div>
-            <div className="flex-1 text-right text-white text-2xl font-light leading-9 flex items-center justify-start" style={{fontFamily: 'Arial, sans-serif'}}>
+            <div className="flex-1 text-right text-white text-2xl font-light leading-9 flex items-center justify-start" style={{fontFamily: 'Tahoma, Geneva, sans-serif'}}>
               <span>התוכניות מותאמות<br />באופן מלא לצרכים<br />ולאופי של התיכון שלך</span>
             </div>
           </div>
@@ -80,7 +88,7 @@ export function ProgramCategories() {
             <div className="flex-1 text-right text-red-400 text-4xl font-bold leading-10 flex items-center justify-end" style={{fontFamily: "'Placebo_FM', Arial, sans-serif", marginRight: '-80px'}}>
               <span>תוכנית<br/>בהתאמה<br/>אישית</span>
             </div>
-            <div className="flex-1 text-right text-white text-2xl font-light leading-9 flex items-center justify-start" style={{fontFamily: 'Arial, sans-serif'}}>
+            <div className="flex-1 text-right text-white text-2xl font-light leading-9 flex items-center justify-start" style={{fontFamily: 'Tahoma, Geneva, sans-serif'}}>
               <span>תוכלי לשלב תוכן<br/>ייחודי משלך: תמונות, <br/>הסרטות והימנונים</span>
             </div>
           </div>

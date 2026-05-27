@@ -1,205 +1,113 @@
-"use client";
 
-import { Box, Container, Typography, Grid, Card, CardContent, Button, Stack } from "@mui/material";
-import { ArrowForward } from "@mui/icons-material";
+import { getPublishedPrograms } from "@/lib/data/programs";
 import Image from "next/image";
+import Link from "next/link";
 
-const programs = [
-  {
-    title: "אש בוערת בברסלב",
-    description: "תוכנית מלהיבה שמקשרת בין רוח הברסלבית לחיים מודרניים",
-    color: "#96ffa7",
-    bg: "linear-gradient(135deg, rgba(44, 229, 176, 0.1), transparent)",
-    border: "rgba(44, 229, 176, 0.2)",
-  },
-  {
-    title: "ספירת העומר",
-    description: "מסע רוחני דרך ספירת העומר עם מעמקות ופעילויות משמעותיות",
-    color: "#FF7A59",
-    bg: "linear-gradient(135deg, rgba(255, 122, 89, 0.1), transparent)",
-    border: "rgba(255, 122, 89, 0.2)",
-  },
-  {
-    title: "סיפור המצווה",
-    description: "חוויה דינמית המלמדת על המצווות דרך סיפורים וחוויות",
-    color: "#4fdab3",
-    bg: "linear-gradient(135deg, rgba(79, 218, 179, 0.1), transparent)",
-    border: "rgba(79, 218, 179, 0.2)",
-  },
-];
+export default async function PopularPrograms() {
+  const programs = await getPublishedPrograms();
+  const popular = programs.slice(0, 2);
 
-export function PopularPrograms() {
   return (
-    <Box
-      component="section"
-      sx={{
-        background: "#0a0a0d",
-        py: { xs: 8, md: 12 },
-        direction: "rtl",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      {/* רקע דקורטיבי */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: "-10%",
-          left: "-10%",
-          width: "400px",
-          height: "400px",
-          background: "radial-gradient(circle, rgba(79, 218, 179, 0.1) 0%, transparent 70%)",
-          borderRadius: "50%",
-          pointerEvents: "none",
-          filter: "blur(50px)",
-        }}
-      />
+    <section className="w-full bg-[#0a0a0d] py-16 md:py-24 relative">
 
-      <Container maxWidth="lg">
-        <Stack spacing={8}>
-          {/* כותרת */}
-          <Box sx={{ textAlign: "center" }}>
-            <Typography
-              sx={{
-                fontSize: { xs: "0.9rem", md: "1rem" },
-                color: "#b5b8c5",
-                textTransform: "uppercase",
-                letterSpacing: "2px",
-                fontWeight: 600,
-                mb: 2,
-              }}
-            >
-              תוכניות בתאום
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: { xs: "2rem", md: "3rem", lg: "3.5rem" },
-                fontWeight: 900,
-                background: "linear-gradient(135deg, #96ffa7 0%, #4fdab3 100%)",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                lineHeight: 1.3,
-              }}
-            >
-              התוכניות
-              <br />
-              הפופולאריות שלנו
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: { xs: "0.95rem", md: "1.1rem" },
-                color: "#b5b8c5",
-                maxWidth: "600px",
-                mx: "auto",
-                lineHeight: 1.7,
-                mt: 3,
-              }}
-            >
-              בחרו מאוסף התוכניות המותאמות שלנו שנוצרו בעבור רכזות ובתיכונים בכל רחבי הארץ
-            </Typography>
-          </Box>
+      {/* עיגול SVG Vector-8 מעל הכותרת */}
+      <div className="flex">
+        <div className="flex-col items-end mb-12">
+          <div className="flex" style={{ marginRight: '138px' }}>
+            <img src="/figma/Vector-8.svg" alt="עיגול דקורטיבי" className="w-6 h-6 mb-2 mr-1" />
+          </div>
+          <div className="max-w-7xl relative">
+            {/* כותרת במרכז */}
+            <div className="flex flex-col mb-10 md:mb-14" mr-5>
+              <h2
+                className="text-4xl font-bold text-right mb-12 bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] bg-clip-text text-transparent leading-tight mb-4 text-right"
+                style={{
+                  letterSpacing: '-1px',
+                  direction: 'rtl',
+                  marginRight: '138px',
+                  fontFamily: "'Placebo_FM', Arial, sans-serif"
+                }}
+              >
+                התוכניות<br />הפופולאריות<br />שלנו
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-wrap justify-center gap-6 md:gap-10 mr-40 mt-20 items-center relative">
+          {/* כרטיסים */}
+          {popular.map((program, idx) => {
+            // צבעים דינמיים: 0 = ירוק, 1 = כתום
+            const isGreen = idx % 2 === 0;
+            const mainColor = isGreen ? '#4FDAB3' : '#FF7458';
+            const gradient = isGreen
+              ? 'bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] bg-clip-text text-transparent'
+              : 'text-[#FF7458]';
+            const buttonClass = isGreen
+              ? 'bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] text-black'
+              : 'bg-[#FF7458] text-white';
+            return (
+              <div
+                key={program.id}
+                className="w-full max-w-[361px] h-[480px] bg-[#0E0E0E] rounded-[30px] p-5 flex flex-col shadow-lg transition-all duration-300 hover:scale-[1.02]"
+              >
+                {/* Image */}
+                <div className="w-full h-[200px] overflow-hidden rounded-[12px] mb-5 bg-[#232326]">
+                  {program.images?.[0]?.url ? (
+                    <Image
+                      src={program.images[0].url}
+                      alt={program.images[0].alt || program.title}
+                      width={361}
+                      height={200}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-white/40">
+                      No Image
+                    </div>
+                  )}
+                </div>
 
-          {/* תוכניות */}
-          <Grid container spacing={4}>
-            {programs.map((program, index) => (
-              <Grid item xs={12} md={6} lg={4} key={index}>
-                <Card
-                  sx={{
-                    background: `linear-gradient(135deg, rgba(10, 10, 13, 0.9), rgba(10, 10, 13, 0.95))`,
-                    border: `1px solid ${program.border}`,
-                    borderRadius: "20px",
-                    p: 4,
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-                    position: "relative",
-                    overflow: "hidden",
-                    "&::before": {
-                      content: '""',
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      height: "1px",
-                      background: `linear-gradient(90deg, transparent, ${program.color}, transparent)`,
-                      opacity: 0,
-                      transition: "opacity 0.4s",
-                    },
-                    "&:hover": {
-                      transform: "translateY(-12px)",
-                      borderColor: program.color,
-                      boxShadow: `0 20px 50px ${program.color}40, inset 0 1px 0 ${program.color}20`,
-                      "&::before": {
-                        opacity: 1,
-                      },
-                    },
-                  }}
+                {/* Title */}
+                <h3
+                  className={`text-2xl md:text-3xl font-bold text-right leading-tight mb-4 ${gradient}`}
+                  style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: !isGreen ? mainColor : undefined }}
                 >
-                  {/* Icon Container */}
-                  <Box
-                    sx={{
-                      width: "60px",
-                      height: "60px",
-                      background: `linear-gradient(135deg, ${program.color}30, ${program.color}10)`,
-                      borderRadius: "15px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      mb: 3,
-                      border: `1px solid ${program.color}40`,
-                      fontSize: "2rem",
-                    }}
+                  {program.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-white text-right text-base leading-7 font-light flex-1 min-h-[56px]" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+                  {program.shortDescription}
+                </p>
+
+                {/* Button */}
+                <div className="mt-6 w-full">
+                  <Link
+                    href={`/programs/${program.slug}`}
+                    className={`w-40 py-3 rounded-full font-bold text-base text-center transition-all duration-300 block ${buttonClass}`}
+                    style={{ fontFamily: "Tahoma, Geneva, sans-serif", color:'black' }}
                   >
-                    ✨
-                  </Box>
+                    לדף התוכנית ←
+                  </Link>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      {/* עיגול SVG עם חץ בצד ימין */}
+      <div className="hidden md:flex  items-center justify-center absolute ">
+        <span className="relative flex items-center justify-center"  style={{marginRight:'340px'}}>
+          <img src="/figma/Ellipse 111.svg" alt="עיגול ניווט" className="w-14 h-14"/>
+          <img src="/figma/Vector (3).svg" alt="חץ" className="w-5 h-5 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+        </span>
+        <span className="relative flex items-center justify-center"  style={{marginRight:'10px'}}>
+          <img src="/figma/Ellipse 111.svg" alt="עיגול ניווט" className="w-14 h-14"/>
+          <img src="/figma/Vector (4).svg" alt="חץ" className="w-5 h-5 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+        </span>
+      </div>
+            <img src="/figma/Vector-2.svg" alt="עיגול דקורטיבי" className="w-10 h-10 mb-2 mt-50 mr-190 text-center" />
 
-                  <Stack spacing={3} sx={{ flex: 1 }}>
-                    <Typography
-                      sx={{
-                        fontSize: { xs: "1.5rem", md: "1.8rem" },
-                        fontWeight: 900,
-                        color: "#fff",
-                        lineHeight: 1.2,
-                      }}
-                    >
-                      {program.title}
-                    </Typography>
-
-                    <Typography sx={{ color: "#b5b8c5", lineHeight: 1.7, flex: 1 }}>
-                      {program.description}
-                    </Typography>
-
-                    <Box sx={{ display: "flex", justifyContent: "flex-end", mt: "auto", pt: 2 }}>
-                      <Button
-                        endIcon={<ArrowForward />}
-                        sx={{
-                          background: `linear-gradient(135deg, ${program.color}dd, ${program.color}99)`,
-                          color: "#0a0a0d",
-                          px: 3,
-                          py: 1,
-                          fontWeight: 700,
-                          textTransform: "none",
-                          borderRadius: "20px",
-                          transition: "all 0.3s",
-                          "&:hover": {
-                            background: `linear-gradient(135deg, ${program.color}, ${program.color}cc)`,
-                            transform: "translateX(-4px)",
-                            boxShadow: `0 10px 25px ${program.color}40`,
-                          },
-                        }}
-                      >
-                        לפרטים נוספים
-                      </Button>
-                    </Box>
-                  </Stack>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Stack>
-      </Container>
-    </Box>
+    </section>
   );
 }
