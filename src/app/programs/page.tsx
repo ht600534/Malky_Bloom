@@ -1,9 +1,9 @@
 import { SiteHeader } from "@/components/site/header";
-import { SiteFooter } from "@/components/site/footer";
 import { CategoryFilter } from "@/components/site/category-filter";
 import { ProgramCard } from "@/components/site/program-card";
 import { ProgramsSearch } from "@/components/site/programs-search";
 import { getProgramsByCategory } from "@/lib/data/programs";
+import SiteFooter from "@/components/site/FooterNew";
 
 export const dynamic = "force-dynamic";
 

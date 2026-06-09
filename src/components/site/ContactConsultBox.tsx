@@ -52,7 +52,7 @@ export default function ContactConsultBox() {
             </div>
 
 
-            <div style={{ width: '100%', height: '800px', backgroundColor: 'white', marginTop: '-50px' }} >
+            <div style={{ width: '100%', height: '160px', backgroundColor: '#F7F7F7', marginTop: '-50px' }} >
 
                 <div
                     className="bg-black  max-w-5xl w-full px-8 md:px-16 py-16 flex flex-col items-center "

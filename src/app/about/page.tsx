@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/site/header";
-import { SiteFooter } from "@/components/site/footer";
+import { NewsletterForm } from "@/components/site/newsletter-form";
+import SiteFooter from "@/components/site/FooterNew";
 
 export default function AboutPage() {
   return (
