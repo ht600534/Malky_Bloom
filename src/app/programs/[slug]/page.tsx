@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site/header";
-import { SiteFooter } from "@/components/site/footer";
 import { ContactForm } from "@/components/site/contact-form";
 import { categoryLabels, getProgramBySlug } from "@/lib/data/programs";
+import SiteFooter from "@/components/site/FooterNew";
 
 export const dynamic = "force-dynamic";
 
