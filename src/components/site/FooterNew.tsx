@@ -20,7 +20,7 @@ export default function SiteFooter() {
       -translate-x-1/2
       -translate-y-1/2
       rounded-b-[999px]
-      bg-[#F3F3F3]
+      bg-[#F7F7F7]
     "
         />
 
@@ -75,7 +75,7 @@ export default function SiteFooter() {
         <div className="flex flex-col items-end text-right gap-6 mt-20 mr-0">
           <div className="flex flex-col items-end gap-3">
 
-            <Image src="/figma/Vector%20(6).svg" alt="חץ כתום " width={110} height={82} style={{ marginLeft: '240px', marginBottom: '10px' }} />
+            <Image src="/figma/Vector%20(6).svg" alt="חץ כתום " width={100} height={72} style={{ marginLeft: '240px', marginBottom: '5px' }} />
 
             <span className="text-[42px]  leading-[1.05]" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", fontWeight: 'none' }}>
               {/* md:text-[28px] font-light leading-[1.05] text-white max-w-[380px] */}

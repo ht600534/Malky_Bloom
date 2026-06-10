@@ -1,6 +1,6 @@
 import { SiteHeader } from "@/components/site/header";
-import { SiteFooter } from "@/components/site/footer";
 import { ContactForm } from "@/components/site/contact-form";
+import SiteFooter from "@/components/site/FooterNew";
 
 export default function ContactPage() {
   return (

@@ -60,7 +60,7 @@ export default async function ProgramsPage({ searchParams }: Props) {
               const isActive = activeCategory === value;
 
               return (
-                <Link style={{ fontFamily: "Tahoma, Geneva, sans-serif", color: '#111116', border: `2px solid ${isActive ? '#111116' : 'white'}` }}
+                <Link  style={{ fontFamily: "Tahoma, Geneva, sans-serif", color: '#111116', border: `2px solid ${isActive ? '#111116' : 'white'}` }}
                   key={value}
                   href={
                     value === "all"

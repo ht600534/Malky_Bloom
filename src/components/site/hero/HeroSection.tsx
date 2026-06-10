@@ -5,7 +5,7 @@
 export default function HeroSection() {
   return (
     <section style={{
-      width: '100vw',
+      width: 'auto',
       background: '#000',
       position: 'relative',
       display: 'flex',
@@ -23,30 +23,32 @@ export default function HeroSection() {
         background: 'rgba(0,0,0,0)',
         borderRadius: 40,
         padding: '0',
-        width: 800,
-        maxWidth: '90vw',
+        // width: 800,
+        // maxWidth: '90vw',
         boxShadow: 'none',
         border: 'none',
         textAlign: 'center',
       }}>
         <div style={{
           fontWeight: 900,
-          fontSize: 70,
+          fontSize: 80,
           color: '#fff',
-          lineHeight: 1.1,
+          lineHeight: 0.99,
           marginBottom: 0,
           letterSpacing: '-2px',
           textShadow: '0 2px 8px #0008',
         }}>
-          <br /><span style={{background: 'none', display: 'inline'}}>מאפס מאמץ ותקציב נמוך<br /></span>
-          <span style={{background: 'none', display: 'inline'}}>עד לתוכנית <span style={{color: '#ff7a6b', fontWeight: 900}}>מוצלחת</span></span>
+
+          <br /><span style={{ background: 'none', display: 'inline', fontFamily: "'Placebo_FM', Arial, sans-serif" }}>מאפס מאמץ ותקציב נמוך<br /></span>
+          <span style={{ background: 'none', display: 'inline', fontFamily: "'Placebo_FM', Arial, sans-serif" }}>עד לתוכנית <span style={{ color: '#ff7a6b', fontWeight: 900 }}>מוצלחת</span></span>
         </div>
         <div style={{
           fontWeight: 800,
-          fontSize: 44,
+          fontSize: 80,
           color: '#4be6b5',
           margin: '24px 0 0 0',
-          lineHeight: 1.1,
+          fontFamily: "'Placebo_FM', Arial, sans-serif",
+          lineHeight: 0.99,
         }}>
           זה אף פעם <br /> לא היה פשוט יותר!
         </div>
@@ -89,6 +91,21 @@ export default function HeroSection() {
           </button> */}
         {/* </div> */}
       </div>
+
+      <img
+        src="/figma/Vector (13).svg"
+        alt=""
+        style={{
+          marginTop: 20,
+          // position: "absolute",
+          marginBottom: '60px',
+          left: "12%",
+          width: 14,
+          pointerEvents: "none",
+          userSelect: "none",
+          // transform: "translateY(-6px)",
+        }}
+      />
     </section>
   );
 }
