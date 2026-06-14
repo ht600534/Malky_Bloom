@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { createContactLead } from "@/app/actions";
+import { TurnstileWidget } from "@/components/site/turnstile";
 
 const initialState = { ok: false, message: "" };
 
@@ -34,10 +35,13 @@ export function ContactForm({ programId }: Props) {
       <input
         type="email"
         name="email"
+        autoComplete="email"
         required
         placeholder="אימייל"
         className="w-full rounded-xl border border-stroke bg-transparent px-3 py-2 outline-none"
       />
+      <input type="hidden" name="cf-turnstile-response" value="" />
+      <TurnstileWidget />
       <textarea
         name="message"
         rows={4}

@@ -1,4 +1,4 @@
-export type ProgramCategory = "events" | "camp" | "year-circle" | "workshops";
+export type ProgramCategory = string;
 
 export type ProgramImage = {
   url: string;

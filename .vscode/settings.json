@@ -1,4 +1,5 @@
 {
     "github.copilot.selectedCompletionModel": "",
-    "github.copilot.chat.askAgent.model": ""
+    "github.copilot.chat.askAgent.model": "",
+    "claudeCode.useTerminal": true
 }

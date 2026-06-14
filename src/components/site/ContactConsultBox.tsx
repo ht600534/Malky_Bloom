@@ -1,6 +1,17 @@
-import React from "react";
+"use client";
+
+import { useActionState } from "react";
+import { createContactLead } from "@/app/actions";
+import { TurnstileWidget } from "@/components/site/turnstile";
+
+const initialState = { ok: false, message: "" };
 
 export default function ContactConsultBox() {
+    const [state, formAction, pending] = useActionState(
+      async (_: typeof initialState, formData: FormData) => createContactLead(formData),
+      initialState,
+    );
+
     return (
         <div className="w-full  justify-center relative z-0" style={{ marginTop: "-100px" }}>
             <div
@@ -22,33 +33,49 @@ export default function ContactConsultBox() {
                     style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                 >
                     צרי קשר להתייעצות והתאמה אישית!                </div>
-                <form className="w-full flex flex-col md:flex-row gap-4 justify-center items-center">
+                <form action={formAction} className="w-full flex flex-col gap-4 md:flex-row justify-center items-center">
                     <input
+                        name="name"
                         type="text"
                         placeholder="השם שלך"
+                        required
                         className="w-full md:w-44 px-4 py-2 rounded-full bg-white text-black text-center text-lg font-normal focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] transition"
                         style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                     />
                     <input
+                        name="phone"
                         type="text"
                         placeholder="טלפון לשיחה"
+                        required
                         className="w-full md:w-44 px-4 py-2 rounded-full bg-white text-black text-center text-lg font-normal focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] transition"
                         style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                     />
                     <input
+                        name="email"
                         type="email"
                         placeholder="כתובת מייל"
+                        required
                         className="w-full md:w-44 px-4 py-2 rounded-full bg-white text-black text-center text-lg font-normal focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] transition"
                         style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                     />
+                    <input
+                        type="hidden"
+                        name="message"
+                        value="בקשת ייעוץ והתאמה אישית מהדף הראשי"
+                    />
+                    <TurnstileWidget />
                     <button
                         type="submit"
-                        className="w-full md:w-34 px-4 py-2 rounded-full bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] text-black font-bold text-lg text-center transition hover:scale-105"
+                        disabled={pending}
+                        className="w-full md:w-34 px-4 py-2 rounded-full bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] text-black font-bold text-lg text-center transition hover:scale-105 disabled:opacity-60"
                         style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                     >
-                        שלח
+                        {pending ? "שולח..." : "שלח"}
                     </button>
                 </form>
+                {state.message ? (
+                  <div className={`text-sm ${state.ok ? "text-brand" : "text-brand-2"} mt-3`}>{state.message}</div>
+                ) : null}
             </div>
 
 

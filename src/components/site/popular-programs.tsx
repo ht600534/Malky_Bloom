@@ -1,11 +1,29 @@
+"use client";
 
-import { getPublishedPrograms } from "@/lib/data/programs";
 import Image from "next/image";
 import Link from "next/link";
+import { useState, useCallback } from "react";
+import type { Program } from "@/lib/types";
 
-export default async function PopularPrograms() {
-  const programs = await getPublishedPrograms();
-  const popular = programs.slice(0, 2);
+type Props = {
+  programs: Program[];
+};
+
+export default function PopularPrograms({ programs }: Props) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const totalPrograms = programs.length;
+
+  const nextPrograms = useCallback(() => {
+    setCurrentIndex((prev) => Math.min(prev + 2, totalPrograms - 2));
+  }, [totalPrograms]);
+
+  const prevPrograms = useCallback(() => {
+    setCurrentIndex((prev) => Math.max(prev - 2, 0));
+  }, []);
+
+  const visiblePrograms = programs.slice(currentIndex, currentIndex + 2);
+  const hasNext = currentIndex + 2 < totalPrograms;
+  const hasPrev = currentIndex > 0;
 
   return (
     <section className="w-full bg-[#0a0a0d] py-16 md:py-24 relative">
@@ -18,7 +36,7 @@ export default async function PopularPrograms() {
           </div>
           <div className="max-w-7xl relative">
             {/* כותרת במרכז */}
-            <div className="flex flex-col mb-10 md:mb-14" mr-5>
+            <div className="flex flex-col mb-10 md:mb-14 mr-5">
               <h2
                 className="text-4xl font-bold text-right mb-12 bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] bg-clip-text text-transparent leading-tight mb-4 text-right"
                 style={{
@@ -35,7 +53,7 @@ export default async function PopularPrograms() {
         </div>
         <div className="flex flex-wrap justify-center gap-6 md:gap-10 mr-40 mt-20 items-center relative">
           {/* כרטיסים */}
-          {popular.map((program, idx) => {
+          {visiblePrograms.map((program, idx) => {
             // צבעים דינמיים: 0 = ירוק, 1 = כתום
             const isGreen = idx % 2 === 0;
             const mainColor = isGreen ? '#4FDAB3' : '#FF7458';
@@ -95,18 +113,31 @@ export default async function PopularPrograms() {
           })}
         </div>
       </div>
-      {/* עיגול SVG עם חץ בצד ימין */}
-      <div className="hidden md:flex  items-center justify-center absolute ">
-        <span className="relative flex items-center justify-center"  style={{marginRight:'340px'}}>
-          <img src="/figma/Ellipse 111.svg" alt="עיגול ניווט" className="w-14 h-14"/>
-          <img src="/figma/Vector (3).svg" alt="חץ" className="w-5 h-5 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+      {/* חצי ניווט — פעילים */}
+      <div
+        className="hidden md:flex items-center justify-center absolute"
+        style={{ pointerEvents: 'none' }}
+      >
+        <span
+          className={`relative flex items-center justify-center cursor-pointer transition-opacity ${hasPrev ? 'opacity-100 hover:scale-110' : 'opacity-30'}`}
+          style={{ marginRight: '340px', pointerEvents: hasPrev ? 'auto' : 'none' }}
+          onClick={(e) => { e.stopPropagation(); e.preventDefault(); prevPrograms(); }}
+          aria-label="הקודמות"
+        >
+          <img src="/figma/Ellipse 111.svg" alt="עיגול ניווט" className="w-14 h-14" />
+          <img src="/figma/Vector (3).svg" alt="חץ ימינה" className="w-5 h-5 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
         </span>
-        <span className="relative flex items-center justify-center"  style={{marginRight:'10px'}}>
-          <img src="/figma/Ellipse 111.svg" alt="עיגול ניווט" className="w-14 h-14"/>
-          <img src="/figma/Vector (4).svg" alt="חץ" className="w-5 h-5 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <span
+          className={`relative flex items-center justify-center cursor-pointer transition-opacity ${hasNext ? 'opacity-100 hover:scale-110' : 'opacity-30'}`}
+          style={{ marginRight: '10px', pointerEvents: hasNext ? 'auto' : 'none' }}
+          onClick={(e) => { e.stopPropagation(); e.preventDefault(); nextPrograms(); }}
+          aria-label="הבאות"
+        >
+          <img src="/figma/Ellipse 111.svg" alt="עיגול ניווט" className="w-14 h-14" />
+          <img src="/figma/Vector (4).svg" alt="חץ שמאלה" className="w-5 h-5 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
         </span>
       </div>
-            <img src="/figma/Vector-2.svg" alt="עיגול דקורטיבי" className="w-10 h-10 mb-2 mt-50 mr-190 text-center" />
+      <img src="/figma/Vector-2.svg" alt="עיגול דקורטיבי" className="w-10 h-10 mb-2 mt-50 mr-190 text-center" />
 
     </section>
   );

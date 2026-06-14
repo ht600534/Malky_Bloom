@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export function TheaterImageBlock() {
   return (
@@ -47,9 +48,9 @@ export function TheaterImageBlock() {
           פלטפורמה חדשנית ומיוחדת <br /> לרכזות תיכון שרוצות הצלחה,<br />עם מגוון ענק של תוכניות מקצועיות <br /> ויצירתיות מוכנות להפעלה
         </div>
         <br />
-        <button className="bg-[#ff7a6b] hover:bg-[#ff7458] text-white rounded-full px-8 py-2 text-lg font-bold transition-all shadow-lg mx-auto mb-8" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+        <Link href="/programs" className="inline-block bg-[#ff7a6b] hover:bg-[#ff7458] text-white rounded-full px-8 py-2 text-lg font-bold transition-all shadow-lg mx-auto mb-8" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
           לתוכניות שלנו
-        </button>
+        </Link>
       </div>
     </section>
   );

@@ -1,13 +1,29 @@
 import { z } from "zod";
 
+const trimmedString = z.string().trim();
+
 export const newsletterSchema = z.object({
-  email: z.string().email("אימייל לא תקין"),
+  email: trimmedString
+    .min(1, "אימייל נדרש")
+    .email("אימייל לא תקין")
+    .transform((value) => value.toLowerCase()),
+  turnstileToken: trimmedString.optional(),
 });
 
 export const contactSchema = z.object({
-  name: z.string().min(2, "שם קצר מדי"),
-  phone: z.string().min(8, "טלפון קצר מדי"),
-  email: z.string().email("אימייל לא תקין"),
-  message: z.string().min(10, "הודעה קצרה מדי"),
-  programId: z.string().optional(),
+  name: trimmedString
+    .min(2, "שם קצר מדי")
+    .max(100, "שם ארוך מדי"),
+  phone: trimmedString
+    .min(8, "טלפון קצר מדי")
+    .max(25, "טלפון לא תקין")
+    .transform((value) => value.replace(/[^\d+]/g, ""))
+    .refine((value) => value.length >= 8 && value.length <= 25, "טלפון לא תקין"),
+  email: trimmedString
+    .min(1, "אימייל נדרש")
+    .email("אימייל לא תקין")
+    .transform((value) => value.toLowerCase()),
+  message: trimmedString.optional().transform((value) => (value ? value : null)),
+  programId: trimmedString.optional(),
+  turnstileToken: trimmedString.optional(),
 });

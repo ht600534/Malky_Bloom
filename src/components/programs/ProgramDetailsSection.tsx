@@ -2,11 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useActionState } from "react";
+import { createContactLead } from "@/app/actions";
+import { TurnstileWidget } from "@/components/site/turnstile";
 import { ContactForm } from "@/components/site/contact-form";
 import { categoryLabels } from "@/lib/data/programs";
 import type { Program } from "@/lib/types";
 import React, { useState } from 'react';
-import { Button, TextField } from "@mui/material";
+
+const initialState = { ok: false, message: "" };
 const QUESTIONS = [
     { q: 'לורם איפסום דולור שי ט אמ ת קופלר?', a: 'תשובה לדוגמה לשאלה הראשונה. כאן תופיע תשובה מפורטת.' },
     { q: 'לורם איפסום עני קלון צלום?', a: 'תשובה לדוגמה לשאלה השנייה. כאן תופיע תשובה מפורטת.' },
@@ -19,8 +23,16 @@ type Props = {
 };
 
 export default function ProgramDetailsSection({ program, relatedPrograms }: Props) {
-    const cover = program.images[0];
+    // תמונת קאבר — תהיה הראשונה או זו שסומנה כ-isCover
+    const cover = program.images.length > 0 ? program.images[0] : null;
     const [openIdx, setOpenIdx] = useState<number | null>(null);
+
+    // Lightbox state
+    const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
+    const allGalleryItems = [
+        ...program.images,
+        ...program.graphics,
+    ].slice(0, 9);
 
     const galleryItems = [
         ...program.images.slice(1),
@@ -73,8 +85,15 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                 <div className="  max-w-[900px] mr-40  text-right">
 
                     {program.category && (
-                        <span className="inline-flex rounded-full bg-white px-5 py-2 text-sm shadow-sm">
-                            {categoryLabels[program.category]}
+                        <span className={`inline-flex rounded-full px-5 py-2 text-sm shadow-sm ${(() => {
+                            const cat = program.category ?? "";
+                            if (cat.includes("חג") || cat.includes("מעגל") || cat.includes("year")) return "bg-yellow-400 text-black";
+                            if (cat.includes("הורים") || cat.includes("ערב")) return "bg-blue-500 text-white";
+                            if (cat.includes("נושא") || cat.includes("workshop") || cat.includes("סדנא")) return "bg-cyan-400 text-black";
+                            if (cat.includes("מחנה") || cat.includes("camp")) return "bg-orange-400 text-black";
+                            return "bg-white text-black";
+                        })()}`}>
+                            {categoryLabels[program.category as keyof typeof categoryLabels] || program.category}
                         </span>
                     )}
                 </div>
@@ -198,19 +217,69 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                         {galleryItems.map((item) => (
                             <div
                                 key={item.url}
-                                className="relative h-[240px] overflow-hidden "
+                                className="relative h-[240px] overflow-hidden cursor-pointer group"
+                                onClick={() => setLightboxIdx(0)}
                             >
                                 <Image
                                     src={item.url}
                                     alt={item.alt || program.title}
                                     fill
-                                    className="object-cover"
+                                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                                     sizes="33vw"
                                 />
+                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                                    <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-sm"></span>
+                                </div>
                             </div>
                         ))}
                     </div>
                 </section>
+            )}
+
+            {/* LIGHTBOX */}
+            {lightboxIdx !== null && (
+                <div
+                    className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
+                    onClick={() => setLightboxIdx(null)}
+                >
+                    <button
+                        className="absolute top-4 left-4 text-white text-2xl hover:text-[#4FDAB3] transition-colors z-10 cursor-pointer"
+                        onClick={() => setLightboxIdx(null)}
+                    >
+                        ✕
+                    </button>
+
+                    {allGalleryItems.length > 1 && (
+                        <>
+                            <button
+                                className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-5xl hover:text-[#4FDAB3] transition-colors z-10 cursor-pointer"
+                                onClick={(e) => { e.stopPropagation(); setLightboxIdx((lightboxIdx - 1 + allGalleryItems.length) % allGalleryItems.length); }}
+                            >
+                                ‹
+                            </button>
+                            <button
+                                className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-5xl hover:text-[#4FDAB3] transition-colors z-10 cursor-pointer"
+                                onClick={(e) => { e.stopPropagation(); setLightboxIdx((lightboxIdx + 1) % allGalleryItems.length); }}
+                            >
+                                ›
+                            </button>
+                        </>
+                    )}
+
+                    <div className="relative max-w-[90vw] max-h-[85vh]" onClick={(e) => e.stopPropagation()}>
+                        <Image
+                            src={allGalleryItems[lightboxIdx].url}
+                            alt={allGalleryItems[lightboxIdx].alt || program.title}
+                            width={1200}
+                            height={800}
+                            className="max-w-[90vw] max-h-[85vh] object-contain rounded-xl"
+                        />
+                    </div>
+
+                    <div className="absolute bottom-6 text-white/60 text-sm">
+                        {lightboxIdx + 1} / {allGalleryItems.length}
+                    </div>
+                </div>
             )}
 
             {/* QUESTIONS */}
@@ -257,7 +326,7 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                 </div>
             </section>
 
-            {/* CTA */}
+            {/* CTA — Interested form */}
             <section className="bg-black py-24">
                 <div className="max-w-[1100px] mx-auto px-6 text-center">
                     <h2
@@ -267,75 +336,7 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                         מעוניינת?
                     </h2>
 
-                    <div className="mt-10 flex  justify-center gap-4">
-
-
-                        <TextField
-                            placeholder="השם שלך"
-                            sx={{
-                                "& .MuiOutlinedInput-root": {
-                                    color: "#000000",
-                                    backgroundColor: "#ffffff",
-                                    borderRadius: "55px",
-                                    height: '50px',
-
-                                    "& fieldset": { borderColor: "#2a2b35" },
-                                    "&:hover fieldset": { borderColor: "#2ce5b0" },
-                                },
-                                "& .MuiOutlinedInput-input::placeholder": { color: "#666", opacity: 1 },
-                            }}
-                        />
-
-                        <TextField
-                            placeholder="טלפון לשיחה"
-                            sx={{
-                                "& .MuiOutlinedInput-root": {
-                                    color: "#000000",
-                                    backgroundColor: "#ffffff",
-                                    borderRadius: "55px",
-                                    height: '50px',
-
-                                    "& fieldset": { borderColor: "#2a2b35" },
-                                    "&:hover fieldset": { borderColor: "#2ce5b0" },
-                                },
-                                "& .MuiOutlinedInput-input::placeholder": { color: "#666", opacity: 1 },
-                            }}
-                        />
-
-                        <TextField
-                            placeholder="כתובת מייל"
-                            sx={{
-                                "& .MuiOutlinedInput-root": {
-                                    color: "#000000",
-                                    backgroundColor: "#ffffff",
-                                    borderRadius: "55px",
-                                    height: '50px',
-                                    "& fieldset": { borderColor: "#2a2b35" },
-                                    "&:hover fieldset": { borderColor: "#2ce5b0" },
-                                },
-                                "& .MuiOutlinedInput-input::placeholder": { color: "#666", opacity: 1 },
-                            }}
-                        />
-                        <Button
-
-                            sx={{
-                                background: "linear-gradient(135deg, #96ffa7 0%, #4fdab3 100%)",
-                                color: "#0a0a0d",
-                                // py: 1.5,
-                                fontWeight: 700,
-                                // textTransform: "none",
-                                borderRadius: "55px",
-                                width: '140px',
-                                height: '50px',
-
-                                "&:hover": {
-                                    opacity: 1.9,
-                                },
-                            }}
-                        >
-                            שלח
-                        </Button>
-                    </div>
+                    <InterestedForm programId={program.id} />
                 </div>
             </section>
             <section className="bg-white py-24 " style={{ backgroundColor: '#F7F7F7' }}>
@@ -400,5 +401,61 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                 {/* <ContactForm programId={program.id} /> */}
             </section>
         </main>
+    );
+}
+
+/** Inline form for the "מעוניינת?" CTA section — uses createContactLead with Turnstile + Zod validation. */
+function InterestedForm({ programId }: { programId: string }) {
+    const [state, formAction, pending] = useActionState(
+        async (_: typeof initialState, formData: FormData) => createContactLead(formData),
+        initialState,
+    );
+
+    return (
+        <form action={formAction} className="mt-10 flex flex-wrap justify-center gap-4 items-start">
+            <input type="hidden" name="programId" value={programId} />
+
+            <input
+                name="name"
+                type="text"
+                required
+                placeholder="השם שלך"
+                className="w-[180px] h-[50px] px-5 rounded-full bg-white text-black text-center text-base focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] transition"
+                style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
+            />
+            <input
+                name="phone"
+                type="text"
+                required
+                placeholder="טלפון לשיחה"
+                className="w-[180px] h-[50px] px-5 rounded-full bg-white text-black text-center text-base focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] transition"
+                style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
+            />
+            <input
+                name="email"
+                type="email"
+                required
+                placeholder="כתובת מייל"
+                className="w-[180px] h-[50px] px-5 rounded-full bg-white text-black text-center text-base focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] transition"
+                style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
+            />
+
+            <TurnstileWidget />
+
+            <button
+                type="submit"
+                disabled={pending}
+                className="w-[140px] h-[50px] rounded-full bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] text-black font-bold text-base transition hover:scale-105 disabled:opacity-60"
+                style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
+            >
+                {pending ? "שולח..." : "שלח"}
+            </button>
+
+            {state.message && (
+                <div className="w-full text-center text-sm mt-2" style={{ color: state.ok ? '#4FDAB3' : '#FF7458' }}>
+                    {state.message}
+                </div>
+            )}
+        </form>
     );
 }

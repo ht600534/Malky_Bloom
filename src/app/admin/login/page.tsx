@@ -8,21 +8,35 @@ export default async function AdminLoginPage({ searchParams }: Props) {
   const query = await searchParams;
 
   return (
-    <main className="container flex min-h-screen items-center justify-center py-12">
-      <form action={adminLoginAction} className="w-full max-w-md space-y-4 rounded-2xl border border-stroke bg-surface p-6">
-        <h1 className="text-2xl font-bold">כניסת מנהלת</h1>
-        <p className="text-sm text-muted">הזיני סיסמת ניהול כדי לגשת למסך הניהול.</p>
+    <main className="flex min-h-screen items-center justify-center px-4" dir="rtl">
+      <form
+        action={adminLoginAction}
+        className="w-full max-w-sm rounded-lg bg-white shadow-sm border border-[#e5e7eb] p-8 text-center"
+      >
+        <h1 className="text-2xl font-bold text-[#111827] mb-1">ברוכה הבאה</h1>
+        <p className="text-sm text-[#6b7280] mb-8">הזיני סיסמת ניהול כדי להמשיך.</p>
+
         <input
           type="password"
           name="password"
           required
-          className="w-full rounded-xl border border-stroke bg-transparent px-3 py-2 outline-none"
+          autoFocus
+          className="w-full rounded-md border border-[#d1d5db] bg-white px-4 py-3 text-sm text-[#111827] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#4FDAB3]/30 focus:border-[#4FDAB3] transition-all mb-5 text-center"
           placeholder="סיסמה"
         />
-        <button type="submit" className="w-full rounded-full bg-brand px-4 py-2 font-semibold text-[#041410]">
+
+        <button
+          type="submit"
+          className="w-full rounded-md bg-[#111827] hover:bg-[#1f2937] px-5 py-3 text-sm font-medium text-white transition"
+        >
           כניסה
         </button>
-        {query.error ? <p className="text-sm text-brand-2">סיסמה שגויה, נסי שוב.</p> : null}
+
+        {query.error ? (
+          <p className="mt-5 text-sm text-[#dc2626] bg-[#fef2f2] rounded-md px-4 py-2 border border-[#fecaca]">
+            סיסמה שגויה, נסי שוב.
+          </p>
+        ) : null}
       </form>
     </main>
   );

@@ -6,7 +6,7 @@ export default function AboutPage() {
     <>
       <SiteHeader />
 
-      <main dir="rtl" className="bg-[#F3F3F3]">
+      <main dir="rtl" className="bg-[#F7F7F7]">
         {/* HERO */}
         <section className="bg-black">
           <div className="mx-auto flex h-[420px] max-w-[1440px] flex-col items-center justify-center px-4">
@@ -26,7 +26,7 @@ export default function AboutPage() {
           </div>
         </section>
         {/* Divider */}
-        <div className="relative h-[74px] bg-[#F3F3F3]">
+        <div className="relative h-[74px] bg-[#F7F7F7]">
           <div
             className="
       absolute
@@ -50,7 +50,7 @@ export default function AboutPage() {
           </div>
         </div>
         {/* CONTENT */}
-        <section className="bg-[#F3F3F3] px-6 py-[10px] mt-10">
+        <section className="bg-[#F7F7F7] px-6 py-[10px] mt-10">
           <div className="mx-auto max-w-auto mr-50 ml-20">
 
             <h2

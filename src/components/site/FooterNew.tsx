@@ -1,9 +1,17 @@
 "use client";
-import React, { useState } from 'react';
-
+import { useActionState } from "react";
+import { subscribeNewsletter } from "@/app/actions";
+import { TurnstileWidget } from "@/components/site/turnstile";
 import Image from "next/image";
 
+const initialState = { ok: false, message: "" };
+
 export default function SiteFooter() {
+  const [state, formAction, pending] = useActionState(
+    async (_: typeof initialState, formData: FormData) => subscribeNewsletter(formData),
+    initialState,
+  );
+
   return (
     <section className="w-full bg-black text-white relative overflow-visible py-28 min-h-[640px]">      {/* קישוט עליון */}
       {/* <div className="absolute left-1/2 -translate-x-1/2 -top-8 z-10">
@@ -48,12 +56,23 @@ export default function SiteFooter() {
             </span>
           </div>
           <div className="flex items-center gap-3">
-            {/* <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-black border border-[#96FFA7]"> */}
             <Image src="/figma/Vector%20(8).svg" alt="מייל" width={24} height={24} />
-            {/* </span> */}
-            <span className="text-[24px] font-normal" style={{ fontFamily: "'Ploni ML v2 AAA', Arial, sans-serif" }}>
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText("malki2310@gmail.com").then(
+                  () => {
+                    const el = document.getElementById("email-copy-msg");
+                    if (el) { el.style.opacity = "1"; setTimeout(() => { el.style.opacity = "0"; }, 2000); }
+                  }
+                ).catch(() => {});
+              }}
+              className="text-[24px] font-normal hover:text-[#4FDAB3] transition-colors cursor-pointer relative"
+              style={{ fontFamily: "'Ploni ML v2 AAA', Arial, sans-serif" }}
+              title="לחצי להעתקת המייל"
+            >
               malki2310@gmail.com
-            </span>
+              <span id="email-copy-msg" className="absolute -bottom-6 right-0 text-xs text-[#4FDAB3] opacity-0 transition-opacity whitespace-nowrap">הועתק!</span>
+            </button>
           </div>
         </div>
         {/* תפריט */}
@@ -82,21 +101,29 @@ export default function SiteFooter() {
               רוצה להתעדכן<br />כשתוכנית חדשה <br /> עולה לאתר?
             </span>
           </div>
-          <form className="flex items-right gap-3 w-full max-w-[320px] ml-6 mb-10">
+          <form action={formAction} className="flex items-right gap-3 w-full max-w-[320px] ml-6">
             <input
+              name="email"
+              type="email"
               dir="rtl"
+              required
               className="flex-1 rounded-full border border-white/40 bg-black/60 px-5 py-3 text-base text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#96FFA7]"
               placeholder="מייל"
               style={{ fontFamily: "'Ploni ML v2 AAA', Arial, sans-serif" }}
             />
+            <TurnstileWidget />
             <button
               type="submit"
-              className="rounded-full bg-[#96FFA7] hover:bg-[#4FDAB3] px-8 py-3 text-base font-bold text-black transition-colors whitespace-nowrap"
+              disabled={pending}
+              className="rounded-full bg-[#96FFA7] hover:bg-[#4FDAB3] px-8 py-3 text-base font-bold text-black transition-colors whitespace-nowrap disabled:opacity-60"
               style={{ fontFamily: "'Ploni ML v2 AAA', Arial, sans-serif" }}
             >
-              שלח
+              {pending ? "שולח..." : "שלח"}
             </button>
-          </form>
+           
+          </form> {state.message ? (
+              <p className={` ml-36 -mt-2 text-right text-sm direction-rtl ${state.ok ? "text-brand" : "text-brand-2"}`}>{state.message}</p>
+            ) : null}
         </div>
       </div>
     </section>
