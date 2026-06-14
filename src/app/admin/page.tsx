@@ -25,9 +25,14 @@ export default async function AdminPage() {
               {/* ייצוא אקסל */}
               <a
                 href="/api/admin/newsletter-export"
-                className="rounded-md border border-[#d1d5db] bg-white px-4 py-2 text-sm font-medium text-[#6b7280] hover:text-[green] transition cursor-pointer"
+                // className="rounded-md border border-[#d1d5db] bg-white px-4 py-2 text-sm font-medium text-[#6b7280] hover:text-[green] transition cursor-pointer"
               >
+                 <button
+                  type="submit"
+                  className="rounded-md border border-[#d1d5db] bg-white px-4 py-2 text-sm font-medium text-[#6b7280] hover:bg-[#f9fafb] hover:text-[GREEN] transition cursor-pointer"
+                >
                 ייצוא נרשמים ל Excel
+                </button>
               </a>
               {/* התנתקות */}
               <form action={adminLogoutAction}>

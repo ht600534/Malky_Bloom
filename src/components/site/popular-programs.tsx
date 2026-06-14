@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState, useCallback } from "react";
+import { SafeImage } from "@/components/site/safe-image";
 import type { Program } from "@/lib/types";
 
 type Props = {
@@ -71,7 +71,7 @@ export default function PopularPrograms({ programs }: Props) {
                 {/* Image */}
                 <div className="w-full h-[200px] overflow-hidden rounded-[12px] mb-5 bg-[#232326]">
                   {program.images?.[0]?.url ? (
-                    <Image
+                    <SafeImage
                       src={program.images[0].url}
                       alt={program.images[0].alt || program.title}
                       width={361}

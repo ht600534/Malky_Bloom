@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site/header";
 import { getProgramsByCategory, getCategoriesFromDb } from "@/lib/data/programs";
+import { SafeImage } from "@/components/site/safe-image";
 import SiteFooter from "@/components/site/FooterNew";
 
 export const dynamic = "force-dynamic";
@@ -143,7 +143,7 @@ export default async function ProgramsPage({ searchParams }: Props) {
                   {/* Image */}
                   <div className="w-full h-[200px] overflow-hidden rounded-[12px] mb-5 bg-[#232326]">
                     {program.images?.[0]?.url ? (
-                      <Image
+                      <SafeImage
                         src={program.images[0].url}
                         alt={program.images[0].alt || program.title}
                         width={361}

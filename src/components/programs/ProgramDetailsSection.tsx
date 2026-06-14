@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useActionState } from "react";
+import { normalizeImageUrl } from "@/lib/url";
 import { createContactLead } from "@/app/actions";
 import { TurnstileWidget } from "@/components/site/turnstile";
 import { ContactForm } from "@/components/site/contact-form";
@@ -62,7 +63,7 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                     <div className="relative mx-auto max-w-[980px] overflow-hidden rounded-[40px]">
                         {cover ? (
                             <Image
-                                src={cover.url}
+                                src={normalizeImageUrl(cover.url)}
                                 alt={cover.alt || program.title}
                                 width={980}
                                 height={520}
@@ -221,7 +222,7 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                                 onClick={() => setLightboxIdx(0)}
                             >
                                 <Image
-                                    src={item.url}
+                                    src={normalizeImageUrl(item.url)}
                                     alt={item.alt || program.title}
                                     fill
                                     className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -268,7 +269,7 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
 
                     <div className="relative max-w-[90vw] max-h-[85vh]" onClick={(e) => e.stopPropagation()}>
                         <Image
-                            src={allGalleryItems[lightboxIdx].url}
+                            src={normalizeImageUrl(allGalleryItems[lightboxIdx].url)}
                             alt={allGalleryItems[lightboxIdx].alt || program.title}
                             width={1200}
                             height={800}

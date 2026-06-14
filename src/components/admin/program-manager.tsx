@@ -42,7 +42,7 @@ const styles = {
   cardDesc: "text-sm text-[#6b7280] mb-6",
   field: "w-full rounded-md border border-[#d1d5db] bg-white px-3 py-2 text-sm text-[#111827] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#4FDAB3]/30 focus:border-[#4FDAB3] transition",
   label: "block text-sm font-medium text-[#374151] mb-1",
-  btnPrimary: "rounded-md border border-[#d1d5db] bg-white px-4 py-2 text-sm font-medium text-[#111827] hover:bg-[#f3f4f6] transition disabled:opacity-40",
+  btnPrimary: "rounded-md bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] px-4 py-2 text-sm font-semibold text-[#041410] hover:shadow-md transition disabled:opacity-40",
   btnSecondary: "rounded-md border border-[#d1d5db] bg-white px-4 py-2 text-sm font-medium text-[#374151] hover:bg-[#f9fafb] transition",
   btnDanger: "rounded-md border border-[#fca5a5] bg-white px-4 py-2 text-sm font-medium text-[#dc2626] hover:bg-[#fef2f2] transition",
   badgePublished: "inline-flex items-center rounded-md bg-[#dcfce7] px-2 py-0.5 text-xs font-medium text-[#166534]",
@@ -388,8 +388,8 @@ export function ProgramManager() {
           <p className="text-xs text-[#9ca3af] mb-4">העלי מהמחשב (תמונה, PDF) או הדביקי קישור ישיר. סמני  לאחת שתוצג בגדול.</p>
           {(form.images ?? []).map((img, index) => (
             <div key={index} className="mb-3 flex flex-wrap items-center gap-3 bg-white rounded-xl border border-[#eef0f4] p-3">
-              <div className="w-full flex flex-wrap items-end gap-3">
-                <div className="flex-1 min-w-[120px]">
+              <div className="w-full flex  gap-3">
+                <div className="flex-1 min-w-[120px] space-y-2">
                   <select
                     value={img.assetType}
                     onChange={(e) => {
@@ -398,12 +398,14 @@ export function ProgramManager() {
                       setForm((prev) => ({ ...prev, images }));
                     }}
                     className={styles.field}
+                  style={{  cursor: "pointer", padding: "9px 12px", height: "fit-content" }}
+                  
                   >
                     <option value="photo"> תמונה</option>
                     <option value="graphic"> גרפיקה</option>
                   </select>
                 </div>
-                <div className="flex-[3] min-w-[200px] space-y-2">
+                <div className="flex-[3] min-w-[180px] space-y-2 height-fit content">
                   <input
                     value={img.url}
                     onChange={(e) => {
@@ -433,7 +435,7 @@ export function ProgramManager() {
                     }))
                   }
                   className={styles.btnDanger}
-                  style={{  cursor: "pointer" }}
+                  style={{  cursor: "pointer", padding: "8px 12px", height: "fit-content" }}
                 >
                   ✕ הסרה
                 </button>
@@ -482,11 +484,11 @@ export function ProgramManager() {
 
         {/* כפתורי שמירה */}
         <div className="flex flex-wrap gap-3 ">
-          <button type="submit" className={`{styles.btnPrimary} cursor="pointer"}`} style={{ cursor: "pointer" }}>
+          <button type="submit" className={`{styles.btnPrimary} cursor="pointer"}`} style={{ cursor: "pointer",color: "#041410" }}>
             {editingId ? " עדכון תוכנית" : " יצירת תוכנית"}
           </button>
           {editingId ? (
-            <button type="button" onClick={cancelEdit} className={styles.btnSecondary} style={{ cursor: "pointer" }}>
+            <button type="button" onClick={cancelEdit} className={styles.btnSecondary} style={{ cursor: "pointer",color: "#041410"  }}>
               ביטול עריכה
             </button>
           ) : null}
