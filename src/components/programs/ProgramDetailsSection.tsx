@@ -13,9 +13,12 @@ import React, { useState } from 'react';
 
 const initialState = { ok: false, message: "" };
 const QUESTIONS = [
-    { q: 'לורם איפסום דולור שי ט אמ ת קופלר?', a: 'תשובה לדוגמה לשאלה הראשונה. כאן תופיע תשובה מפורטת.' },
-    { q: 'לורם איפסום עני קלון צלום?', a: 'תשובה לדוגמה לשאלה השנייה. כאן תופיע תשובה מפורטת.' },
-    { q: 'לורם איפסום דולור שי ט אמ ת קופלר סינטומר לנוג?', a: 'תשובה לדוגמה לשאלה השלישית. כאן תופיע תשובה מפורטת.' },
+    {
+        q: 'איך מתבצעת הרכישה ואיך אני מקבלת את התוכנית?',
+        a: 'הרכישה והקשר מתבצעים בצורה אישית ופשוטה – במייל או בטלפון.\nלאחר שניצור קשר ונבין יחד מהי התוכנית המדויקת עבורך, החומרים יישלחו אלייך ישירות.\nהערכה מגיעה בצורה מסודרת ומוכנה לחלוטין, ובנוסף, כחלק מהשירות, את מקבלת מענה מלא הכולל עזרה והתאמה של התכנים לאופי ולצרכים המדויקים של המוסד שלך.'
+    },
+    { q: 'מה קורה אם אני צריכה עזרה, שינוי או התאמה מיוחדת בתוכנית שרכשתי?', a: 'אני כאן בשבילך!\n  אם נתקלת בשאלה תוך כדי תנועה, או שאת זקוקה לייעוץ קל לגבי התאמת הפעילות, את תמיד יכולה לפנות אליי דרך עמוד יצירת הקשר באתר או במייל ואשמח לסייע לך כדי שהתוכנית תצליח בצורה המקסימלית.' },
+    { q: 'האם התוכניות מגיעות מוכנות לחלוטין או שנדרשת עבודת הכנה מצידי?', a: 'מטרה שלי היא להקל עלייך מקסימום! \n התוכניות מגיעות כערכה מקיפה הכוללת את כתיבת הרעיון, המהלך, ההנחיות לרכזת,\n  חומרים להדפסה ומדיה (במידה ויש).\n  יחד עם זאת, בכל תוכנית ישנו מרחב המאפשר לך להכניס את הטאץ האישי שלך ולהתאים את התוכן לאופי המדויק של המוסד שלך.' },
 
 ];
 type Props = {
@@ -26,7 +29,7 @@ type Props = {
 export default function ProgramDetailsSection({ program, relatedPrograms }: Props) {
     // תמונת קאבר — תהיה הראשונה או זו שסומנה כ-isCover
     const cover = program.images.length > 0 ? program.images[0] : null;
-    const [openIdx, setOpenIdx] = useState<number | null>(null);
+    const [openItems, setOpenItems] = useState<number[]>([]);
 
     // Lightbox state
     const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
@@ -298,16 +301,25 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                         {QUESTIONS.map((item, idx) => (
                             <div key={idx} className="relative">
                                 <div
-                                    className={`flex flex-row-reverse items-center bg-white rounded-full  px-6 py-2 transition-all duration-300 cursor-pointer hover:shadow-md  `}
+                                    className="relative flex flex-row-reverse items-center bg-white rounded-full px-6 py-2 transition-all duration-300 cursor-pointer hover:shadow-md"
                                     style={{ minHeight: 52 }}
-                                    // ${openIdx === idx ? 'rounded-b-2xl' : ''}
-                                    onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
-                                >
+                                    onClick={() =>
+                                        setOpenItems(prev =>
+                                            prev.includes(idx)
+                                                ? prev.filter(i => i !== idx)
+                                                : [...prev, idx]
+                                        )
+                                    }                            >
                                     {/* כפתור חץ עגול בצד שמאל */}
                                     <div className="flex-shrink-0 -ml-2 z-10">
                                         <Image src="/figma/Ellipse 106.svg" alt="עיגול כתום" width={56} height={56} />
-                                        <span className={`absolute left-1/20 top-1/2 -translate-x-1/2 -translate-y-1/2  ${openIdx === idx ? 'left-1/20 top-1/4 -translate-x-1/2 -translate-y-1/2' : ''}`}>
-                                            <Image src="/figma/Elements (1).svg" alt="חץ שחור" width={28} height={28} />
+                                        <span className="absolute left-1/20 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                                            <Image
+                                                src="/figma/Elements (1).svg"
+                                                alt="חץ שחור"
+                                                width={28}
+                                                height={28}
+                                            />
                                         </span>
                                     </div>
                                     {/* שאלה */}
@@ -316,8 +328,8 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                                     </div>
                                 </div>
                                 {/* תשובה */}
-                                {openIdx === idx && (
-                                    <div className="w-full  rounded-b-2xl  px-8 py-6 text-right text-base md:text-lg text-black font-normal " style={{ fontFamily: "Tahoma, Geneva, sans-serif", marginTop: '-8px' }}>
+                                {openItems.includes(idx) && (
+                                    <div className="w-full  rounded-b-2xl  px-8 py-6 text-right text-base md:text-lg text-black font-normal " style={{ fontFamily: "Tahoma, Geneva, sans-serif", marginTop: '-8px', whiteSpace: 'pre-line' }}>
                                         {item.a}
                                     </div>
                                 )}
