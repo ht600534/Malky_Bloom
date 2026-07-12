@@ -69,7 +69,7 @@ export async function subscribeNewsletter(formData: FormData): Promise<ActionRes
       };
     }
 
-    return { ok: true, message: "נרשמת בהצלחה לרשימת התפוצה." };
+    return { ok: true, message: "נרשמת בהצלחה. אשלח לך עדכון כשיעלו תוכניות חדשות." };
   } catch (error) {
     console.error("Newsletter flow failed:", error);
     return { ok: false, message: "נכשל חיבור למסד הנתונים. נסי שוב מאוחר יותר." };
@@ -138,7 +138,7 @@ export async function createContactLead(formData: FormData): Promise<ActionResul
       };
     }
 
-    return { ok: true, message: "הפנייה נקלטה, נחזור אליך בהקדם." };
+    return { ok: true, message: "הפנייה נשלחה בהצלחה. נחזור אלייך בהקדם." };
   } catch (error) {
     console.error("Contact lead flow failed:", error);
     return { ok: false, message: "חסר חיבור למסד הנתונים בסביבה הנוכחית." };

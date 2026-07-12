@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ensureAdminRequest } from "@/lib/admin-api";
+import { isTrustedOrigin } from "@/lib/request-security";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { categorySchema } from "@/lib/validations/category";
 
@@ -23,6 +24,10 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   if (!ensureAdminRequest(request)) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
+  if (!isTrustedOrigin(request)) {
+    return NextResponse.json({ message: "Forbidden" }, { status: 403 });
   }
 
   const body = await request.json();

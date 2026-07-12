@@ -1,6 +1,7 @@
 import { randomUUID } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { ensureAdminRequest } from "@/lib/admin-api";
+import { isTrustedOrigin } from "@/lib/request-security";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 const MAX_BYTES = 10 * 1024 * 1024;
@@ -25,6 +26,10 @@ function safeFileName(name: string) {
 export async function POST(request: NextRequest) {
   if (!ensureAdminRequest(request)) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
+  if (!isTrustedOrigin(request)) {
+    return NextResponse.json({ message: "Forbidden" }, { status: 403 });
   }
 
   const formData = await request.formData();

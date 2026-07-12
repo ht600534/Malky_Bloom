@@ -6,7 +6,7 @@ create table if not exists public.programs (
   slug text not null unique,
   short_description text not null,
   full_description text not null,
-  category text not null check (category in ('events', 'camp', 'year-circle', 'workshops')),
+  category text not null,
   status text not null default 'draft' check (status in ('draft', 'published')),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()

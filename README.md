@@ -21,6 +21,7 @@
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
    - `SUPABASE_SERVICE_ROLE_KEY`
    - `ADMIN_PANEL_PASSWORD`
+   - `CRON_SECRET`
 4. הרצה:
    - `npm run dev`
 
@@ -48,3 +49,13 @@
 - לחבר את הריפו ל-Vercel
 - להגדיר Environment Variables לפי `.env.example`
 - לבצע Deploy
+
+## Keep-Alive ל-Supabase
+
+- נוסף endpoint מאובטח: `/api/keep-alive`
+- נוסף קובץ [vercel.json](vercel.json) שמריץ Vercel Cron כל 3 ימים
+- יש להגדיר ב-Vercel משתנה סביבה `CRON_SECRET` עם מחרוזת אקראית ארוכה
+- ה-cron קורא ל-Supabase דרך `SUPABASE_SERVICE_ROLE_KEY` ומבצע שאילתה קלה על טבלת `programs`
+
+מטרת המנגנון:
+- לשמור על פעילות תקופתית בפרויקט Supabase כדי לצמצם סיכוי להשעיה עקב חוסר פעילות

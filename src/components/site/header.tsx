@@ -9,7 +9,7 @@ export function SiteHeader() {
 
   return (
     <header className="bg-[#06070a]">
-      <div className="max-w-[1440px] mx-auto px-10 h-[90px] flex items-center justify-between relative">
+      <div className="max-w-[1440px] mx-auto px-10 h-[116px] flex items-center justify-between relative">
   <Link
           href="/"
           className="text-[40px] leading-none"
@@ -51,7 +51,7 @@ export function SiteHeader() {
 
        <Link
           href="/contact"
-          className="rounded-full bg-[#FF8B72] px-6 py-2 text-black text-sm"
+          className="rounded-full bg-[#FF8B72] px-7 py-3 text-black text-sm"
         >
           צרי קשר
         </Link>

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ensureAdminRequest } from "@/lib/admin-api";
+import { isTrustedOrigin } from "@/lib/request-security";
 import {
   dbProgramToAdminForm,
   getProgramByIdAdmin,
@@ -37,6 +38,10 @@ export async function PUT(request: NextRequest, { params }: Params) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
+  if (!isTrustedOrigin(request)) {
+    return NextResponse.json({ message: "Forbidden" }, { status: 403 });
+  }
+
   const { id } = await params;
   const body = await request.json();
   const parsed = programSchema.safeParse(body);
@@ -65,6 +70,10 @@ export async function PUT(request: NextRequest, { params }: Params) {
 export async function DELETE(request: NextRequest, { params }: Params) {
   if (!ensureAdminRequest(request)) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
+  if (!isTrustedOrigin(request)) {
+    return NextResponse.json({ message: "Forbidden" }, { status: 403 });
   }
 
   const { id } = await params;

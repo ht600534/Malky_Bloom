@@ -6,7 +6,6 @@ type Props = {
 
 export default async function AdminLoginPage({ searchParams }: Props) {
   const query = await searchParams;
-  const location = typeof window !== "undefined" ? window.location.href : "";
   return (
     <main className="flex min-h-screen items-center justify-center px-4" dir="rtl">
       <form
@@ -43,7 +42,11 @@ export default async function AdminLoginPage({ searchParams }: Props) {
             המשך לאתר 
           </a>
         </div>
-        {query.error ? (
+        {query.error === "rate" ? (
+          <p className="mt-5 text-sm text-[#dc2626] bg-[#fef2f2] rounded-md px-4 py-2 border border-[#fecaca]">
+            יותר מדי ניסיונות התחברות. נסי שוב בעוד כמה דקות.
+          </p>
+        ) : query.error ? (
           <p className="mt-5 text-sm text-[#dc2626] bg-[#fef2f2] rounded-md px-4 py-2 border border-[#fecaca]">
             סיסמה שגויה, נסי שוב.
           </p>

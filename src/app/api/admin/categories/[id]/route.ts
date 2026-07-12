@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ensureAdminRequest } from "@/lib/admin-api";
+import { isTrustedOrigin } from "@/lib/request-security";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 type Params = {
@@ -9,6 +10,10 @@ type Params = {
 export async function DELETE(request: NextRequest, { params }: Params) {
   if (!ensureAdminRequest(request)) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
+  if (!isTrustedOrigin(request)) {
+    return NextResponse.json({ message: "Forbidden" }, { status: 403 });
   }
 
   const { id } = await params;

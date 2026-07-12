@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useActionState } from "react";
 import { createContactLead } from "@/app/actions";
 import { TurnstileWidget } from "@/components/site/turnstile";
@@ -13,127 +14,124 @@ export function ContactFormPage() {
   );
 
   return (
-    <main className="bg-[#171717] min-h-screen" dir="rtl">
-      {/* ========== סקשן עליון — כותרת + טופס ========== */}
-      <section className="relative max-w-[1280px] mx-auto px-6 pt-20 pb-24">
+    <main className="bg-[#171717]" dir="rtl">
+      <section className="relative overflow-hidden bg-[#171717] px-4 pb-24 pt-12 md:px-8 md:pb-32 md:pt-20">
+        <div className="mx-auto flex max-w-[1180px] flex-col items-center text-center">
+<div className="relative mb-5 h-[145px] w-[210px] md:h-[165px] md:w-[240px]">
+  {/* Scribble */}
+  <Image
+    src="/figma/Vector (15).svg"
+    alt=""
+    width={76}
+    height={76}
+    className="absolute left-[18px] top-[6px] h-[76px] w-[76px] object-contain"
+    priority
+  />
 
-        {/* אייקונים דקורטיביים */}
-        <div className="flex items-start justify-between mb-8">
-          <img src="/figma/OBJECTS (5).svg" alt="" className="w-[68px] h-[61px]" />
-          <img src="/figma/Group 117.svg" alt="" className="w-[49px] h-[29px] mt-4" />
-        </div>
+  {/* Orange top marks */}
+  <Image
+    src="/figma/Group 117.svg"
+    alt=""
+    width={48}
+    height={22}
+    className="absolute right-[26px] top-[4px] h-[22px] w-[48px] object-contain"
+    priority
+  />
 
-        {/* כותרת */}
-        <div className="text-right">
+  {/* Smile */}
+  <Image
+    src="/figma/OBJECTS (5).svg"
+    alt=""
+    width={82}
+    height={82}
+    className="absolute left-[28px] bottom-[4px] h-[82px] w-[82px] object-contain"
+    priority
+  />
+
+  {/* Stars */}
+  <Image
+    src="/figma/OBJECTS (4).svg"
+    alt=""
+    width={68}
+    height={62}
+    className="absolute right-[18px] bottom-[10px] h-[62px] w-[68px] object-contain"
+    priority
+  />
+</div>
           <h1
-            className="text-[100px] md:text-[120px] leading-[0.85] text-[#96FFA7]"
+            className="mb-3 text-[38px] leading-[1.05] text-[#FF7458] md:mb-4 md:text-[56px]"
             style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}
           >
-            צרי
-            <br />
-            קשר
+            נשמח להיות בקשר:)
           </h1>
-        </div>
 
-        {/* אייקונים + תת-כותרת */}
-        <div className="flex items-start justify-between mb-4">
-          <img src="/figma/Vector (14).svg" alt="" className="w-[86px] h-[62px]" />
-        </div>
+          <p
+            className="mb-8 text-[22px] leading-[1.55] text-white md:mb-10 md:text-[36px]"
+            style={{ fontFamily: "Tahoma, Geneva, sans-serif", fontWeight: 300 }}
+          >
+            השאירי פרטים ונחזור אלייך בהקדם!
+          </p>
 
-        <p
-          className="text-white/70 text-xl text-right mr-8 mt-[-10px]"
-          style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
-        >
-          נשמח לעזור! השאירי פרטים <br className="md:hidden" />
-          ונחזור אלייך בהקדם
-        </p>
-
-        {/* ========== טופס ========== */}
-        <form action={formAction} className="mt-16 space-y-4">
-
-          {/* שורה 1 — אייקון טלפון + שם + טלפון */}
-          <div className="flex flex-wrap items-center gap-3">
-            {/* אייקון טלפון */}
-            <div className="hidden md:flex items-center justify-center w-[50px] h-[51px] rounded-full bg-[#FF7458] shrink-0">
-              <img src="/figma/phone-icon.svg" alt="טלפון" className="w-6 h-6" />
-            </div>
-
-            {/* שם */}
+          <form action={formAction} className="flex w-full max-w-[900px] flex-col gap-3 md:flex-row md:items-center md:justify-center md:gap-[10px]">
             <input
               name="name"
               type="text"
               required
               placeholder="השם שלך"
-              className="h-[51px] px-5 rounded-full bg-white text-black text-right text-base focus:outline-none focus:ring-2 focus:ring-[#96FFA7] transition w-full md:w-[165px]"
-              style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
+              className="h-[51px] w-full rounded-full border-none bg-white px-6 text-center text-[20px] text-black placeholder:text-black/70 focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] md:w-[230px]"
+              style={{ fontFamily: "Tahoma, Geneva, sans-serif", fontWeight: 300 }}
             />
-
-            {/* טלפון */}
             <input
               name="phone"
               type="text"
               required
               placeholder="טלפון לשיחה"
-              className="h-[51px] px-5 rounded-full bg-white text-black text-right text-base focus:outline-none focus:ring-2 focus:ring-[#96FFA7] transition w-full md:w-[230px]"
-              style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
+              className="h-[51px] w-full rounded-full border-none bg-white px-6 text-center text-[20px] text-black placeholder:text-black/70 focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] md:w-[230px]"
+              style={{ fontFamily: "Tahoma, Geneva, sans-serif", fontWeight: 300 }}
             />
-
-            {/* אימייל */}
             <input
               name="email"
               type="email"
               required
               placeholder="כתובת מייל"
-              className="h-[51px] px-5 rounded-full bg-white text-black text-right text-base focus:outline-none focus:ring-2 focus:ring-[#96FFA7] transition w-full md:w-[230px]"
-              style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
+              className="h-[51px] w-full rounded-full border-none bg-white px-6 text-center text-[20px] text-black placeholder:text-black/70 focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] md:w-[230px]"
+              style={{ fontFamily: "Tahoma, Geneva, sans-serif", fontWeight: 300 }}
             />
+            <button
+              type="submit"
+              disabled={pending}
+              className="h-[51px] w-full rounded-full bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] text-[22px] font-bold text-black transition hover:scale-[1.02] disabled:opacity-60 md:w-[165px]"
+              style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
+            >
+              {pending ? "שולח..." : "שלח"}
+            </button>
+          </form>
 
-            {/* הודעה */}
-            <input
-              name="message"
-              type="text"
-              placeholder="תוכן הפנייה"
-              className="h-[51px] px-5 rounded-full bg-white text-black text-right text-base focus:outline-none focus:ring-2 focus:ring-[#96FFA7] transition w-full md:w-[230px]"
-              style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
-            />
+          <div className="mt-5 flex justify-center">
+            <TurnstileWidget />
           </div>
 
-          <TurnstileWidget />
-
-          <button
-            type="submit"
-            disabled={pending}
-            className="inline-flex items-center justify-center h-[39px] px-8 rounded-full bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] text-black font-bold text-base transition hover:scale-[1.03] hover:shadow-lg disabled:opacity-60"
-            style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
-          >
-            {pending ? "שולחת..." : "שליחה"}
-          </button>
-
-          {state.message && (
-            <div
-              className={`text-sm px-5 py-3 rounded-2xl border ${
-                state.ok
-                  ? "bg-[#f0fdf4] text-[#166534] border-[#bbf7d0]"
-                  : "bg-[#fef2f2] text-[#991b1b] border-[#fecaca]"
-              }`}
-            >
-              {state.message}
-            </div>
-          )}
-        </form>
-      </section>
-
-      {/* ========== Footer / חצי תחתון ========== */}
-      <footer className="bg-black py-12 mt-20">
-        <div className="max-w-[1280px] mx-auto px-6 text-center">
-          <p
-            className="text-white/50 text-sm"
-            style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
-          >
-            © {new Date().getFullYear()} מרכזות אונליין. כל הזכויות שמורות.
-          </p>
+          {state.message ? (
+            state.ok ? (
+              <div className="mt-5 max-w-[430px] rounded-[28px] border border-[#96FFA7]/30 bg-white px-5 py-4 text-center shadow-[0_18px_50px_rgba(79,218,179,0.16)]">
+                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] text-[22px] text-[#041410]">
+                  ✓
+                </div>
+                <p className="text-[20px] text-[#0f172a]" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}>
+                  ההודעה נשלחה
+                </p>
+                <p className="mt-2 text-sm leading-7 text-[#335348]" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+                  {state.message}
+                </p>
+              </div>
+            ) : (
+              <div className="mt-5 max-w-md rounded-2xl border border-[#fecaca] bg-[#fff1f1] px-4 py-3 text-center text-sm text-[#991b1b]">
+                {state.message}
+              </div>
+            )
+          ) : null}
         </div>
-      </footer>
+      </section>
     </main>
   );
 }
