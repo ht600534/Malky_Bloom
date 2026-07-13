@@ -368,7 +368,10 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8 text-center w-340">
-                        {relatedPrograms.map((item) => (
+                        {relatedPrograms.map((item) => {
+                            const relatedCategoryStyle = getProgramCategoryStyle(item.category);
+
+                            return (
                             <article
                                 key={item.id}
                                 className="overflow-hidden rounded-[32px] bg-white"
@@ -383,27 +386,32 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                                             sizes="28vw"
                                         />
                                     ) : (
-                                        <div className="flex h-full items-center justify-center bg-[#f3f3f3] text-[#666]">
-                                            {item.title}
+                                        <div className="flex h-full items-center justify-center bg-black text-center">
+                                            <span
+                                                className="px-6 text-[34px] leading-tight"
+                                                style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: relatedCategoryStyle.titleColor }}
+                                            >
+                                                {item.title}
+                                            </span>
                                         </div>
                                     )}
                                 </div>
 
                                 <div className="p-8 text-right">
                                     {/* <p className="text-[#96FFA7] text-sm mb-3">תוכנית</p> */}
-                                    <h3 className="text-[28px] font-bold text-black mb-4" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: '#FF7458' }}>{item.title}</h3>
+                                    <h3 className="text-[28px] font-bold text-black mb-4" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: relatedCategoryStyle.titleColor }}>{item.title}</h3>
                                     <p className="text-[#666] leading-7 line-clamp-3" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>{item.shortDescription}</p>
                                     <div className="mt-8 text-right">
                                         <Link
                                             href={`/programs/${item.slug}`}
-                                            className="inline-flex rounded-full bg-[#FF7458] px-10 py-3 text-white font-semibold"
+                                            className={`inline-flex rounded-full px-10 py-3 font-semibold ${relatedCategoryStyle.buttonClassName}`}
                                         >
                                             לתוכנית
                                         </Link>
                                     </div>
                                 </div>
                             </article>
-                        ))}
+                        );})}
                     </div>
 
                 </div>
