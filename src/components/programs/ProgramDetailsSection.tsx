@@ -7,7 +7,7 @@ import { normalizeImageUrl } from "@/lib/url";
 import { createContactLead } from "@/app/actions";
 import { TurnstileWidget } from "@/components/site/turnstile";
 import { ContactForm } from "@/components/site/contact-form";
-import { categoryLabels } from "@/lib/data/programs";
+import { categoryLabels, getProgramCategoryStyle } from "@/lib/data/programs";
 import type { Program } from "@/lib/types";
 import React, { useState } from 'react';
 
@@ -27,6 +27,7 @@ type Props = {
 };
 
 export default function ProgramDetailsSection({ program, relatedPrograms }: Props) {
+    const categoryStyle = getProgramCategoryStyle(program.category);
     // תמונת קאבר — תהיה הראשונה או זו שסומנה כ-isCover
     const cover = program.images.length > 0 ? program.images[0] : null;
     const [openItems, setOpenItems] = useState<number[]>([]);
@@ -73,8 +74,13 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                                 className="w-full h-auto"
                             />
                         ) : (
-                            <div className="h-[520px] flex items-center justify-center text-white">
-                                אין תמונה
+                            <div className="flex h-[520px] items-center justify-center bg-white text-center">
+                                <span
+                                    className="px-8 text-[42px] leading-tight md:text-[64px]"
+                                    style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: categoryStyle.placeholderTextColor }}
+                                >
+                                    {program.title}
+                                </span>
                             </div>
                         )}
                     </div>
@@ -89,14 +95,7 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                 <div className="  max-w-[900px] mr-40  text-right">
 
                     {program.category && (
-                        <span className={`inline-flex rounded-full px-5 py-2 text-sm shadow-sm ${(() => {
-                            const cat = program.category ?? "";
-                            if (cat.includes("חג") || cat.includes("מעגל") || cat.includes("year")) return "bg-yellow-400 text-black";
-                            if (cat.includes("הורים") || cat.includes("ערב")) return "bg-blue-500 text-white";
-                            if (cat.includes("נושא") || cat.includes("workshop") || cat.includes("סדנא")) return "bg-cyan-400 text-black";
-                            if (cat.includes("מחנה") || cat.includes("camp")) return "bg-orange-400 text-black";
-                            return "bg-white text-black";
-                        })()}`}>
+                        <span className={`inline-flex rounded-full px-5 py-2 text-sm shadow-sm ${categoryStyle.badgeClassName}`}>
                             {categoryLabels[program.category as keyof typeof categoryLabels] || program.category}
                         </span>
                     )}
@@ -385,7 +384,7 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                                         />
                                     ) : (
                                         <div className="flex h-full items-center justify-center bg-[#f3f3f3] text-[#666]">
-                                            אין תמונה
+                                            {item.title}
                                         </div>
                                     )}
                                 </div>

@@ -151,8 +151,13 @@ export default async function ProgramsPage({ searchParams }: Props) {
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center ">
-                        No Image
+                      <div className="flex h-full w-full items-center justify-center bg-white text-center">
+                          <span
+                            className="px-6 text-[28px] leading-tight"
+                            style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: mainColor }}
+                          >
+                            {program.title}
+                          </span>
                       </div>
                     )}
                   </div>

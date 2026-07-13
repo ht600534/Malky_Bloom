@@ -7,7 +7,7 @@ export type ProgramImage = {
 
 export type ProgramMaterial = {
   label: string;
-  url: string;
+  url?: string;
 };
 
 export type Program = {
@@ -26,4 +26,11 @@ export type Program = {
   graphics: ProgramImage[];
   materials: ProgramMaterial[];
   status: "draft" | "published";
+};
+
+export type ProgramCategoryStyle = {
+  badgeClassName: string;
+  titleColor: string;
+  buttonClassName: string;
+  placeholderTextColor: string;
 };

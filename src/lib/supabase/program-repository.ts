@@ -92,7 +92,7 @@ export async function syncProgramAssets(programId: string, input: ProgramPayload
       materials.map((file, index) => ({
         program_id: programId,
         label: file.label?.trim() || `קובץ ${index + 1}`,
-        file_url: file.url.trim(),
+        file_url: file.url?.trim() || "",
         sort_order: index,
       })),
     );
@@ -193,6 +193,6 @@ export function dbProgramToAdminForm(row: DbProgram) {
         isCover: false,
       })),
     ],
-    materials: client.materials.map((m) => ({ label: m.label, url: m.url })),
+    materials: client.materials.map((m) => ({ label: m.label, url: m.url ?? "" })),
   };
 }

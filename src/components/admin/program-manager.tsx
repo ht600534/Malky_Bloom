@@ -94,7 +94,7 @@ export function ProgramManager() {
     const payload: ProgramInput = {
       ...form,
       images: (form.images ?? []).filter((img) => img.url.trim()),
-      materials: (form.materials ?? []).filter((m) => m.url.trim()),
+      materials: (form.materials ?? []).filter((m) => m.label.trim()),
     };
 
     const response = await fetch(editingId ? `/api/admin/programs/${editingId}` : "/api/admin/programs", {
@@ -466,6 +466,47 @@ export function ProgramManager() {
             className="text-sm font-medium text-[#4FDAB3] hover:text-[#3ab890] transition-colors mt-2"
           >
             + הוספת תמונה/גרפיקה/PDF
+          </button>
+        </div>
+
+        <div className="rounded-xl border border-[#eef0f4] bg-[#fafbfc] p-5 mb-5">
+          <h3 className={styles.sectionTitle}> חומרים נלווים</h3>
+          <p className="text-xs text-[#9ca3af] mb-4">כאן מוסיפים רק מילים או שמות של חומרים נלווים, בלי קבצים ובלי קישורים.</p>
+          {(form.materials ?? []).map((material, index) => (
+            <div key={index} className="mb-3 rounded-xl border border-[#eef0f4] bg-white p-3">
+              <div className="grid gap-3 md:grid-cols-[1fr_auto] md:items-start">
+                <input
+                  value={material.label}
+                  onChange={(e) => {
+                    const materials = [...(form.materials ?? [])];
+                    materials[index] = { ...materials[index], label: e.target.value };
+                    setForm((prev) => ({ ...prev, materials }));
+                  }}
+                  className={styles.field}
+                  placeholder="למשל: דף עבודה, כרטיסיות, מצגת, מדבקות"
+                />
+                <button
+                  type="button"
+                  onClick={() =>
+                    setForm((prev) => ({
+                      ...prev,
+                      materials: (prev.materials ?? []).filter((_, i) => i !== index),
+                    }))
+                  }
+                  className={styles.btnDanger}
+                  style={{ cursor: "pointer", padding: "8px 12px", height: "fit-content" }}
+                >
+                  ✕ הסרה
+                </button>
+              </div>
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={() => setForm((prev) => ({ ...prev, materials: [...(prev.materials ?? []), { label: "", url: "" }] }))}
+            className="text-sm font-medium text-[#4FDAB3] hover:text-[#3ab890] transition-colors mt-2"
+          >
+            + הוספת חומר נלווה
           </button>
         </div>
 

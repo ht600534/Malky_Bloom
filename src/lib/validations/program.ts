@@ -11,8 +11,8 @@ export const programImageInputSchema = z.object({
 });
 
 export const programFileInputSchema = z.object({
-  label: optionalText,
-  url: z.string().url("כתובת חומר לא תקינה"),
+  label: z.string().trim().min(1, "נדרש להזין חומר נלווה"),
+  url: optionalText,
 });
 
 const programSchemaBase = z.object({

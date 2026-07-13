@@ -1,4 +1,4 @@
-import type { Program, ProgramCategory } from "@/lib/types";
+import type { Program, ProgramCategory, ProgramCategoryStyle } from "@/lib/types";
 import {
   dbProgramToClient,
   getPublishedProgramBySlug,
@@ -17,6 +17,55 @@ export const categoryLabels: Record<ProgramCategory | "all", string> = {
   "year-circle": "מעגל השנה",
   workshops: "סדנאות",
 };
+
+const defaultCategoryStyle: ProgramCategoryStyle = {
+  badgeClassName: "bg-white text-black",
+  titleColor: "#4FDAB3",
+  buttonClassName: "bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] text-black",
+  placeholderTextColor: "#4FDAB3",
+};
+
+export function getProgramCategoryStyle(category?: string | null): ProgramCategoryStyle {
+  const value = (category ?? "").toLowerCase();
+
+  if (value.includes("חג") || value.includes("מעגל") || value.includes("year")) {
+    return {
+      badgeClassName: "bg-yellow-400 text-black",
+      titleColor: "#FACC15",
+      buttonClassName: "bg-yellow-400 text-black",
+      placeholderTextColor: "#FACC15",
+    };
+  }
+
+  if (value.includes("הורים") || value.includes("ערב")) {
+    return {
+      badgeClassName: "bg-blue-500 text-white",
+      titleColor: "#2563EB",
+      buttonClassName: "bg-blue-500 text-white",
+      placeholderTextColor: "#2563EB",
+    };
+  }
+
+  if (value.includes("נושא") || value.includes("workshop") || value.includes("סדנא") || value.includes("סדנה")) {
+    return {
+      badgeClassName: "bg-cyan-400 text-black",
+      titleColor: "#22D3EE",
+      buttonClassName: "bg-cyan-400 text-black",
+      placeholderTextColor: "#22D3EE",
+    };
+  }
+
+  if (value.includes("מחנה") || value.includes("קייטנה") || value.includes("camp")) {
+    return {
+      badgeClassName: "bg-orange-400 text-black",
+      titleColor: "#FF7458",
+      buttonClassName: "bg-[#FF7458] text-white",
+      placeholderTextColor: "#FF7458",
+    };
+  }
+
+  return defaultCategoryStyle;
+}
 
 /** טוען קטגוריות מה-DB. מחזיר רק "הכל" + מה שיש במסד. */
 export async function getCategoriesFromDb(): Promise<Record<string, string>> {
