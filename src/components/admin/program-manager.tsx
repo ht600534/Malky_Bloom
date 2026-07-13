@@ -386,6 +386,29 @@ export function ProgramManager() {
         <div className="rounded-xl border border-[#eef0f4] bg-[#fafbfc] p-5 mb-5">
           <h3 className={styles.sectionTitle}> תמונות, גרפיקות ו-PDF</h3>
           <p className="text-xs text-[#9ca3af] mb-4">העלי מהמחשב (תמונה, PDF) או הדביקי קישור ישיר. סמני  לאחת שתוצג בגדול.</p>
+          <div className="mb-4 flex flex-wrap items-center gap-3 rounded-xl border border-dashed border-[#d1d5db] bg-white px-4 py-3">
+            <LocalFileUpload
+              accept="image/*"
+              multiple
+              label="בחירת כמה תמונות יחד"
+              onUploaded={(url, fileName) => {
+                const derivedAlt = fileName.replace(/\.[^.]+$/, "");
+                setForm((prev) => ({
+                  ...prev,
+                  images: [
+                    ...(prev.images ?? []),
+                    {
+                      url,
+                      alt: derivedAlt,
+                      assetType: "photo",
+                      isCover: (prev.images ?? []).length === 0,
+                    },
+                  ],
+                }));
+              }}
+            />
+            <span className="text-xs text-[#6b7280]">אפשר לבחור כמה תמונות בבת אחת והן יתווספו אוטומטית לרשימה.</span>
+          </div>
           {(form.images ?? []).map((img, index) => (
             <div key={index} className="mb-3 flex flex-wrap items-center gap-3 bg-white rounded-xl border border-[#eef0f4] p-3">
               <div className="w-full flex  gap-3">

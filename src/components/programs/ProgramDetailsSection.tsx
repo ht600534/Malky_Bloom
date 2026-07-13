@@ -113,15 +113,12 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                         ))}
                     </h1>
 
-                    <p className="mt-8 text-[18px] mr-20 leading-9 text-[#555]" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
-                        {program.shortDescription}
+                    <p
+                        className="mt-8 mr-20 text-[18px] leading-9 text-[#555] whitespace-pre-line"
+                        style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
+                    >
+                        {program.fullDescription || program.shortDescription}
                     </p>
-
-                    {/* {program.fullDescription && (
-                        <p className="mt-6 text-[18px] leading-9 text-[#555]">
-                            {program.fullDescription}
-                        </p>
-                    )} */}
                 </div>
 
                 {/* DETAILS */}

@@ -31,19 +31,20 @@ export default function PopularPrograms({ programs }: Props) {
     <section className="w-full bg-[#0a0a0d] py-16 md:py-24 relative">
 
       {/* עיגול SVG Vector-8 מעל הכותרת */}
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-10 px-6 md:flex-row md:items-start md:justify-between">
+<div className="flex">
         <div className="flex-col items-end mb-12">
-          <div className="flex md:justify-end">
+          <div className="flex" style={{ marginRight: '138px' }}>
             <img src="/figma/Vector-8.svg" alt="עיגול דקורטיבי" className="w-6 h-6 mb-2 mr-1" />
           </div>
           <div className="max-w-7xl relative">
             {/* כותרת במרכז */}
-            <div className="flex flex-col mb-10 md:mb-14 md:mr-5">
+            <div className="flex flex-col mb-10 md:mb-14 mr-5">
               <h2
                 className="text-4xl font-bold text-right mb-12 bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] bg-clip-text text-transparent leading-tight mb-4 text-right"
                 style={{
                   letterSpacing: '-1px',
                   direction: 'rtl',
+                  marginRight: '118px',
                   fontFamily: "'Placebo_FM', Arial, sans-serif"
                 }}
               >
