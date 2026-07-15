@@ -23,3 +23,8 @@ export function normalizeImageUrl(input: string): string {
   return trimmed;
 }
 
+export function isPdfUrl(input: string): boolean {
+  const normalized = input.trim().toLowerCase();
+  return normalized.includes(".pdf") || normalized.includes("application/pdf");
+}
+

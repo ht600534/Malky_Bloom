@@ -121,6 +121,68 @@ export async function listPublishedPrograms() {
     .order("created_at", { ascending: false });
 }
 
+type PublishedProgramsFilters = {
+  category?: string;
+  searchQuery?: string;
+};
+
+function applyPublishedProgramsFilters<T>(query: T, filters: PublishedProgramsFilters): T {
+  let nextQuery = query as T & {
+    eq: (column: string, value: string) => typeof nextQuery;
+    or: (filters: string) => typeof nextQuery;
+  };
+
+  if (filters.category && filters.category !== "all") {
+    nextQuery = nextQuery.eq("category", filters.category);
+  }
+
+  const q = filters.searchQuery?.trim();
+  if (q) {
+    const escaped = q.replace(/[%_,]/g, " ").trim();
+    if (escaped) {
+      const pattern = `%${escaped}%`;
+      nextQuery = nextQuery.or(
+        [
+          `title.ilike.${pattern}`,
+          `short_description.ilike.${pattern}`,
+          `full_description.ilike.${pattern}`,
+          `topic.ilike.${pattern}`,
+          `target_audience.ilike.${pattern}`,
+          `duration.ilike.${pattern}`,
+        ].join(","),
+      );
+    }
+  }
+
+  return nextQuery;
+}
+
+export async function listPublishedProgramsPage(options: {
+  category?: string;
+  searchQuery?: string;
+  limit: number;
+  offset: number;
+}) {
+  const supabase = getSupabaseServerClient();
+  const start = Math.max(options.offset, 0);
+  const end = start + Math.max(options.limit, 1) - 1;
+
+  const query = applyPublishedProgramsFilters(
+    supabase
+      .from("programs")
+      .select(programSelect, { count: "exact" })
+      .eq("status", "published")
+      .order("created_at", { ascending: false })
+      .range(start, end),
+    {
+      category: options.category,
+      searchQuery: options.searchQuery,
+    },
+  );
+
+  return query;
+}
+
 export async function getPublishedProgramBySlug(slug: string) {
   const supabase = getSupabaseServerClient();
   return supabase
@@ -135,12 +197,22 @@ export function dbProgramToClient(row: DbProgram) {
   const images = (row.program_images ?? [])
     .filter((img) => img.asset_type === "photo")
     .sort((a, b) => a.sort_order - b.sort_order)
-    .map((img) => ({ url: img.image_url, alt: img.alt_text || row.title }));
+    .map((img) => ({
+      url: img.image_url,
+      alt: img.alt_text || row.title,
+      assetType: "photo" as const,
+      isCover: img.is_cover,
+    }));
 
   const graphics = (row.program_images ?? [])
     .filter((img) => img.asset_type === "graphic")
     .sort((a, b) => a.sort_order - b.sort_order)
-    .map((img) => ({ url: img.image_url, alt: img.alt_text || row.title }));
+    .map((img) => ({
+      url: img.image_url,
+      alt: img.alt_text || row.title,
+      assetType: "graphic" as const,
+      isCover: img.is_cover,
+    }));
 
   const materials = (row.program_files ?? [])
     .sort((a, b) => a.sort_order - b.sort_order)
@@ -179,20 +251,14 @@ export function dbProgramToAdminForm(row: DbProgram) {
     notes: client.notes,
     category: row.category ?? undefined,
     status: client.status,
-    images: [
-      ...client.images.map((img) => ({
-        url: img.url,
-        alt: img.alt,
-        assetType: "photo" as const,
-        isCover: false,
+    images: (row.program_images ?? [])
+      .sort((a, b) => a.sort_order - b.sort_order)
+      .map((img) => ({
+        url: img.image_url,
+        alt: img.alt_text || row.title,
+        assetType: img.asset_type,
+        isCover: img.is_cover,
       })),
-      ...client.graphics.map((img) => ({
-        url: img.url,
-        alt: img.alt,
-        assetType: "graphic" as const,
-        isCover: false,
-      })),
-    ],
     materials: client.materials.map((m) => ({ label: m.label, url: m.url ?? "" })),
   };
 }

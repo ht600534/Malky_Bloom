@@ -2,6 +2,7 @@ import type { Program, ProgramCategory, ProgramCategoryStyle } from "@/lib/types
 import {
   dbProgramToClient,
   getPublishedProgramBySlug,
+  listPublishedProgramsPage,
   listPublishedPrograms,
 } from "@/lib/supabase/program-repository";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
@@ -154,6 +155,30 @@ export async function getProgramsByCategory(category?: string, searchQuery?: str
   }
 
   return programs;
+}
+
+export async function getProgramsPage(options: {
+  category?: string;
+  searchQuery?: string;
+  limit: number;
+  offset: number;
+}) {
+  try {
+    const { data, error, count } = await listPublishedProgramsPage(options);
+    if (error) {
+      console.error("[programs] paged load failed:", error.message);
+      return { programs: [] as Program[], total: 0, hasMore: false };
+    }
+
+    const programs = (data ?? []).map((row) => dbProgramToClient(row));
+    const total = count ?? programs.length;
+    const hasMore = options.offset + programs.length < total;
+
+    return { programs, total, hasMore };
+  } catch (error) {
+    console.error("[programs] paged load crashed:", error);
+    return { programs: [] as Program[], total: 0, hasMore: false };
+  }
 }
 
 export async function getProgramBySlug(slug: string) {

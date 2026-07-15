@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useActionState } from "react";
-import { normalizeImageUrl } from "@/lib/url";
+import { isPdfUrl, normalizeImageUrl } from "@/lib/url";
 import { createContactLead } from "@/app/actions";
 import { TurnstileWidget } from "@/components/site/turnstile";
 import { ContactForm } from "@/components/site/contact-form";
@@ -28,21 +28,17 @@ type Props = {
 
 export default function ProgramDetailsSection({ program, relatedPrograms }: Props) {
     const categoryStyle = getProgramCategoryStyle(program.category);
-    // תמונת קאבר — תהיה הראשונה או זו שסומנה כ-isCover
-    const cover = program.images.length > 0 ? program.images[0] : null;
+    const visualAssets = [...program.images, ...program.graphics];
+    const cover = visualAssets.find((item) => item.isCover) ?? visualAssets[0] ?? null;
     const [openItems, setOpenItems] = useState<number[]>([]);
 
     // Lightbox state
     const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
-    const allGalleryItems = [
-        ...program.images,
-        ...program.graphics,
-    ].slice(0, 9);
+    const allGalleryItems = visualAssets;
 
-    const galleryItems = [
-        ...program.images.slice(1),
-        ...program.graphics,
-    ].slice(0, 6);
+    const galleryItems = cover
+        ? visualAssets.filter((item, index) => !(index === 0 && item.url === cover.url && item.alt === cover.alt))
+        : visualAssets;
 
     const questions = program.notes
         ? program.notes
@@ -60,19 +56,33 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
         ? program.materials.map((material) => material.label).join(" • ")
         : "אין חומרים נלווים";
 
+    function renderPdfFrame(url: string, title: string, className: string) {
+        return (
+            <iframe
+                src={`${normalizeImageUrl(url)}#toolbar=0&navpanes=0&scrollbar=0`}
+                title={title}
+                className={className}
+            />
+        );
+    }
+
     return (
         <main className="bg-[#F7F7F7] text-[#111116]"  >
             <section className="relative bg-black mb-20  ">
                 <div className="max-w-[1400px] mx-auto px-6 pt-20">
                     <div className="relative mx-auto max-w-[980px] overflow-hidden rounded-[40px]">
                         {cover ? (
-                            <Image
-                                src={normalizeImageUrl(cover.url)}
-                                alt={cover.alt || program.title}
-                                width={980}
-                                height={520}
-                                className="w-full h-auto"
-                            />
+                            isPdfUrl(cover.url) ? (
+                                renderPdfFrame(cover.url, cover.alt || program.title, "h-[520px] w-full bg-white")
+                            ) : (
+                                <Image
+                                    src={normalizeImageUrl(cover.url)}
+                                    alt={cover.alt || program.title}
+                                    width={980}
+                                    height={520}
+                                    className="w-full h-auto"
+                                />
+                            )
                         ) : (
                             <div className="flex h-[520px] items-center justify-center bg-white text-center">
                                 <span
@@ -212,21 +222,25 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
 
             {/* GALLERY */}
             {galleryItems.length > 0 && (
-                <section className="max-w-[1280px] mx-auto px-6 pb-20">
+                <section className="max-w-[1280px] mx-auto px-6 pb-20 overflow-x-clip">
                     <div className="grid md:grid-cols-3 gap-4">
                         {galleryItems.map((item) => (
                             <div
-                                key={item.url}
+                                key={`${item.url}-${item.alt}`}
                                 className="relative h-[240px] overflow-hidden cursor-pointer group"
-                                onClick={() => setLightboxIdx(0)}
+                                onClick={() => setLightboxIdx(allGalleryItems.findIndex((asset) => asset.url === item.url && asset.alt === item.alt))}
                             >
-                                <Image
-                                    src={normalizeImageUrl(item.url)}
-                                    alt={item.alt || program.title}
-                                    fill
-                                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                    sizes="33vw"
-                                />
+                                {isPdfUrl(item.url) ? (
+                                    renderPdfFrame(item.url, item.alt || program.title, "h-full w-full bg-white")
+                                ) : (
+                                    <Image
+                                        src={normalizeImageUrl(item.url)}
+                                        alt={item.alt || program.title}
+                                        fill
+                                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                        sizes="33vw"
+                                    />
+                                )}
                                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
                                     <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-sm"></span>
                                 </div>
@@ -267,13 +281,17 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                     )}
 
                     <div className="relative max-w-[90vw] max-h-[85vh]" onClick={(e) => e.stopPropagation()}>
-                        <Image
-                            src={normalizeImageUrl(allGalleryItems[lightboxIdx].url)}
-                            alt={allGalleryItems[lightboxIdx].alt || program.title}
-                            width={1200}
-                            height={800}
-                            className="max-w-[90vw] max-h-[85vh] object-contain rounded-xl"
-                        />
+                        {isPdfUrl(allGalleryItems[lightboxIdx].url) ? (
+                            renderPdfFrame(allGalleryItems[lightboxIdx].url, allGalleryItems[lightboxIdx].alt || program.title, "h-[85vh] w-[90vw] rounded-xl bg-white")
+                        ) : (
+                            <Image
+                                src={normalizeImageUrl(allGalleryItems[lightboxIdx].url)}
+                                alt={allGalleryItems[lightboxIdx].alt || program.title}
+                                width={1200}
+                                height={800}
+                                className="max-w-[90vw] max-h-[85vh] object-contain rounded-xl"
+                            />
+                        )}
                     </div>
 
                     <div className="absolute bottom-6 text-white/60 text-sm">

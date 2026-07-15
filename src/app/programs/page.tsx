@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/site/header";
-import { getProgramsByCategory, getCategoriesFromDb } from "@/lib/data/programs";
-import { SafeImage } from "@/components/site/safe-image";
+import { getProgramsPage, getCategoriesFromDb } from "@/lib/data/programs";
+import ProgramsFeed from "@/components/site/programs-feed";
 import SiteFooter from "@/components/site/FooterNew";
 
 export const dynamic = "force-dynamic";
@@ -14,8 +14,8 @@ export default async function ProgramsPage({ searchParams }: Props) {
   const query = await searchParams;
   const activeCategory = query.category ?? "all";
   const searchQuery = query.q ?? "";
-  const [programs, activeLabels] = await Promise.all([
-    getProgramsByCategory(activeCategory, searchQuery),
+  const [{ programs, hasMore }, activeLabels] = await Promise.all([
+    getProgramsPage({ category: activeCategory, searchQuery, limit: 9, offset: 0 }),
     getCategoriesFromDb(),
   ]);
   const heroTitle = activeCategory === "all" ? "כל התוכניות" : activeLabels[activeCategory] ?? "כל התוכניות";
@@ -126,69 +126,12 @@ export default async function ProgramsPage({ searchParams }: Props) {
               );
             })}
           </div>
-          <div className="flex flex-wrap justify-center gap-6 md:gap-10  mt-20 items-center relative">
-            {/* כרטיסים */}
-            {programs.map((program) => {
-              // צבעים לפי קטגוריה
-              const catColor = categoryColors[program.category ?? ""] ?? categoryColors["all"] ?? { hero: "#96FFA7", btn: "bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] text-black" };
-              const mainColor = catColor.hero;
-              const buttonClass = catColor.btn;
-              // Use style for dynamic color (Tailwind cannot generate arbitrary text-* dynamically)
-              const titleColorStyle = { color: mainColor };
-              return (
-                <div
-                  key={program.id}
-                  className="w-full max-w-[371px] h-[480px] bg-[#fffff] rounded-[30px] p-5 flex flex-col shadow-lg transition-all duration-300 hover:scale-[1.02]"
-                >
-                  {/* Image */}
-                  <div className="w-full h-[200px] overflow-hidden rounded-[12px] mb-5 bg-[#232326]">
-                    {program.images?.[0]?.url ? (
-                      <SafeImage
-                        src={program.images[0].url}
-                        alt={program.images[0].alt || program.title}
-                        width={361}
-                        height={200}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="flex h-full w-full items-center justify-center bg-black text-center">
-                          <span
-                            className="px-6 text-[28px] leading-tight"
-                            style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: mainColor }}
-                          >
-                            {program.title}
-                          </span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Title */}
-                  <h3
-                    className="text-2xl md:text-3xl font-bold text-right leading-tight mb-4"
-                    style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: mainColor }}
-                  >
-                    {program.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-white text-right text-base leading-7 font-light flex-1 min-h-[56px]" style={{ color:'black', fontFamily: "Tahoma, Geneva, sans-serif" }}>
-                    {program.shortDescription}
-                  </p>
-
-                  {/* Button */}
-                  <div className="mt-6 w-full">
-                    <Link
-                      href={`/programs/${program.slug}`}
-                      className={`w-40 py-3 rounded-full font-bold text-base text-center transition-all duration-300 block ${buttonClass}`}
-                      style={{ fontFamily: "Tahoma, Geneva, sans-serif", color: 'black' }}
-                    >
-                      לדף התוכנית ←
-                    </Link>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <ProgramsFeed
+            initialPrograms={programs}
+            initialHasMore={hasMore}
+            activeCategory={activeCategory}
+            searchQuery={searchQuery}
+          />
         </section>
       </main>
 

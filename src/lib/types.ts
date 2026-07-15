@@ -3,6 +3,8 @@ export type ProgramCategory = string;
 export type ProgramImage = {
   url: string;
   alt: string;
+  assetType?: "photo" | "graphic";
+  isCover?: boolean;
 };
 
 export type ProgramMaterial = {
