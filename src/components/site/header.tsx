@@ -15,7 +15,7 @@ export function SiteHeader() {
           className="text-[40px] leading-none"
           style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}
         >
-          מרכזות<span className="text-[#96FFA7]">אונליין</span>
+          מרכזות<span className="text-[#4be6b5]">אונליין</span>
         </Link>
        
 
@@ -30,7 +30,7 @@ export function SiteHeader() {
             return (
               <Link key={item.href} href={item.href} className="relative inline-flex items-center justify-center text-sm font-medium transition-colors duration-200 overflow-visible">
                 {isActive ? (
-                  <span className="relative inline-flex items-center justify-center w-[110px] h-[41px] overflow-visible text-[#96FFA7]">
+                  <span className="relative inline-flex items-center justify-center w-[110px] h-[41px] overflow-visible text-[#4be6b5]">
                     <img
                       src="/figma/Vector 1 (1).svg"
                       alt=""
@@ -40,7 +40,7 @@ export function SiteHeader() {
                     <span className="relative text-center px-2">{item.label}</span>
                   </span>
                 ) : (
-                  <span className="px-5 py-2 text-white hover:text-[#96FFA7]">
+                  <span className="px-5 py-2 text-white hover:text-[#4be6b5]">
                     {item.label}
                   </span>
                 )}
@@ -51,7 +51,7 @@ export function SiteHeader() {
 
        <Link
           href="/contact"
-          className="rounded-full bg-[#FF8B72] px-7 py-3 text-black text-sm"
+          className="rounded-full bg-[#ff7a6b] px-7 py-3 text-black text-sm"
         >
           צרי קשר
         </Link>

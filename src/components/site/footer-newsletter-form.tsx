@@ -28,7 +28,7 @@ export default function FooterNewsletterForm({
           type="email"
           dir="rtl"
           required
-          className="flex-1 rounded-full border border-white/40 bg-black/60 px-5 py-3 text-base text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#96FFA7]"
+          className="flex-1 rounded-full border border-white/40 bg-black/60 px-5 py-3 text-base text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#4be6b5]"
           placeholder="מייל"
           style={{ fontFamily: "'Ploni ML v2 AAA', Arial, sans-serif" }}
         />
@@ -36,7 +36,7 @@ export default function FooterNewsletterForm({
         <button
           type="submit"
           disabled={pending}
-          className="rounded-full bg-[#96FFA7] hover:bg-[#4FDAB3] px-8 py-3 text-base font-bold text-black transition-colors whitespace-nowrap disabled:opacity-60"
+          className="rounded-full bg-[#4be6b5] hover:bg-[#4be6b5] px-8 py-3 text-base font-bold text-black transition-colors whitespace-nowrap disabled:opacity-60"
           style={{ fontFamily: "'Ploni ML v2 AAA', Arial, sans-serif" }}
         >
           {pending ? "שולח..." : "שלח"}

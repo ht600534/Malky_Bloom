@@ -20,7 +20,7 @@ export default async function AdminLoginPage({ searchParams }: Props) {
           name="password"
           required
           autoFocus
-          className="w-full rounded-md border border-[#d1d5db] bg-white px-4 py-3 text-sm text-[#111827] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#4FDAB3]/30 focus:border-[#4FDAB3] transition-all mb-5 text-center"
+          className="w-full rounded-md border border-[#d1d5db] bg-white px-4 py-3 text-sm text-[#111827] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#4be6b5]/30 focus:border-[#4be6b5] transition-all mb-5 text-center"
           placeholder="סיסמה"
         />
 

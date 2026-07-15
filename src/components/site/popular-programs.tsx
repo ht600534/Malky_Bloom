@@ -41,7 +41,7 @@ export default function PopularPrograms({ programs }: Props) {
             {/* כותרת במרכז */}
             <div className="flex flex-col mb-10 md:mb-14 mr-5">
               <h2
-                className="text-4xl font-bold text-right mb-12 bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] bg-clip-text text-transparent leading-tight mb-4 text-right"
+                className="text-4xl font-bold text-right mb-12 bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] bg-clip-text text-transparent leading-tight mb-4 text-right"
                 style={{
                   letterSpacing: '-1px',
                   direction: 'rtl',

@@ -21,7 +21,7 @@ export default function ContactConsultBox() {
                 <h2
                     className="text-4xl md:text-5xl font-bold text-center mb-4 pt-12"
                     style={{
-                        color: "#FF7458",
+                        color: "#ff7a6b",
                         fontFamily: "'Placebo_FM', Arial, sans-serif",
                         lineHeight: 1.1,
                     }}
@@ -39,7 +39,7 @@ export default function ContactConsultBox() {
                         type="text"
                         placeholder="השם שלך"
                         required
-                        className="w-full md:w-44 px-4 py-2 rounded-full bg-white text-black text-center text-lg font-normal focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] transition"
+                        className="w-full md:w-44 px-4 py-2 rounded-full bg-white text-black text-center text-lg font-normal focus:outline-none focus:ring-2 focus:ring-[#4be6b5] transition"
                         style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                     />
                     <input
@@ -47,7 +47,7 @@ export default function ContactConsultBox() {
                         type="text"
                         placeholder="טלפון לשיחה"
                         required
-                        className="w-full md:w-44 px-4 py-2 rounded-full bg-white text-black text-center text-lg font-normal focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] transition"
+                        className="w-full md:w-44 px-4 py-2 rounded-full bg-white text-black text-center text-lg font-normal focus:outline-none focus:ring-2 focus:ring-[#4be6b5] transition"
                         style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                     />
                     <input
@@ -55,7 +55,7 @@ export default function ContactConsultBox() {
                         type="email"
                         placeholder="כתובת מייל"
                         required
-                        className="w-full md:w-44 px-4 py-2 rounded-full bg-white text-black text-center text-lg font-normal focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] transition"
+                        className="w-full md:w-44 px-4 py-2 rounded-full bg-white text-black text-center text-lg font-normal focus:outline-none focus:ring-2 focus:ring-[#4be6b5] transition"
                         style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                     />
                     <input
@@ -67,7 +67,7 @@ export default function ContactConsultBox() {
                     <button
                         type="submit"
                         disabled={pending}
-                        className="w-full md:w-34 px-4 py-2 rounded-full bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] text-black font-bold text-lg text-center transition hover:scale-105 disabled:opacity-60"
+                        className="w-full md:w-34 px-4 py-2 rounded-full bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] text-black font-bold text-lg text-center transition hover:scale-105 disabled:opacity-60"
                         style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                     >
                         {pending ? "שולח..." : "שלח"}

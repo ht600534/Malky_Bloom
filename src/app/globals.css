@@ -48,8 +48,8 @@ html, body {
   --surface-soft: #181820;
   --foreground: #f6f7fb;
   --muted: #b5b8c5;
-  --brand: #2ce5b0;
-  --brand-2: #ff7a59;
+  --brand: #4be6b5;
+  --brand-2: #ff7a6b;
   --stroke: #2a2b35;
 
   /* Figma export tokens */
@@ -77,7 +77,7 @@ html, body {
   --lh-31: 31px;
   --lh-26: 26px;
   --lh-19: 19px;
-  --Linear: linear-gradient(90deg, #96ffa7 0%, #4fdab3 100%);
+  --Linear: linear-gradient(90deg, #4be6b5 0%, #2da88d 100%);
   --font-placebo-fm: var(--font-rubik), Arial, sans-serif;
   --font-ploni-ml-v2-aaa: var(--font-rubik), Arial, sans-serif;
 }

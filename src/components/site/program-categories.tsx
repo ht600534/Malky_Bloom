@@ -6,18 +6,18 @@ export function ProgramCategories() {
     <section className="w-full bg-[#0a0a0d]  rtl relative overflow-visible">
       <div className="max-w-7xl mx-auto flex justify-center md:gap-30 relative z-10">
         {/* עיגול שמאלי - ירוק בתוך ריבוע */}
-        <div className="flex flex-col items-center" style={{ marginTop: '250px' }}>
+        <div className="flex flex-col items-center" style={{ marginTop: '180px' }}>
           <div className="w-[300px] h-[300px] rounded-3xl bg-[#101012] flex flex-col items-center justify-center shadow-lg">
-            <div className="w-[80px] h-[80px] rounded-full bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] flex items-center justify-center">
+            <div className="w-[80px] h-[80px] rounded-full bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] flex items-center justify-center">
               <img src="/figma/Vector-6.svg" alt="מעגל השנה" className="w-10 h-10" />
             </div>
-            <div className="mt-8 text-2xl font-bold bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] bg-clip-text text-transparent text-center leading-tight" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+            <div className="mt-8 text-2xl font-bold bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] bg-clip-text text-transparent text-center leading-tight" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
               סביב<br />מעגל השנה
             </div>
           </div>
         </div>
         {/* עיגול אמצעי - לבן בתוך ריבוע */}
-        <div className="flex flex-col items-o" style={{ marginTop: '350px', marginBottom: '-350px'}}>
+        <div className="flex flex-col items-o" style={{ marginTop: '280px', marginBottom: '-350px'}}>
           <div className="w-[300px] h-[300px] rounded-3xl bg-[#101012] flex flex-col items-center justify-center shadow-lg">
             <div className="w-[80px] h-[80px] rounded-full bg-white flex items-center justify-center border-4 border-[#111116]">
               <img src="/figma/spark-orange.svg" alt="תוכניות נושא" className="w-8 h-8 filter invert-0 brightness-0" />
@@ -28,12 +28,12 @@ export function ProgramCategories() {
           </div>
         </div>
         {/* עיגול ימני - כתום בתוך ריבוע */}
-        <div className="flex flex-col items-center" style={{ marginTop: '250px' }}>
+        <div className="flex flex-col items-center" style={{ marginTop: '180px' }}>
           <div className="w-[300px] h-[300px] rounded-3xl bg-[#101012] flex flex-col items-center justify-center shadow-lg">
-            <div className="w-[80px] h-[80px] rounded-full bg-[#FF7458] flex items-center justify-center">
+            <div className="w-[80px] h-[80px] rounded-full bg-[#ff7a6b] flex items-center justify-center">
               <img src="/figma/11.svg" alt="מחנות קיץ וחורף" className="w-10 h-10" />
             </div>
-            <div className="mt-8 text-2xl font-bold text-[#FF7458] text-center leading-tight" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+            <div className="mt-8 text-2xl font-bold text-[#ff7a6b] text-center leading-tight" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
               מחנות<br />קיץ וחורף
             </div>
           </div>
@@ -41,8 +41,8 @@ export function ProgramCategories() {
       </div>
       {/* קו עם עיגול ירוק */}
       {/* <div className="w-full flex justify-center mt-2 mb-0 relative z-0">
-        <div className="w-[340px] h-0.5 bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] relative">
-          <div className="absolute left-1/2 -translate-x-1/2 top-[-14px] w-8 h-8 rounded-full border-4 border-[#111116] bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] flex items-center justify-center">
+        <div className="w-[340px] h-0.5 bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] relative">
+          <div className="absolute left-1/2 -translate-x-1/2 top-[-14px] w-8 h-8 rounded-full border-4 border-[#111116] bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] flex items-center justify-center">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="9" cy="9" r="7" stroke="#111116" strokeWidth="2" />
               <circle cx="9" cy="9" r="3" fill="#111116" />
@@ -53,7 +53,7 @@ export function ProgramCategories() {
       {/* ריווח שחור קצר מתחת לריבועים */}
     
       {/* מעבר לרקע לבן בהמשך - רווח בלבד */}
-      <div className="w-full h-100 bg-transparent" />
+      <div className="w-full h-80 bg-transparent" />
       {/* בלוק תוכנית ערכית ומיוחדת ממורכז לימין, צמוד לריבועים */}
       <div className="w-full flex items-end justify-center gap-0.2 bg-white relative z-20 py-24 px-2" >
         {/* בלוק ימין */}
@@ -89,7 +89,7 @@ export function ProgramCategories() {
               <span>תוכנית<br/>בהתאמה<br/>אישית</span>
             </div>
             <div className="flex-1 text-right text-white text-2xl font-light leading-9 flex items-center justify-start" style={{fontFamily: 'Tahoma, Geneva, sans-serif'}}>
-              <span>תוכלי לשלב תוכן<br/>ייחודי משלך: תמונות, <br/>הסרטות והימנונים</span>
+              <span>תוכלי לשלב תוכן<br/>ייחודי משלך: תמונות, <br/>הסרטות והמנונים</span>
             </div>
           </div>
         </div>

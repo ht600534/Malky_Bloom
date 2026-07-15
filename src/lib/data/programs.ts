@@ -21,9 +21,9 @@ export const categoryLabels: Record<ProgramCategory | "all", string> = {
 
 const defaultCategoryStyle: ProgramCategoryStyle = {
   badgeClassName: "bg-white text-black",
-  titleColor: "#4FDAB3",
-  buttonClassName: "bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] text-black",
-  placeholderTextColor: "#4FDAB3",
+  titleColor: "#4be6b5",
+  buttonClassName: "bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] text-black",
+  placeholderTextColor: "#4be6b5",
 };
 
 export function getProgramCategoryStyle(category?: string | null): ProgramCategoryStyle {
@@ -59,9 +59,9 @@ export function getProgramCategoryStyle(category?: string | null): ProgramCatego
   if (value.includes("מחנה") || value.includes("קייטנה") || value.includes("camp")) {
     return {
       badgeClassName: "bg-orange-400 text-black",
-      titleColor: "#FF7458",
-      buttonClassName: "bg-[#FF7458] text-white",
-      placeholderTextColor: "#FF7458",
+      titleColor: "#ff7a6b",
+      buttonClassName: "bg-[#ff7a6b] text-white",
+      placeholderTextColor: "#ff7a6b",
     };
   }
 

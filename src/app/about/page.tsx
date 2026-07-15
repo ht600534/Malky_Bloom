@@ -18,7 +18,7 @@ export default function AboutPage() {
                 />
               </div>
             <h1
-              className="text-center text-[92px] font-semibold leading-none text-[#FF7458]"
+              className="text-center text-[92px] font-semibold leading-none text-[#ff7a6b]"
               style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}
             >
               אודות
@@ -54,7 +54,7 @@ export default function AboutPage() {
           <div className="mx-auto max-w-auto mr-50 ml-20">
 
             <h2
-              className="mb-16 text-right text-[38px] font-semibold leading-[1.2] text-[#FF7458] "
+              className="mb-16 text-right text-[38px] font-semibold leading-[1.2] text-[#ff7a6b] "
               style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}
             >
               <div className="mb-4 flex justify-right">
@@ -112,7 +112,7 @@ export default function AboutPage() {
                 רכזות רחב.<br /> כולן תורמות לכולן.
               </p>
 
-              <p className="text-[26px] font-semibold text-[#FF7458] mb-70" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+              <p className="text-[26px] font-semibold text-[#ff7a6b] mb-70" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
                 אני כאן לכל שאלה!
               </p>
             </div>

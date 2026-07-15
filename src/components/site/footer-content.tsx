@@ -50,7 +50,7 @@ export default async function FooterContent({
   return (
     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-[minmax(280px,340px)_minmax(220px,260px)_minmax(420px,1fr)] gap-y-14 gap-x-12 relative z-20 w-full">
       <div className="flex flex-col items-start text-left gap-6">
-        <span className="text-[42px] leading-[1.05] bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] bg-clip-text text-transparent mb-20 mt-10" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}>
+        <span className="text-[42px] leading-[1.05] bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] bg-clip-text text-transparent mb-20 mt-10" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}>
           מרכזות <span className="font-light" style={{ color: "white" }}>אונליין</span>
         </span>
         <div className="flex items-center gap-3 mt-6">
@@ -63,7 +63,7 @@ export default async function FooterContent({
           <Image src="/figma/Vector%20(8).svg" alt="מייל" width={24} height={24} />
           <a
             href={`mailto:${email}`}
-            className="text-[24px] font-normal hover:text-[#4FDAB3] transition-colors cursor-pointer relative"
+            className="text-[24px] font-normal hover:text-[#4be6b5] transition-colors cursor-pointer relative"
             style={{ fontFamily: "'Ploni ML v2 AAA', Arial, sans-serif" }}
             title="שלחי מייל"
           >
@@ -71,7 +71,7 @@ export default async function FooterContent({
           </a>
         </div>
       </div>
-      <div className={`mt-30 mr-12 grid grid-cols-2 ${menuGapClassName} gap-y-3 text-right text-[24px] leading-[1.55] text-[#96FFA7]`} style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+      <div className={`mt-30 mr-12 grid grid-cols-2 ${menuGapClassName} gap-y-3 text-right text-[24px] leading-[1.55] text-[#4be6b5]`} style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
         {footerLinks.map((item) => (
           <Link key={item.label} href={item.href} className="whitespace-nowrap transition hover:text-white " style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
             {item.label}

@@ -22,7 +22,7 @@ export default async function ProgramsPage({ searchParams }: Props) {
 
   /** מפה של צבעי כותרת + כפתור לפי slug קטגוריה */
   const categoryColors: Record<string, { hero: string; btn: string }> = {
-    all: { hero: "#96FFA7", btn: "bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] text-black" },
+    all: { hero: "#4be6b5", btn: "bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] text-black" },
   };
   for (const [slug, name] of Object.entries(activeLabels)) {
     if (slug === "all") continue;
@@ -30,11 +30,11 @@ export default async function ProgramsPage({ searchParams }: Props) {
     if (matchHeb.includes("חג") || matchHeb.includes("מעגל"))   { categoryColors[slug] = { hero: "#FCD34D", btn: "bg-[#FCD34D] text-black" }; }
     else if (matchHeb.includes("הורים") || matchHeb.includes("ערב")) { categoryColors[slug] = { hero: "#60A5FA", btn: "bg-[#60A5FA] text-white" }; }
     else if (matchHeb.includes("נושא") || matchHeb.includes("סדנא")) { categoryColors[slug] = { hero: "#67E8F9", btn: "bg-[#67E8F9] text-black" }; }
-    else if (matchHeb.includes("מחנה") || matchHeb.includes("קייטנה") || slug === "camp") { categoryColors[slug] = { hero: "#FF7458", btn: "bg-[#FF7458] text-white" }; }
-    else { categoryColors[slug] = { hero: "#96FFA7", btn: "bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] text-black" }; }
+    else if (matchHeb.includes("מחנה") || matchHeb.includes("קייטנה") || slug === "camp") { categoryColors[slug] = { hero: "#ff7a6b", btn: "bg-[#ff7a6b] text-white" }; }
+    else { categoryColors[slug] = { hero: "#4be6b5", btn: "bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] text-black" }; }
   }
 
-  const heroColor = categoryColors[activeCategory]?.hero ?? "#96FFA7";
+  const heroColor = categoryColors[activeCategory]?.hero ?? "#4be6b5";
 
   return (
     <>
@@ -84,10 +84,10 @@ export default async function ProgramsPage({ searchParams }: Props) {
                   name="q"
                   defaultValue={searchQuery}
                   placeholder="חפשי תוכנית לפי נושא, שם או תיאור..."
-                  className="w-full h-[46px] pr-10 pl-4 rounded-full bg-white text-black text-right text-sm focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] transition"
+                  className="w-full h-[46px] pr-10 pl-4 rounded-full bg-white text-black text-right text-sm focus:outline-none focus:ring-2 focus:ring-[#4be6b5] transition"
                   style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                 />
-                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9ca3af] hover:text-[#4FDAB3] transition-colors">
+                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9ca3af] hover:text-[#4be6b5] transition-colors">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
                 </button>
               </form>

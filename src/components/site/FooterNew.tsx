@@ -40,6 +40,18 @@ export default async function SiteFooter() {
         newsletterFormClassName="w-full max-w-[320px]"
         newsletterMessageClassName="ml-36 -mt-2 text-right text-sm direction-rtl"
       />
+
+      {/* ── Credits ── */}
+      <div className="relative z-20 text-center mt-20 pb-4">
+        <a
+          href="mailto:henny600534@gmail.com"
+          className="text-green hover:text-[#ff7a6b] transition-colors text-sm tracking-wide"
+          style={{ fontFamily: "Tahoma, Geneva, sans-serif"}}
+        >
+          
+          עיצוב ובניית אתרים  — Henny600534@gmail.com
+        </a>
+      </div>
     </section>
   );
 }

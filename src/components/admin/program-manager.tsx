@@ -40,9 +40,9 @@ const styles = {
   card: "rounded-lg bg-white shadow-sm border border-[#e5e7eb] p-6 md:p-8",
   cardHeader: "text-xl md:text-2xl font-bold text-[#111827] mb-1",
   cardDesc: "text-sm text-[#6b7280] mb-6",
-  field: "w-full rounded-md border border-[#d1d5db] bg-white px-3 py-2 text-sm text-[#111827] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#4FDAB3]/30 focus:border-[#4FDAB3] transition",
+  field: "w-full rounded-md border border-[#d1d5db] bg-white px-3 py-2 text-sm text-[#111827] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#4be6b5]/30 focus:border-[#4be6b5] transition",
   label: "block text-sm font-medium text-[#374151] mb-1",
-  btnPrimary: "rounded-md bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] px-4 py-2 text-sm font-semibold text-[#041410] hover:shadow-md transition disabled:opacity-40",
+  btnPrimary: "rounded-md bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] px-4 py-2 text-sm font-semibold text-[#041410] hover:shadow-md transition disabled:opacity-40",
   btnSecondary: "rounded-md border border-[#d1d5db] bg-white px-4 py-2 text-sm font-medium text-[#374151] hover:bg-[#f9fafb] transition",
   btnDanger: "rounded-md border border-[#fca5a5] bg-white px-4 py-2 text-sm font-medium text-[#dc2626] hover:bg-[#fef2f2] transition",
   badgePublished: "inline-flex items-center rounded-md bg-[#dcfce7] px-2 py-0.5 text-xs font-medium text-[#166534]",
@@ -499,7 +499,7 @@ export function ProgramManager() {
                     images[index] = { ...images[index], isCover: e.target.checked };
                     setForm((prev) => ({ ...prev, images }));
                   }}
-                  className="w-4 h-4 rounded accent-[#4FDAB3]"
+                  className="w-4 h-4 rounded accent-[#4be6b5]"
                 />
                  תמונת קאבר (מוצגת בגדול)
               </label>
@@ -508,7 +508,7 @@ export function ProgramManager() {
           <button
             type="button"
             onClick={() => setForm((prev) => ({ ...prev, images: [...(prev.images ?? []), { ...emptyImage }] }))}
-            className="text-sm font-medium text-[#4FDAB3] hover:text-[#3ab890] transition-colors mt-2"
+            className="text-sm font-medium text-[#4be6b5] hover:text-[#3ab890] transition-colors mt-2"
           >
             + הוספת תמונה/גרפיקה/PDF
           </button>

@@ -2,6 +2,8 @@
 // קומפוננטת Hero Section – עיצוב ראשי מהפיגמה
 // אין לוגיקה, רק מבנה ותצוגה
 
+import ConstellationEffect from "./ConstellationEffect";
+
 export default function HeroSection() {
   return (
     <section style={{
@@ -14,6 +16,8 @@ export default function HeroSection() {
       justifyContent: 'center',
       flexGrow: 1
     }}>
+      <ConstellationEffect />
+
       {/* שכבת תוכן */}
       <div style={{
         position: 'relative',

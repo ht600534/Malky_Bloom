@@ -18,7 +18,7 @@ const QUESTIONS = [
         a: 'הרכישה והקשר מתבצעים בצורה אישית ופשוטה – במייל או בטלפון.\nלאחר שניצור קשר ונבין יחד מהי התוכנית המדויקת עבורך, החומרים יישלחו אלייך ישירות.\nהערכה מגיעה בצורה מסודרת ומוכנה לחלוטין, ובנוסף, כחלק מהשירות, את מקבלת מענה מלא הכולל עזרה והתאמה של התכנים לאופי ולצרכים המדויקים של המוסד שלך.'
     },
     { q: 'מה קורה אם אני צריכה עזרה, שינוי או התאמה מיוחדת בתוכנית שרכשתי?', a: 'אני כאן בשבילך!\n  אם נתקלת בשאלה תוך כדי תנועה, או שאת זקוקה לייעוץ קל לגבי התאמת הפעילות, את תמיד יכולה לפנות אליי דרך עמוד יצירת הקשר באתר או במייל ואשמח לסייע לך כדי שהתוכנית תצליח בצורה המקסימלית.' },
-    { q: 'האם התוכניות מגיעות מוכנות לחלוטין או שנדרשת עבודת הכנה מצידי?', a: 'מטרה שלי היא להקל עלייך מקסימום! \n התוכניות מגיעות כערכה מקיפה הכוללת את כתיבת הרעיון, המהלך, ההנחיות לרכזת,\n  חומרים להדפסה ומדיה (במידה ויש).\n  יחד עם זאת, בכל תוכנית ישנו מרחב המאפשר לך להכניס את הטאץ האישי שלך ולהתאים את התוכן לאופי המדויק של המוסד שלך.' },
+    { q: 'האם התוכניות מגיעות מוכנות לחלוטין או שנדרשת עבודת הכנה מצידי?', a: 'המטרה שלי היא להקל עלייך מקסימום! \n התוכניות מגיעות כערכה מקיפה הכוללת את כתיבת הרעיון, המהלך, ההנחיות לרכזת,\n  חומרים להדפסה ומדיה (במידה ויש).\n  יחד עם זאת, בכל תוכנית ישנו מרחב המאפשר לך להכניס את הטאץ האישי שלך ולהתאים את התוכן לאופי המדויק של המוסד שלך.' },
 
 ];
 type Props = {
@@ -257,7 +257,7 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                     onClick={() => setLightboxIdx(null)}
                 >
                     <button
-                        className="absolute top-4 left-4 text-white text-2xl hover:text-[#4FDAB3] transition-colors z-10 cursor-pointer"
+                        className="absolute top-4 left-4 text-white text-2xl hover:text-[#4be6b5] transition-colors z-10 cursor-pointer"
                         onClick={() => setLightboxIdx(null)}
                     >
                         ✕
@@ -266,13 +266,13 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                     {allGalleryItems.length > 1 && (
                         <>
                             <button
-                                className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-5xl hover:text-[#4FDAB3] transition-colors z-10 cursor-pointer"
+                                className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-5xl hover:text-[#4be6b5] transition-colors z-10 cursor-pointer"
                                 onClick={(e) => { e.stopPropagation(); setLightboxIdx((lightboxIdx - 1 + allGalleryItems.length) % allGalleryItems.length); }}
                             >
                                 ‹
                             </button>
                             <button
-                                className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-5xl hover:text-[#4FDAB3] transition-colors z-10 cursor-pointer"
+                                className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-5xl hover:text-[#4be6b5] transition-colors z-10 cursor-pointer"
                                 onClick={(e) => { e.stopPropagation(); setLightboxIdx((lightboxIdx + 1) % allGalleryItems.length); }}
                             >
                                 ›
@@ -357,7 +357,7 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
             <section className="bg-black py-24">
                 <div className="max-w-[1100px] mx-auto px-6 text-center">
                     <h2
-                        className="text-[64px] leading-none text-[#FF7458]"
+                        className="text-[64px] leading-none text-[#ff7a6b]"
                         style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}
                     >
                         מעוניינת?
@@ -370,7 +370,7 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                 <div className="max-w-[1280px] mx-auto px-6 ">
 
                     <div className="text-center mb-14">
-                        {/* <p className="text-[14px] tracking-[0.3em] text-[#96FFA7] mb-4">
+                        {/* <p className="text-[14px] tracking-[0.3em] text-[#4be6b5] mb-4">
         תוכניות נוספות
       </p> */}
 
@@ -422,7 +422,7 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                                 </div>
 
                                 <div className="p-8 text-right">
-                                    {/* <p className="text-[#96FFA7] text-sm mb-3">תוכנית</p> */}
+                                    {/* <p className="text-[#4be6b5] text-sm mb-3">תוכנית</p> */}
                                     <h3 className="text-[28px] font-bold text-black mb-4" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: relatedCategoryStyle.titleColor }}>{item.title}</h3>
                                     <p className="text-[#666] leading-7 line-clamp-3" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>{item.shortDescription}</p>
                                     <div className="mt-8 text-right">
@@ -464,7 +464,7 @@ function InterestedForm({ programId }: { programId: string }) {
                 type="text"
                 required
                 placeholder="השם שלך"
-                className="w-[180px] h-[50px] px-5 rounded-full bg-white text-black text-center text-base focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] transition"
+                className="w-[180px] h-[50px] px-5 rounded-full bg-white text-black text-center text-base focus:outline-none focus:ring-2 focus:ring-[#4be6b5] transition"
                 style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
             />
             <input
@@ -472,7 +472,7 @@ function InterestedForm({ programId }: { programId: string }) {
                 type="text"
                 required
                 placeholder="טלפון לשיחה"
-                className="w-[180px] h-[50px] px-5 rounded-full bg-white text-black text-center text-base focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] transition"
+                className="w-[180px] h-[50px] px-5 rounded-full bg-white text-black text-center text-base focus:outline-none focus:ring-2 focus:ring-[#4be6b5] transition"
                 style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
             />
             <input
@@ -480,7 +480,7 @@ function InterestedForm({ programId }: { programId: string }) {
                 type="email"
                 required
                 placeholder="כתובת מייל"
-                className="w-[180px] h-[50px] px-5 rounded-full bg-white text-black text-center text-base focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] transition"
+                className="w-[180px] h-[50px] px-5 rounded-full bg-white text-black text-center text-base focus:outline-none focus:ring-2 focus:ring-[#4be6b5] transition"
                 style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
             />
 
@@ -489,14 +489,14 @@ function InterestedForm({ programId }: { programId: string }) {
             <button
                 type="submit"
                 disabled={pending}
-                className="w-[140px] h-[50px] rounded-full bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] text-black font-bold text-base transition hover:scale-105 disabled:opacity-60"
+                className="w-[140px] h-[50px] rounded-full bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] text-black font-bold text-base transition hover:scale-105 disabled:opacity-60"
                 style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
             >
                 {pending ? "שולח..." : "שלח"}
             </button>
 
             {state.message && (
-                <div className="w-full text-center text-sm mt-2" style={{ color: state.ok ? '#4FDAB3' : '#FF7458' }}>
+                <div className="w-full text-center text-sm mt-2" style={{ color: state.ok ? '#4be6b5' : '#ff7a6b' }}>
                     {state.message}
                 </div>
             )}

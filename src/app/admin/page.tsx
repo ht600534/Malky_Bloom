@@ -17,7 +17,7 @@ export default async function AdminPage() {
           <div className="flex items-center justify-between rounded-lg bg-white shadow-sm border border-[#e5e7eb] p-5 md:p-6">
             <div>
               <h1 className="text-2xl md:text-3xl font-bold text-[#111827]" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}>
-                מרכזות<span className="text-[#4FDAB3]">אונליין</span>
+                מרכזות<span className="text-[#4be6b5]">אונליין</span>
               </h1>
               <p className="text-sm text-[#6b7280] mt-1">פאנל ניהול התוכניות</p>
             </div>

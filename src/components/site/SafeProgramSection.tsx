@@ -9,7 +9,7 @@ export default function SafeProgramSection() {
                 <div className="flex-1 flex flex-col md:items-end items-center text-right gap-4" >
                     <div className="flex flex-col md:flex-row md:items-center md:gap-8 w-full">
 
-                        <div className="text-4xl md:text-7xl font-bold leading-tight whitespace-pre-line mr-40" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: '#96FFA7' }}>
+                        <div className="text-4xl md:text-7xl font-bold leading-tight whitespace-pre-line mr-40" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: '#4be6b5' }}>
                             תוכנית  <br /> על  בטוח
                         </div>
 

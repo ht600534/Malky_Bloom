@@ -23,6 +23,9 @@ const rubik = Rubik({
 export const metadata: Metadata = {
   title: "מרכזות אונליין",
   description: "אתר תוכניות תוכן וחוויות עם מסך ניהול מלא למנהלת.",
+  icons: {
+    icon: "/favicon.svg",
+  },
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://example.com"),
   openGraph: {
     title: "מרכזות אונליין",

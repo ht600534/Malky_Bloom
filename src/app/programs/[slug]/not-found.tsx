@@ -8,7 +8,7 @@ export default function ProgramNotFoundPage() {
       <SiteHeader />
       <main className="bg-[#F7F7F7] px-6 py-24 text-center text-[#111116]">
         <div className="mx-auto max-w-2xl rounded-[32px] bg-white p-10 shadow-sm">
-          <p className="mb-4 text-sm font-semibold text-[#FF7458]">עמוד התוכנית לא זמין כרגע</p>
+          <p className="mb-4 text-sm font-semibold text-[#ff7a6b]">עמוד התוכנית לא זמין כרגע</p>
           <h1
             className="mb-6 text-[42px] leading-tight text-[#111116] md:text-[56px]"
             style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}
@@ -21,13 +21,13 @@ export default function ProgramNotFoundPage() {
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/programs"
-              className="rounded-full bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] px-8 py-3 font-bold text-black"
+              className="rounded-full bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] px-8 py-3 font-bold text-black"
             >
               חזרה לתוכניות
             </Link>
             <Link
               href="/contact"
-              className="rounded-full bg-[#FF7458] px-8 py-3 font-bold text-white"
+              className="rounded-full bg-[#ff7a6b] px-8 py-3 font-bold text-white"
             >
               יצירת קשר
             </Link>

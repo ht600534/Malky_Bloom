@@ -59,7 +59,7 @@ export function ContactFormPage() {
   />
 </div>
           <h1
-            className="mb-3 text-[38px] leading-[1.05] text-[#FF7458] md:mb-4 md:text-[56px]"
+            className="mb-3 text-[38px] leading-[1.05] text-[#ff7a6b] md:mb-4 md:text-[56px]"
             style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}
           >
             נשמח להיות בקשר:)
@@ -78,7 +78,7 @@ export function ContactFormPage() {
               type="text"
               required
               placeholder="השם שלך"
-              className="h-[51px] w-full rounded-full border-none bg-white px-6 text-center text-[20px] text-black placeholder:text-black/70 focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] md:w-[230px]"
+              className="h-[51px] w-full rounded-full border-none bg-white px-6 text-center text-[20px] text-black placeholder:text-black/70 focus:outline-none focus:ring-2 focus:ring-[#4be6b5] md:w-[230px]"
               style={{ fontFamily: "Tahoma, Geneva, sans-serif", fontWeight: 300 }}
             />
             <input
@@ -86,7 +86,7 @@ export function ContactFormPage() {
               type="text"
               required
               placeholder="טלפון לשיחה"
-              className="h-[51px] w-full rounded-full border-none bg-white px-6 text-center text-[20px] text-black placeholder:text-black/70 focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] md:w-[230px]"
+              className="h-[51px] w-full rounded-full border-none bg-white px-6 text-center text-[20px] text-black placeholder:text-black/70 focus:outline-none focus:ring-2 focus:ring-[#4be6b5] md:w-[230px]"
               style={{ fontFamily: "Tahoma, Geneva, sans-serif", fontWeight: 300 }}
             />
             <input
@@ -94,13 +94,13 @@ export function ContactFormPage() {
               type="email"
               required
               placeholder="כתובת מייל"
-              className="h-[51px] w-full rounded-full border-none bg-white px-6 text-center text-[20px] text-black placeholder:text-black/70 focus:outline-none focus:ring-2 focus:ring-[#4FDAB3] md:w-[230px]"
+              className="h-[51px] w-full rounded-full border-none bg-white px-6 text-center text-[20px] text-black placeholder:text-black/70 focus:outline-none focus:ring-2 focus:ring-[#4be6b5] md:w-[230px]"
               style={{ fontFamily: "Tahoma, Geneva, sans-serif", fontWeight: 300 }}
             />
             <button
               type="submit"
               disabled={pending}
-              className="h-[51px] w-full rounded-full bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] text-[22px] font-bold text-black transition hover:scale-[1.02] disabled:opacity-60 md:w-[165px]"
+              className="h-[51px] w-full rounded-full bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] text-[22px] font-bold text-black transition hover:scale-[1.02] disabled:opacity-60 md:w-[165px]"
               style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
             >
               {pending ? "שולח..." : "שלח"}
@@ -113,8 +113,8 @@ export function ContactFormPage() {
 
           {state.message ? (
             state.ok ? (
-              <div className="mt-5 max-w-[430px] rounded-[28px] border border-[#96FFA7]/30 bg-white px-5 py-4 text-center shadow-[0_18px_50px_rgba(79,218,179,0.16)]">
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-[#96FFA7] to-[#4FDAB3] text-[22px] text-[#041410]">
+              <div className="mt-5 max-w-[430px] rounded-[28px] border border-[#4be6b5]/30 bg-white px-5 py-4 text-center shadow-[0_18px_50px_rgba(79,218,179,0.16)]">
+                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] text-[22px] text-[#041410]">
                   ✓
                 </div>
                 <p className="text-[20px] text-[#0f172a]" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}>
