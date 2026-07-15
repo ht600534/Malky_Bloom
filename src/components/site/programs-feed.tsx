@@ -5,6 +5,7 @@ import { startTransition, useEffect, useRef, useState } from "react";
 import { SafeImage } from "@/components/site/safe-image";
 import { getProgramCategoryStyle } from "@/lib/data/programs";
 import type { Program } from "@/lib/types";
+import { isPdfUrl, normalizeImageUrl } from "@/lib/url";
 
 type Props = {
   initialPrograms: Program[];
@@ -102,6 +103,7 @@ export default function ProgramsFeed({ initialPrograms, initialHasMore, activeCa
           const categoryStyle = getProgramCategoryStyle(program.category);
           const mainColor = categoryStyle.titleColor;
           const buttonClass = categoryStyle.buttonClassName;
+          const coverAsset = [...program.images, ...program.graphics].find((item) => item.isCover) ?? [...program.images, ...program.graphics][0];
 
           return (
             <div
@@ -109,16 +111,24 @@ export default function ProgramsFeed({ initialPrograms, initialHasMore, activeCa
               className="flex h-[480px] w-full max-w-[371px] flex-col rounded-[30px] bg-[#fffff] p-5 shadow-lg transition-all duration-300 hover:scale-[1.02]"
             >
               <div className="mb-5 h-[200px] w-full overflow-hidden rounded-[12px] bg-[#232326]">
-                {program.images?.[0]?.url ? (
-                  <SafeImage
-                    src={program.images[0].url}
-                    alt={program.images[0].alt || program.title}
-                    width={361}
-                    height={200}
-                    className="h-full w-full object-cover"
-                    fallbackTitle={program.title}
-                    fallbackCategory={program.category}
-                  />
+                {coverAsset?.url ? (
+                  isPdfUrl(coverAsset.url) ? (
+                    <iframe
+                      src={`${normalizeImageUrl(coverAsset.url)}#toolbar=0&navpanes=0&scrollbar=0`}
+                      title={coverAsset.alt || program.title}
+                      className="h-full w-full bg-white"
+                    />
+                  ) : (
+                    <SafeImage
+                      src={coverAsset.url}
+                      alt={coverAsset.alt || program.title}
+                      width={361}
+                      height={200}
+                      className="h-full w-full object-cover"
+                      fallbackTitle={program.title}
+                      fallbackCategory={program.category}
+                    />
+                  )
                 ) : (
                   <div className="flex h-full w-full items-center justify-center bg-black text-center">
                     <span

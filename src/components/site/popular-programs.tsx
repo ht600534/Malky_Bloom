@@ -5,6 +5,7 @@ import { useState, useCallback } from "react";
 import { SafeImage } from "@/components/site/safe-image";
 import { getProgramCategoryStyle } from "@/lib/data/programs";
 import type { Program } from "@/lib/types";
+import { isPdfUrl, normalizeImageUrl } from "@/lib/url";
 
 type Props = {
   programs: Program[];
@@ -57,6 +58,7 @@ export default function PopularPrograms({ programs }: Props) {
           {/* כרטיסים */}
           {visiblePrograms.map((program) => {
             const categoryStyle = getProgramCategoryStyle(program.category);
+            const coverAsset = [...program.images, ...program.graphics].find((item) => item.isCover) ?? [...program.images, ...program.graphics][0];
             return (
               <div
                 key={program.id}
@@ -64,16 +66,24 @@ export default function PopularPrograms({ programs }: Props) {
               >
                 {/* Image */}
                 <div className="w-full h-[200px] overflow-hidden rounded-[12px] mb-5 bg-[#232326]">
-                  {program.images?.[0]?.url ? (
-                    <SafeImage
-                      src={program.images[0].url}
-                      alt={program.images[0].alt || program.title}
-                      width={361}
-                      height={200}
-                      className="w-full h-full object-cover"
-                      fallbackTitle={program.title}
-                      fallbackCategory={program.category}
-                    />
+                  {coverAsset?.url ? (
+                    isPdfUrl(coverAsset.url) ? (
+                      <iframe
+                        src={`${normalizeImageUrl(coverAsset.url)}#toolbar=0&navpanes=0&scrollbar=0`}
+                        title={coverAsset.alt || program.title}
+                        className="h-full w-full bg-white"
+                      />
+                    ) : (
+                      <SafeImage
+                        src={coverAsset.url}
+                        alt={coverAsset.alt || program.title}
+                        width={361}
+                        height={200}
+                        className="w-full h-full object-cover"
+                        fallbackTitle={program.title}
+                        fallbackCategory={program.category}
+                      />
+                    )
                   ) : (
                     <div className="flex h-full w-full items-center justify-center bg-white text-center">
                       <span

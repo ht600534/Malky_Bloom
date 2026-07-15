@@ -385,6 +385,7 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                     <div className="grid md:grid-cols-3 gap-8 text-center w-340">
                         {relatedPrograms.map((item) => {
                             const relatedCategoryStyle = getProgramCategoryStyle(item.category);
+                            const relatedCover = [...item.images, ...item.graphics].find((asset) => asset.isCover) ?? [...item.images, ...item.graphics][0];
 
                             return (
                             <article
@@ -392,14 +393,22 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                                 className="overflow-hidden rounded-[32px] bg-white"
                             >
                                 <div className="relative h-[280px]  mr-5 mt-5 ml-5 border border-[#f0f0f0] rounded-[32px] overflow-hidden">
-                                    {item.images[0] ? (
-                                        <Image
-                                            src={item.images[0].url}
-                                            alt={item.images[0].alt || item.title}
-                                            fill
-                                            className="object-cover"
-                                            sizes="28vw"
-                                        />
+                                    {relatedCover?.url ? (
+                                        isPdfUrl(relatedCover.url) ? (
+                                            <iframe
+                                                src={`${normalizeImageUrl(relatedCover.url)}#toolbar=0&navpanes=0&scrollbar=0`}
+                                                title={relatedCover.alt || item.title}
+                                                className="h-full w-full bg-white"
+                                            />
+                                        ) : (
+                                            <Image
+                                                src={relatedCover.url}
+                                                alt={relatedCover.alt || item.title}
+                                                fill
+                                                className="object-cover"
+                                                sizes="28vw"
+                                            />
+                                        )
                                     ) : (
                                         <div className="flex h-full items-center justify-center bg-black text-center">
                                             <span
