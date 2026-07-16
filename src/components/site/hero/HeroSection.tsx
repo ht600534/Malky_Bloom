@@ -6,7 +6,7 @@
 //  {/* <ConstellationEffect /> */}
 export default function HeroSection() {
   return (
-    <section className="relative flex min-h-[540px] w-auto flex-grow flex-col items-center justify-center overflow-hidden bg-black px-4 pb-20 pt-24 sm:min-h-[620px] sm:px-6 sm:pb-24 sm:pt-28 md:min-h-[720px] md:pb-32 md:pt-36">
+    <section className="relative flex min-h-[420px] w-auto flex-grow flex-col items-center justify-center overflow-hidden bg-black px-4 pb-10 pt-16 sm:min-h-[480px] sm:px-6 sm:pb-14 sm:pt-20 md:min-h-[540px] md:pb-16 md:pt-24">
     
 
       {/* שכבת תוכן */}
@@ -15,10 +15,10 @@ export default function HeroSection() {
           className="text-white"
           style={{
             fontWeight: 900,
-            fontSize: 'clamp(2.6rem, 9vw, 5rem)',
-            lineHeight: 0.99,
+            fontSize: 'clamp(2rem, 6.5vw, 3.8rem)',
+            lineHeight: 1.2,
             marginBottom: 0,
-            letterSpacing: '-2px',
+            letterSpacing: '-1.5px',
             textShadow: '0 2px 8px #0008',
           }}
         >
@@ -29,9 +29,9 @@ export default function HeroSection() {
           className="mt-7 text-[#4be6b5] sm:mt-8"
           style={{
             fontWeight: 800,
-            fontSize: 'clamp(2.4rem, 8.5vw, 5rem)',
+            fontSize: 'clamp(2rem, 6.5vw, 3.8rem)',
             fontFamily: "'Placebo_FM', Arial, sans-serif",
-            lineHeight: 0.99,
+            lineHeight: 1.2,
           }}
         >
           זה אף פעם <br /> לא היה פשוט יותר!
@@ -43,7 +43,7 @@ export default function HeroSection() {
         }}>
           פתרון מלא לניהול תוכניות עם כלים חכמים ודקוק פשוט
         </div> */}
-        <div className="h-16 sm:h-20 md:h-24" />
+        <div className="h-3 sm:h-4" />
         {/* <div style={{display: 'flex', gap: 24, justifyContent: 'center', marginTop: 36}}>
           <button style={{
             color: '#fff',

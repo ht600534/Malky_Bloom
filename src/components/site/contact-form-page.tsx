@@ -113,16 +113,23 @@ export function ContactFormPage() {
 
           {state.message ? (
             state.ok ? (
-              <div className="mt-5 max-w-[430px] rounded-[28px] border border-[#4be6b5]/30 bg-white px-5 py-4 text-center shadow-[0_18px_50px_rgba(79,218,179,0.16)]">
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] text-[22px] text-[#041410]">
-                  ✓
+              <div className="mt-6 w-full max-w-[430px] overflow-hidden border border-[#4be6b5]/25 bg-[#0a0a0d]">
+                <div className="h-[3px] w-full bg-gradient-to-r from-[#4be6b5] to-[#4be6b5]/20" />
+                <div className="px-6 py-6">
+                  <div className="mb-4 flex items-center gap-3">
+                    <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center border border-[#4be6b5]/30 bg-[#4be6b5]/10">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M2.5 8L6.5 12L13.5 4" stroke="#4be6b5" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter" />
+                      </svg>
+                    </div>
+                    <p className="text-[20px] text-white" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}>
+                      ההודעה נשלחה!
+                    </p>
+                  </div>
+                  <p className="border-r-2 border-[#4be6b5]/40 pr-3 text-sm leading-7 text-white/55" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+                    {state.message}
+                  </p>
                 </div>
-                <p className="text-[20px] text-[#0f172a]" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}>
-                  ההודעה נשלחה
-                </p>
-                <p className="mt-2 text-sm leading-7 text-[#335348]" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
-                  {state.message}
-                </p>
               </div>
             ) : (
               <div className="mt-5 max-w-md rounded-2xl border border-[#fecaca] bg-[#fff1f1] px-4 py-3 text-center text-sm text-[#991b1b]">

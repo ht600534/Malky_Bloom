@@ -25,7 +25,7 @@ export default async function FooterContent({
   email,
   menuGapClassName = "gap-x-8 sm:gap-x-12 lg:gap-x-16",
   newsletterArrowStyle = { marginBottom: "5px" },
-  newsletterTitleClassName = "text-[38px]",
+  newsletterTitleClassName = "text-[12px]",
   newsletterFormClassName = "w-full max-w-[320px]",
   newsletterMessageClassName = "mt-2 text-right text-sm direction-rtl",
 }: FooterContentProps) {
@@ -54,16 +54,16 @@ export default async function FooterContent({
           מרכזות <span className="font-light" style={{ color: "white" }}>אונליין</span>
         </span>
         <div className="mt-2 flex items-center gap-3">
-          <Image src="/figma/Vector%20(7).svg" alt="טלפון" width={24} height={24} />
-          <span className="text-[18px] font-normal sm:text-[22px] lg:text-[24px]" style={{ fontFamily: "'Ploni ML v2 AAA', Arial, sans-serif" }}>
+          <Image src="/figma/Vector%20(7).svg" alt="טלפון" width={14} height={14} />
+          <span className="text-[14px] font-normal sm:text-[12px] lg:text-[14px]" style={{ fontFamily: "'Ploni ML v2 AAA', Arial, sans-serif" }}>
             {phone}
           </span>
         </div>
         <div className="flex items-center gap-3">
-          <Image src="/figma/Vector%20(8).svg" alt="מייל" width={24} height={24} />
+          <Image src="/figma/Vector%20(8).svg" alt="מייל" width={14} height={14} />
           <a
             href={`mailto:${email}`}
-            className="relative cursor-pointer text-[16px] font-normal transition-colors hover:text-[#4be6b5] sm:text-[20px] lg:text-[24px]"
+            className="relative cursor-pointer text-[16px] font-normal transition-colors hover:text-[#4be6b5] sm:text-[10px] lg:text-[14px]"
             style={{ fontFamily: "'Ploni ML v2 AAA', Arial, sans-serif" }}
             title="שלחי מייל"
           >
@@ -71,17 +71,17 @@ export default async function FooterContent({
           </a>
         </div>
       </div>
-      <div className={`grid grid-cols-2 justify-items-right gap-y-3 text-right text-[18px] leading-[1.55] text-[#4be6b5] sm:text-[20px] lg:mt-24 lg:mr-100 lg:-translate-x-14 lg:justify-items-right lg:text-right lg:text-[24px] xl:mr-12 xl:-translate-x-8 ${menuGapClassName}`} style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+      <div className={`grid grid-cols-2 justify-items-right gap-y-2 text-right text-[18px] leading-[1.05] text-[#4be6b5] sm:text-[20px] lg:mt-24 lg:mr-100 lg:-translate-x-14 lg:justify-items-right lg:text-right lg:text-[14px] xl:mr-12 xl:-translate-x-8 ${menuGapClassName}`} style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
         {footerLinks.map((item) => (
           <Link key={item.label} href={item.href} className="whitespace-nowrap transition hover:text-white " style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
             {item.label}
           </Link>
         ))}
       </div>
-      <div className="flex flex-col items-center gap-6 text-center md:col-span-2 md:items-end md:text-right lg:col-span-1 lg:mt-14">
+      <div className="flex flex-col items-center gap-6 text-center md:col-span-2 md:items-end md:text-right lg:col-span-1 lg:mt-14 ml-20">
         <div className="flex flex-col items-right gap-3">
-          <Image src="/figma/Vector%20(6).svg" alt="חץ כתום " width={100} height={72} className="self-right" style={newsletterArrowStyle} />
-          <span className={`${newsletterTitleClassName} leading-[1.05] text-right`} style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", fontWeight: "none" }}>
+          <Image src="/figma/Vector%20(6).svg" alt="חץ כתום " width={80} height={52} className="self-right" style={newsletterArrowStyle} />
+          <span className={`${newsletterTitleClassName} leading-[1.05] text-right`} style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", fontWeight: "none",fontSize:'26px' }}>
             רוצה להתעדכן<br />כשתוכנית חדשה <br /> עולה לאתר?
           </span>
         </div>
