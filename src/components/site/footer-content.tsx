@@ -78,9 +78,9 @@ export default async function FooterContent({
           </Link>
         ))}
       </div>
-      <div className="flex flex-col items-center gap-6 text-center md:col-span-2 md:items-end md:text-right lg:col-span-1 lg:mt-14 ml-20">
+      <div className="flex flex-col items-center gap-6 text-center md:col-span-2 md:items-end md:text-right lg:col-span-1 lg:mt-14 ml-40">
         <div className="flex flex-col items-right gap-3">
-          <Image src="/figma/Vector%20(6).svg" alt="חץ כתום " width={80} height={52} className="self-right" style={newsletterArrowStyle} />
+          <Image src="/figma/Vector%20(6).svg" alt="חץ כתום " width={60} height={32} className="self-right" style={newsletterArrowStyle} />
           <span className={`${newsletterTitleClassName} leading-[1.05] text-right`} style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", fontWeight: "none",fontSize:'26px' }}>
             רוצה להתעדכן<br />כשתוכנית חדשה <br /> עולה לאתר?
           </span>
