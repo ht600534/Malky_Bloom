@@ -3,7 +3,7 @@ import FooterContent from "./footer-content";
 
 export default async function SiteFooter() {
   return (
-    <section className="w-full bg-black text-white relative overflow-visible py-28 min-h-[580px]">      {/* קישוט עליון */}
+    <section className="relative min-h-[580px] w-full overflow-visible bg-black py-20 text-white sm:py-24 md:py-28">      {/* קישוט עליון */}
       {/* <div className="absolute left-1/2 -translate-x-1/2 -top-8 z-10">
         <Image src="/figma/Elements.svg" alt="קישוט" width={64} height={32} />
       </div> */}
@@ -34,15 +34,15 @@ export default async function SiteFooter() {
       <FooterContent
         phone="0733515872"
         email="mo0733515872@gmail.com"
-        menuGapClassName="gap-x-50"
-        newsletterArrowStyle={{ marginLeft: "210px", marginBottom: "5px" }}
-        newsletterTitleClassName="text-[38px]"
+        menuGapClassName="gap-x-8 sm:gap-x-12 lg:gap-x-16"
+        newsletterArrowStyle={{ marginBottom: "5px" }}
+        newsletterTitleClassName="text-[30px] sm:text-[34px] lg:text-[38px]"
         newsletterFormClassName="w-full max-w-[320px]"
-        newsletterMessageClassName="ml-36 -mt-2 text-right text-sm direction-rtl"
+        newsletterMessageClassName="mt-2 text-right text-sm direction-rtl"
       />
 
       {/* ── Credits ── */}
-      <div className="relative z-20 text-center mt-20 pb-4">
+      <div className="relative z-20 mt-14 px-4 pb-4 text-center sm:mt-20">
         <a
           href="mailto:henny600534@gmail.com"
           className="text-green hover:text-[#ff7a6b] transition-colors text-sm tracking-wide"

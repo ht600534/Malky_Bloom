@@ -2,11 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { isPdfUrl, normalizeImageUrl } from "@/lib/url";
 import { createContactLead } from "@/app/actions";
 import { TurnstileWidget } from "@/components/site/turnstile";
-import { ContactForm } from "@/components/site/contact-form";
 import { categoryLabels, getProgramCategoryStyle } from "@/lib/data/programs";
 import type { Program } from "@/lib/types";
 import React, { useState } from 'react';
@@ -40,18 +39,6 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
         ? visualAssets.filter((item, index) => !(index === 0 && item.url === cover.url && item.alt === cover.alt))
         : visualAssets;
 
-    const questions = program.notes
-        ? program.notes
-            .split(/\r?\n/)
-            .map((line) => line.trim())
-            .filter(Boolean)
-            .slice(0, 3)
-        : [
-            "למה זה מתאים לקהל שלי?",
-            "מה כלול בתכנית?",
-            "איך מתבצעת ההרשמה?",
-        ];
-
     const materialsText = program.materials.length
         ? program.materials.map((material) => material.label).join(" • ")
         : "אין חומרים נלווים";
@@ -66,27 +53,76 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
         );
     }
 
+    useEffect(() => {
+        if (lightboxIdx === null) {
+            return;
+        }
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                setLightboxIdx(null);
+                return;
+            }
+
+            if (allGalleryItems.length <= 1) {
+                return;
+            }
+
+            if (event.key === "ArrowLeft") {
+                setLightboxIdx((currentIdx) => {
+                    if (currentIdx === null) {
+                        return currentIdx;
+                    }
+
+                    return (currentIdx - 1 + allGalleryItems.length) % allGalleryItems.length;
+                });
+            }
+
+            if (event.key === "ArrowRight") {
+                setLightboxIdx((currentIdx) => {
+                    if (currentIdx === null) {
+                        return currentIdx;
+                    }
+
+                    return (currentIdx + 1) % allGalleryItems.length;
+                });
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [allGalleryItems.length, lightboxIdx]);
+
     return (
         <main className="bg-[#F7F7F7] text-[#111116]"  >
-            <section className="relative bg-black mb-20  ">
-                <div className="max-w-[1400px] mx-auto px-6 pt-20">
-                    <div className="relative mx-auto max-w-[980px] overflow-hidden rounded-[40px]">
+            <section className="relative mb-12 bg-black sm:mb-16 md:mb-20">
+                <div className="mx-auto max-w-[1400px] px-4 pt-8 sm:px-6 sm:pt-12 md:pt-20">
+                    <div className="mx-auto mb-6 flex max-w-[980px] justify-end sm:mb-8">
+                        <Link
+                            href="/programs"
+                            className="inline-flex items-center rounded-full  px-5 text-sm text-white transition-colors "
+                            style={{ fontFamily: "Tahoma, Geneva, sans-serif",color:'white' }}
+                        >
+                        <p>{ ` חזרה לעמוד התוכניות -> `}  </p> 
+                        </Link>
+                    </div>
+                    <div className="relative mx-auto max-w-[980px] overflow-hidden rounded-[24px] sm:rounded-[32px] md:rounded-[40px]">
                         {cover ? (
                             isPdfUrl(cover.url) ? (
-                                renderPdfFrame(cover.url, cover.alt || program.title, "h-[520px] w-full bg-white")
+                                renderPdfFrame(cover.url, cover.alt || program.title, "h-[280px] w-full bg-white sm:h-[420px] md:h-[520px]")
                             ) : (
                                 <Image
                                     src={normalizeImageUrl(cover.url)}
                                     alt={cover.alt || program.title}
                                     width={980}
                                     height={520}
-                                    className="w-full h-auto"
+                                    className="h-auto w-full"
                                 />
                             )
                         ) : (
-                            <div className="flex h-[520px] items-center justify-center bg-white text-center">
+                            <div className="flex h-[280px] items-center justify-center bg-white text-center sm:h-[420px] md:h-[520px]">
                                 <span
-                                    className="px-8 text-[42px] leading-tight md:text-[64px]"
+                                    className="px-6 text-[30px] leading-tight sm:px-8 sm:text-[42px] md:text-[64px]"
                                     style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: categoryStyle.placeholderTextColor }}
                                 >
                                     {program.title}
@@ -97,12 +133,12 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                 </div>
 
                 {/* רקע אפור שמתחיל מוקדם יותר */}
-                <div className="mt-[-120px] h-[120px] bg-[#F7F7F7]" />
+                <div className="mt-[-60px] h-[60px] bg-[#F7F7F7] sm:mt-[-90px] sm:h-[90px] md:mt-[-120px] md:h-[120px]" />
             </section>
 
             {/* TITLE + DESCRIPTION */}
-            <section className="max-w-[1280px] mx-auto px-6 pt-10 pb-16" style={{ backgroundColor: '#F7F7F7' }}>
-                <div className="  max-w-[900px] mr-40  text-right">
+            <section className="mx-auto max-w-[1280px] px-4 pb-12 pt-4 sm:px-6 sm:pb-16 sm:pt-6 md:pt-10" style={{ backgroundColor: '#F7F7F7' }}>
+                <div className="mx-auto max-w-[900px] text-right">
 
                     {program.category && (
                         <span className={`inline-flex rounded-full px-5 py-2 text-sm shadow-sm ${categoryStyle.badgeClassName}`}>
@@ -110,10 +146,10 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                         </span>
                     )}
                 </div>
-                <div className=" flex max-w-[900px] mr-40  text-right">
+                <div className="mx-auto flex max-w-[900px] flex-col gap-6 text-right lg:flex-row lg:items-start lg:gap-10">
 
                     <h1
-                        className="mt-8 text-[72px] leading-[0.9] text-black"
+                        className="mt-6 text-[42px] leading-[0.9] text-black sm:text-[56px] md:text-[72px]"
                         style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}
                     >
                         {program.title.split(/\s+/).map((word, index) => (
@@ -124,7 +160,7 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                     </h1>
 
                     <p
-                        className="mt-8 mr-20 text-[18px] leading-9 text-[#555] whitespace-pre-line"
+                        className="mt-0 text-[16px] leading-8 whitespace-pre-line text-[#555] sm:text-[18px] sm:leading-9 lg:mt-8 lg:mr-6"
                         style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                     >
                         {program.fullDescription || program.shortDescription}
@@ -132,7 +168,7 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                 </div>
 
                 {/* DETAILS */}
-                <div className="grid md:grid-cols-2 gap-x-10 gap-y-10 mt-26 text-right mr-40 mb-40">
+                <div className="mx-auto mt-12 grid max-w-[900px] gap-x-10 gap-y-8 text-right sm:mt-16 md:grid-cols-2 md:gap-y-10 lg:mt-20 lg:mb-32">
 
                     <div className="flex items-start gap-4">
                         <Image
@@ -143,12 +179,12 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                         //   className="shrink-0 mt-1"
                         />
 
-                        <div className="flex gap-1">
-                            <p className="text-[22px] text-black font-medium">
+                        <div className="flex flex-wrap gap-1">
+                            <p className="text-[18px] font-medium text-black sm:text-[22px]">
                                 נושא:
                             </p>
 
-                            <p className="text-[22px] text-black ">
+                            <p className="text-[18px] text-black sm:text-[22px]">
                                 {program.topic || "-"}
                             </p>
                         </div>
@@ -166,12 +202,12 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                         //   className="shrink-0 mt-1"
                         />
 
-                        <div className="flex gap-1">
-                            <p className="text-[22px] text-black font-medium">
+                        <div className="flex flex-wrap gap-1">
+                            <p className="text-[18px] font-medium text-black sm:text-[22px]">
                                 אורך:
                             </p>
 
-                            <p className="text-[22px] text-black ">
+                            <p className="text-[18px] text-black sm:text-[22px]">
                                 {program.duration || "-"}
                             </p>
                         </div>
@@ -185,12 +221,12 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                         //   className="shrink-0 mt-1"
                         />
 
-                        <div className="flex gap-1">
-                            <p className="text-[22px] text-black font-medium">
+                        <div className="flex flex-wrap gap-1">
+                            <p className="text-[18px] font-medium text-black sm:text-[22px]">
                                 חומרים נלווים:
                             </p>
 
-                            <p className="text-[22px] text-black ">
+                            <p className="text-[18px] text-black sm:text-[22px]">
                                 {materialsText}
                             </p>
                         </div>
@@ -205,12 +241,12 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                         />
 
 
-                        <div className="flex gap-1">
-                            <p className="text-[22px] text-black font-medium">
+                        <div className="flex flex-wrap gap-1">
+                            <p className="text-[18px] font-medium text-black sm:text-[22px]">
                                 קהל יעד:
                             </p>
 
-                            <p className="text-[22px] text-black ">
+                            <p className="text-[18px] text-black sm:text-[22px]">
                                 {program.targetAudience || "-"}
                             </p>
                         </div>
@@ -222,12 +258,12 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
 
             {/* GALLERY */}
             {galleryItems.length > 0 && (
-                <section className="max-w-[1280px] mx-auto px-6 pb-20 overflow-x-clip">
-                    <div className="grid md:grid-cols-3 gap-4">
+                <section className="mx-auto max-w-[1280px] overflow-x-clip px-4 pb-16 sm:px-6 sm:pb-20">
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         {galleryItems.map((item) => (
                             <div
                                 key={`${item.url}-${item.alt}`}
-                                className="relative h-[240px] overflow-hidden cursor-pointer group"
+                                className="group relative h-[220px] cursor-pointer overflow-hidden sm:h-[240px]"
                                 onClick={() => setLightboxIdx(allGalleryItems.findIndex((asset) => asset.url === item.url && asset.alt === item.alt))}
                             >
                                 {isPdfUrl(item.url) ? (
@@ -253,11 +289,11 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
             {/* LIGHTBOX */}
             {lightboxIdx !== null && (
                 <div
-                    className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 px-4"
                     onClick={() => setLightboxIdx(null)}
                 >
                     <button
-                        className="absolute top-4 left-4 text-white text-2xl hover:text-[#4be6b5] transition-colors z-10 cursor-pointer"
+                        className="absolute left-4 top-4 z-10 cursor-pointer text-2xl text-white transition-colors hover:text-[#4be6b5]"
                         onClick={() => setLightboxIdx(null)}
                     >
                         ✕
@@ -266,21 +302,23 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                     {allGalleryItems.length > 1 && (
                         <>
                             <button
-                                className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-5xl hover:text-[#4be6b5] transition-colors z-10 cursor-pointer"
+                                className="absolute right-2 top-1/2 z-10 flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-black/35 -translate-y-1/2 text-5xl text-white transition-colors hover:text-[#4be6b5] sm:right-4 sm:h-20 sm:w-20 sm:text-6xl"
                                 onClick={(e) => { e.stopPropagation(); setLightboxIdx((lightboxIdx - 1 + allGalleryItems.length) % allGalleryItems.length); }}
+                                aria-label="לתמונה הקודמת"
                             >
                                 ‹
                             </button>
                             <button
-                                className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-5xl hover:text-[#4be6b5] transition-colors z-10 cursor-pointer"
+                                className="absolute left-2 top-1/2 z-10 flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-black/35 -translate-y-1/2 text-5xl text-white transition-colors hover:text-[#4be6b5] sm:left-4 sm:h-20 sm:w-20 sm:text-6xl"
                                 onClick={(e) => { e.stopPropagation(); setLightboxIdx((lightboxIdx + 1) % allGalleryItems.length); }}
+                                aria-label="לתמונה הבאה"
                             >
                                 ›
                             </button>
                         </>
                     )}
 
-                    <div className="relative max-w-[90vw] max-h-[85vh]" onClick={(e) => e.stopPropagation()}>
+                    <div className="relative max-h-[85vh] max-w-[90vw]" onClick={(e) => e.stopPropagation()}>
                         {isPdfUrl(allGalleryItems[lightboxIdx].url) ? (
                             renderPdfFrame(allGalleryItems[lightboxIdx].url, allGalleryItems[lightboxIdx].alt || program.title, "h-[85vh] w-[90vw] rounded-xl bg-white")
                         ) : (
@@ -301,17 +339,17 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
             )}
 
             {/* QUESTIONS */}
-            <section className="w-full bg-white py-24" dir="rtl" style={{ backgroundColor: '#F7F7F7' }}>
-                <div className="max-w-7xl mx-auto px-4 flex">
+            <section className="w-full bg-white py-16 sm:py-20 md:py-24" dir="rtl" style={{ backgroundColor: '#F7F7F7' }}>
+                <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 lg:flex-row lg:items-start">
                     {/* כותרת */}
-                    <div className=" flex-col items-end mb-12" style={{ direction: 'rtl', marginLeft: '-80px' }}>
+                    <div className="mb-0 flex-col items-end lg:mb-12" style={{ direction: 'rtl' }}>
                         <img src="/figma/Vector-9.svg" alt="סמל המלצות" className="w-6 h-6 mb-2 ml-1" style={{ display: 'inline-block' }} />
-                        <h2 className="text-4xl  text-right mb-12" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: '#000' }}>
+                        <h2 className="mb-6 text-right text-3xl sm:text-4xl lg:mb-12" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: '#000' }}>
                             שאלות <br /> יש?
                         </h2>
                     </div>
                     {/* שאלות */}
-                    <div className="flex-1 flex flex-col gap-6 mr-50">
+                    <div className="flex-1 flex flex-col gap-4 sm:gap-6 lg:mr-16 xl:mr-24">
                         {QUESTIONS.map((item, idx) => (
                             <div key={idx} className="relative">
                                 <div
@@ -354,10 +392,10 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
             </section>
 
             {/* CTA — Interested form */}
-            <section className="bg-black py-24">
-                <div className="max-w-[1100px] mx-auto px-6 text-center">
+            <section className="bg-black py-16 sm:py-20 md:py-24">
+                <div className="mx-auto max-w-[1100px] px-4 text-center sm:px-6">
                     <h2
-                        className="text-[64px] leading-none text-[#ff7a6b]"
+                        className="text-[40px] leading-none text-[#ff7a6b] sm:text-[52px] md:text-[64px]"
                         style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}
                     >
                         מעוניינת?
@@ -366,23 +404,23 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                     <InterestedForm programId={program.id} />
                 </div>
             </section>
-            <section className="bg-white py-24 " style={{ backgroundColor: '#F7F7F7' }}>
-                <div className="max-w-[1280px] mx-auto px-6 ">
+            <section className="bg-white py-16 sm:py-20 md:py-24" style={{ backgroundColor: '#F7F7F7' }}>
+                <div className="mx-auto max-w-[1280px] px-4 sm:px-6">
 
-                    <div className="text-center mb-14">
+                    <div className="mb-10 text-center sm:mb-14">
                         {/* <p className="text-[14px] tracking-[0.3em] text-[#4be6b5] mb-4">
         תוכניות נוספות
       </p> */}
 
                         <h2
-                            className="text-[56px] leading-none text-black"
+                            className="text-[34px] leading-none text-black sm:text-[44px] md:text-[56px]"
                             style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}
                         >
                             עוד תוכניות שתוכלי לאהוב
                         </h2>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8 text-center w-340">
+                    <div className="grid gap-6 text-center sm:gap-8 md:grid-cols-2 xl:grid-cols-3">
                         {relatedPrograms.map((item) => {
                             const relatedCategoryStyle = getProgramCategoryStyle(item.category);
                             const relatedCover = [...item.images, ...item.graphics].find((asset) => asset.isCover) ?? [...item.images, ...item.graphics][0];
@@ -390,9 +428,9 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                             return (
                             <article
                                 key={item.id}
-                                className="overflow-hidden rounded-[32px] bg-white"
+                                className="overflow-hidden rounded-[32px] bg-white shadow-sm"
                             >
-                                <div className="relative h-[280px]  mr-5 mt-5 ml-5 border border-[#f0f0f0] rounded-[32px] overflow-hidden">
+                                <div className="relative mx-4 mt-4 h-[240px] overflow-hidden rounded-[28px] border border-[#f0f0f0] sm:mx-5 sm:mt-5 sm:h-[280px] sm:rounded-[32px]">
                                     {relatedCover?.url ? (
                                         isPdfUrl(relatedCover.url) ? (
                                             <iframe
@@ -423,12 +461,12 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
 
                                 <div className="p-8 text-right">
                                     {/* <p className="text-[#4be6b5] text-sm mb-3">תוכנית</p> */}
-                                    <h3 className="text-[28px] font-bold text-black mb-4" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: relatedCategoryStyle.titleColor }}>{item.title}</h3>
+                                    <h3 className="mb-4 text-[24px] font-bold text-black sm:text-[28px]" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: relatedCategoryStyle.titleColor }}>{item.title}</h3>
                                     <p className="text-[#666] leading-7 line-clamp-3" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>{item.shortDescription}</p>
                                     <div className="mt-8 text-right">
                                         <Link
                                             href={`/programs/${item.slug}`}
-                                            className={`inline-flex rounded-full px-10 py-3 font-semibold ${relatedCategoryStyle.buttonClassName}`}
+                                            className={`inline-flex rounded-full px-8 py-3 font-semibold sm:px-10 ${relatedCategoryStyle.buttonClassName}`}
                                         >
                                             לתוכנית
                                         </Link>
@@ -456,7 +494,7 @@ function InterestedForm({ programId }: { programId: string }) {
     );
 
     return (
-        <form action={formAction} className="mt-10 flex flex-wrap justify-center gap-4 items-start">
+        <form action={formAction} className="mt-8 flex flex-wrap items-start justify-center gap-4 sm:mt-10">
             <input type="hidden" name="programId" value={programId} />
 
             <input
@@ -464,7 +502,7 @@ function InterestedForm({ programId }: { programId: string }) {
                 type="text"
                 required
                 placeholder="השם שלך"
-                className="w-[180px] h-[50px] px-5 rounded-full bg-white text-black text-center text-base focus:outline-none focus:ring-2 focus:ring-[#4be6b5] transition"
+                className="h-[50px] w-full max-w-[320px] rounded-full bg-white px-5 text-center text-base text-black transition focus:outline-none focus:ring-2 focus:ring-[#4be6b5] sm:w-[180px]"
                 style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
             />
             <input
@@ -472,7 +510,7 @@ function InterestedForm({ programId }: { programId: string }) {
                 type="text"
                 required
                 placeholder="טלפון לשיחה"
-                className="w-[180px] h-[50px] px-5 rounded-full bg-white text-black text-center text-base focus:outline-none focus:ring-2 focus:ring-[#4be6b5] transition"
+                className="h-[50px] w-full max-w-[320px] rounded-full bg-white px-5 text-center text-base text-black transition focus:outline-none focus:ring-2 focus:ring-[#4be6b5] sm:w-[180px]"
                 style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
             />
             <input
@@ -480,7 +518,7 @@ function InterestedForm({ programId }: { programId: string }) {
                 type="email"
                 required
                 placeholder="כתובת מייל"
-                className="w-[180px] h-[50px] px-5 rounded-full bg-white text-black text-center text-base focus:outline-none focus:ring-2 focus:ring-[#4be6b5] transition"
+                className="h-[50px] w-full max-w-[320px] rounded-full bg-white px-5 text-center text-base text-black transition focus:outline-none focus:ring-2 focus:ring-[#4be6b5] sm:w-[180px]"
                 style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
             />
 
@@ -489,7 +527,7 @@ function InterestedForm({ programId }: { programId: string }) {
             <button
                 type="submit"
                 disabled={pending}
-                className="w-[140px] h-[50px] rounded-full bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] text-black font-bold text-base transition hover:scale-105 disabled:opacity-60"
+                className="h-[50px] w-full max-w-[320px] rounded-full bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] text-base font-bold text-black transition hover:scale-105 disabled:opacity-60 sm:w-[140px]"
                 style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
             >
                 {pending ? "שולח..." : "שלח"}

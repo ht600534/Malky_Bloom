@@ -60,17 +60,27 @@ export default function TestimonialsCarousel() {
   }
 
   .swiper-button-prev {
-    right: 80px !important;
+    right: 24px !important;
   }
 
   .swiper-button-next {
-    left: 80px !important;
+    left: 24px !important;
+  }
+
+  @media (min-width: 768px) {
+    .swiper-button-prev {
+      right: 80px !important;
+    }
+
+    .swiper-button-next {
+      left: 80px !important;
+    }
   }
 `}</style>
 
-    <div className="max-w-7xl mx-auto px-4 flex">
+    <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 sm:px-6 lg:flex-row">
 
-      <div className="flex-col items-end mb-12" style={{ direction: 'rtl' }}>
+      <div className="mb-0 flex-col items-end lg:mb-12" style={{ direction: 'rtl' }}>
         <img
           src="/figma/Vector-9.svg"
           alt="סמל המלצות"
@@ -78,7 +88,7 @@ export default function TestimonialsCarousel() {
           style={{ display: 'inline-block' }}
         />
         <h2
-          className="text-4xl font-bold text-right mb-12"
+          className="mb-6 text-right text-3xl font-bold sm:text-4xl lg:mb-12"
           style={{
             fontFamily: "'Placebo_FM', Arial, sans-serif",
             color: '#000'
@@ -88,7 +98,7 @@ export default function TestimonialsCarousel() {
         </h2>
       </div>
 
-      <div className="overflow-x-hidden w-full relative">
+      <div className="relative w-full overflow-x-hidden">
         <Swiper
           modules={[Navigation, Autoplay]}
           navigation
@@ -105,19 +115,18 @@ export default function TestimonialsCarousel() {
             paddingBottom: '2rem',
             direction: 'rtl',
             color: 'black',
-            minHeight: '500px'
+            minHeight: '420px'
           }}
         >
           {testimonials.map((t, i) => (
             <SwiperSlide key={i}>
-                <div className="flex flex-col items-right justify-between bg-transparent min-w-[620px] max-w-[620px] mx-auto px-4">
+                <div className="mx-auto flex max-w-[620px] min-w-0 flex-col justify-between bg-transparent px-4">
 
                 <p
-                  className="text-right text-black text-xl leading-relaxed mb-6 font-normal break-words"
+                  className="mb-6 break-words text-right text-base font-normal leading-relaxed text-black sm:text-lg md:text-xl"
                   style={{
                     fontFamily: 'Tahoma, Geneva, sans-serif',
                     direction: 'rtl',
-                    maxWidth: '620px',
                     wordBreak: 'break-word',
                     whiteSpace: 'pre-wrap',
                     overflowWrap: 'break-word'
@@ -142,13 +151,13 @@ export default function TestimonialsCarousel() {
                   )}
 
                   {t.name && (
-                    <span className="font-bold text-black text-xl mt-2">
+                    <span className="mt-2 text-lg font-bold text-black sm:text-xl">
                       {t.name}
                     </span>
                   )}
 
                   {t.contact && (
-                    <span className="text-gray-600 text-xl">
+                    <span className="text-base text-gray-600 sm:text-xl">
                       {t.contact}
                     </span>
                   )}

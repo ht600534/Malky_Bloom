@@ -23,11 +23,11 @@ type FooterContentProps = {
 export default async function FooterContent({
   phone,
   email,
-  menuGapClassName = "gap-x-50",
-  newsletterArrowStyle = { marginLeft: "210px", marginBottom: "5px" },
+  menuGapClassName = "gap-x-8 sm:gap-x-12 lg:gap-x-16",
+  newsletterArrowStyle = { marginBottom: "5px" },
   newsletterTitleClassName = "text-[38px]",
   newsletterFormClassName = "w-full max-w-[320px]",
-  newsletterMessageClassName = "ml-36 -mt-2 text-right text-sm direction-rtl",
+  newsletterMessageClassName = "mt-2 text-right text-sm direction-rtl",
 }: FooterContentProps) {
   const categories = await getCategoriesFromDb();
   const categoryEntries = Object.entries(categories).filter(([slug]) => slug !== "all");
@@ -48,14 +48,14 @@ export default async function FooterContent({
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-[minmax(280px,340px)_minmax(220px,260px)_minmax(420px,1fr)] gap-y-14 gap-x-12 relative z-20 w-full">
-      <div className="flex flex-col items-start text-left gap-6">
-        <span className="text-[42px] leading-[1.05] bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] bg-clip-text text-transparent mb-20 mt-10" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}>
+    <div className="relative z-20 mx-auto grid w-full max-w-7xl grid-cols-1 gap-x-12 gap-y-12 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-[minmax(240px,320px)_minmax(220px,260px)_minmax(320px,1fr)] lg:gap-y-14 xl:gap-x-16">
+      <div className="flex flex-col items-center gap-5 text-center md:items-start md:text-left">
+        <span className="mb-4 mt-10  bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] bg-clip-text text-[34px] leading-[1.05] text-transparent sm:text-[38px] lg:mb-12 lg:text-[42px]" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}>
           מרכזות <span className="font-light" style={{ color: "white" }}>אונליין</span>
         </span>
-        <div className="flex items-center gap-3 mt-6">
+        <div className="mt-2 flex items-center gap-3">
           <Image src="/figma/Vector%20(7).svg" alt="טלפון" width={24} height={24} />
-          <span className="text-[24px] font-normal" style={{ fontFamily: "'Ploni ML v2 AAA', Arial, sans-serif" }}>
+          <span className="text-[18px] font-normal sm:text-[22px] lg:text-[24px]" style={{ fontFamily: "'Ploni ML v2 AAA', Arial, sans-serif" }}>
             {phone}
           </span>
         </div>
@@ -63,7 +63,7 @@ export default async function FooterContent({
           <Image src="/figma/Vector%20(8).svg" alt="מייל" width={24} height={24} />
           <a
             href={`mailto:${email}`}
-            className="text-[24px] font-normal hover:text-[#4be6b5] transition-colors cursor-pointer relative"
+            className="relative cursor-pointer text-[16px] font-normal transition-colors hover:text-[#4be6b5] sm:text-[20px] lg:text-[24px]"
             style={{ fontFamily: "'Ploni ML v2 AAA', Arial, sans-serif" }}
             title="שלחי מייל"
           >
@@ -71,17 +71,17 @@ export default async function FooterContent({
           </a>
         </div>
       </div>
-      <div className={`mt-30 mr-12 grid grid-cols-2 ${menuGapClassName} gap-y-3 text-right text-[24px] leading-[1.55] text-[#4be6b5]`} style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+      <div className={`grid grid-cols-2 justify-items-right gap-y-3 text-right text-[18px] leading-[1.55] text-[#4be6b5] sm:text-[20px] lg:mt-24 lg:mr-100 lg:-translate-x-14 lg:justify-items-right lg:text-right lg:text-[24px] xl:mr-12 xl:-translate-x-8 ${menuGapClassName}`} style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
         {footerLinks.map((item) => (
           <Link key={item.label} href={item.href} className="whitespace-nowrap transition hover:text-white " style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
             {item.label}
           </Link>
         ))}
       </div>
-      <div className="flex flex-col items-end text-right gap-6 mt-20 mr-0">
-        <div className="flex flex-col items-end gap-3">
-          <Image src="/figma/Vector%20(6).svg" alt="חץ כתום " width={100} height={72} style={newsletterArrowStyle} />
-          <span className={`${newsletterTitleClassName} leading-[1.05]`} style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", fontWeight: "none" }}>
+      <div className="flex flex-col items-center gap-6 text-center md:col-span-2 md:items-end md:text-right lg:col-span-1 lg:mt-14">
+        <div className="flex flex-col items-right gap-3">
+          <Image src="/figma/Vector%20(6).svg" alt="חץ כתום " width={100} height={72} className="self-right" style={newsletterArrowStyle} />
+          <span className={`${newsletterTitleClassName} leading-[1.05] text-right`} style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", fontWeight: "none" }}>
             רוצה להתעדכן<br />כשתוכנית חדשה <br /> עולה לאתר?
           </span>
         </div>

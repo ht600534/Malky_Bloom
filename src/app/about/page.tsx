@@ -9,16 +9,16 @@ export default function AboutPage() {
       <main dir="rtl" className="bg-[#F7F7F7]">
         {/* HERO */}
         <section className="bg-black">
-          <div className="mx-auto flex h-[420px] max-w-[1440px] flex-col items-center justify-center px-4">
+          <div className="mx-auto flex min-h-[260px] max-w-[1440px] flex-col items-center justify-center px-4 py-12 sm:min-h-[320px] md:h-[420px]">
             <div className="-mb-5 flex justify-right">
                 <img
                   src="/figma/OBJECTS (3).svg"
                   alt=""
-                  className="h-auto w-[60px]"
+                  className="h-auto w-[44px] sm:w-[60px]"
                 />
               </div>
             <h1
-              className="text-center text-[92px] font-semibold leading-none text-[#ff7a6b]"
+              className="text-center text-[52px] font-semibold leading-none text-[#ff7a6b] sm:text-[72px] md:text-[92px]"
               style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}
             >
               אודות
@@ -50,18 +50,18 @@ export default function AboutPage() {
           </div>
         </div>
         {/* CONTENT */}
-        <section className="bg-[#F7F7F7] px-6 py-[10px] mt-10">
-          <div className="mx-auto max-w-auto mr-50 ml-20">
+        <section className="mt-6 bg-[#F7F7F7] px-4 py-[10px] sm:px-6 sm:mt-10">
+          <div className="mx-auto max-w-5xl">
 
             <h2
-              className="mb-16 text-right text-[38px] font-semibold leading-[1.2] text-[#ff7a6b] "
+              className="mb-10 text-right text-[28px] font-semibold leading-[1.2] text-[#ff7a6b] sm:mb-12 sm:text-[34px] md:mb-16 md:text-[38px]"
               style={{ fontFamily: "'Placebo_FM', Arial, sans-serif" }}
             >
               <div className="mb-4 flex justify-right">
                 <img
                   src="/figma/Vector (6).svg"
                   alt=""
-                  className="h-auto w-[90px]"
+                  className="h-auto w-[70px] sm:w-[90px]"
                 />
               </div>
 
@@ -75,7 +75,7 @@ export default function AboutPage() {
             </h2>
 
             <div
-              className="space-y-10 text-right text-[22px] leading-[1.5] text-[#1A1A1A]"
+              className="space-y-8 text-right text-[18px] leading-[1.7] text-[#1A1A1A] sm:space-y-10 sm:text-[20px] md:text-[22px] md:leading-[1.5]"
               style={{ fontFamily: "'Ploni ML v2 AAA', Arial, sans-serif" }}
             >
 
@@ -112,7 +112,7 @@ export default function AboutPage() {
                 רכזות רחב.<br /> כולן תורמות לכולן.
               </p>
 
-              <p className="text-[26px] font-semibold text-[#ff7a6b] mb-70" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+              <p className="mb-20 text-[22px] font-semibold text-[#ff7a6b] sm:mb-32 sm:text-[24px] md:mb-48 md:text-[26px]" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
                 אני כאן לכל שאלה!
               </p>
             </div>

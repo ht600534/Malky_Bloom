@@ -17,21 +17,21 @@ const QUESTIONS = [
 export default function FaqSection() {
     const [openItems, setOpenItems] = useState<number[]>([]);
     return (
-        <section className="w-full bg-white py-24" dir="rtl" style={{ backgroundColor: '#F7F7F7' }}>
-            <div className="max-w-7xl mx-auto px-4 flex">
+        <section className="w-full bg-white py-16 sm:py-20 md:py-24" dir="rtl" style={{ backgroundColor: '#F7F7F7' }}>
+            <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 lg:flex-row lg:items-start">
                 {/* כותרת */}
-                <div className=" flex-col items-end mb-12" style={{ direction: 'rtl', marginLeft: '-80px' }}>
+                <div className="mb-0 flex-col items-end lg:mb-12" style={{ direction: 'rtl' }}>
                     <img src="/figma/Vector-9.svg" alt="סמל המלצות" className="w-6 h-6 mb-2 ml-1" style={{ display: 'inline-block' }} />
-                    <h2 className="text-4xl  text-right mb-12" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: '#000' }}>
+                    <h2 className="mb-6 text-right text-3xl sm:text-4xl lg:mb-12" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: '#000' }}>
                         שאלות <br /> נפוצות
                     </h2>
                 </div>
                 {/* שאלות */}
-                <div className="flex-1 flex flex-col gap-6 mr-50">
+                <div className="flex-1 flex flex-col gap-4 sm:gap-6 lg:mr-16 xl:mr-24">
                     {QUESTIONS.map((item, idx) => (
                         <div key={idx} className="relative">
                             <div
-                                className="relative flex flex-row-reverse items-center bg-white rounded-full px-6 py-2 transition-all duration-300 cursor-pointer hover:shadow-md"
+                                className="relative flex min-h-[52px] flex-row-reverse items-center rounded-[28px] bg-white px-4 py-3 transition-all duration-300 cursor-pointer hover:shadow-md sm:rounded-full sm:px-6 sm:py-2"
                                 style={{ minHeight: 52 }}
                                 onClick={() =>
                                     setOpenItems(prev =>
@@ -42,7 +42,7 @@ export default function FaqSection() {
                                 }                            >
                                 {/* כפתור חץ עגול בצד שמאל */}
                                 <div className="flex-shrink-0 -ml-2 z-10">
-                                    <Image src="/figma/Ellipse 106.svg" alt="עיגול כתום" width={56} height={56} />
+                                    <Image src="/figma/Ellipse 106.svg" alt="עיגול כתום" width={48} height={48} className="sm:h-14 sm:w-14" />
                                     <span className="absolute left-1/20 top-1/2 -translate-x-1/2 -translate-y-1/2">
                                         <Image
                                             src="/figma/Elements (1).svg"
@@ -53,13 +53,13 @@ export default function FaqSection() {
                                     </span>
                                 </div>
                                 {/* שאלה */}
-                                <div className="flex-1 text-right text-lg md:text-xl font-normal text-black px-2 select-none" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+                                <div className="flex-1 select-none px-2 text-right text-base font-normal text-black sm:text-lg md:text-xl" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
                                     {item.q}
                                 </div>
                             </div>
                             {/* תשובה */}
                             {openItems.includes(idx) && (
-                                <div className="w-full  rounded-b-2xl  px-8 py-6 text-right text-base md:text-lg text-black font-normal " style={{ fontFamily: "Tahoma, Geneva, sans-serif", marginTop: '-8px', whiteSpace: 'pre-line' }}>
+                                <div className="w-full rounded-b-2xl px-5 py-5 text-right text-sm font-normal text-black sm:px-8 sm:text-base md:text-lg" style={{ fontFamily: "Tahoma, Geneva, sans-serif", marginTop: '-8px', whiteSpace: 'pre-line' }}>
                                     {item.a}
                                 </div>
                             )}

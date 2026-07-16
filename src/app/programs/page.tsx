@@ -15,7 +15,7 @@ export default async function ProgramsPage({ searchParams }: Props) {
   const activeCategory = query.category ?? "all";
   const searchQuery = query.q ?? "";
   const [{ programs, hasMore }, activeLabels] = await Promise.all([
-    getProgramsPage({ category: activeCategory, searchQuery, limit: 9, offset: 0 }),
+    getProgramsPage({ category: activeCategory, searchQuery, limit: 12, offset: 0 }),
     getCategoriesFromDb(),
   ]);
   const heroTitle = activeCategory === "all" ? "כל התוכניות" : activeLabels[activeCategory] ?? "כל התוכניות";
@@ -40,9 +40,9 @@ export default async function ProgramsPage({ searchParams }: Props) {
     <>
       <SiteHeader />
       <main className="bg-[#06070a] text-white">
-        <div className="flex flex-col items-center justify-center min-h-[420px]">
+        <div className="flex min-h-[260px] flex-col items-center justify-center px-6 pb-10 pt-16 sm:min-h-[320px] md:min-h-[420px] md:pb-0 md:pt-0">
           <h1
-            className="mt-12 text-[100px] leading-none"
+            className="mt-6 text-center text-[52px] leading-none sm:text-[72px] md:mt-12 md:text-[100px]"
             style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: heroColor }}
           >
             {heroTitle}
@@ -73,9 +73,9 @@ export default async function ProgramsPage({ searchParams }: Props) {
           </div>
         </div>
 
-        <section className="bg-[#F7F7F7] pb-40 pt-20">
+        <section className="bg-[#F7F7F7] pb-20 pt-12 sm:pb-28 sm:pt-16 md:pb-40 md:pt-20">
           {/* חיפוש */}
-          <div className="mb-10 flex justify-center">
+          <div className="mb-8 flex justify-center px-4 sm:mb-10">
             <div className="relative w-full max-w-[400px]">
               <form method="GET" action="/programs">
                 {activeCategory !== "all" ? <input type="hidden" name="category" value={activeCategory} /> : null}
@@ -93,7 +93,7 @@ export default async function ProgramsPage({ searchParams }: Props) {
               </form>
             </div>
           </div>
-          <div className="mb-20 flex flex-wrap justify-center gap-4">
+          <div className="mb-12 flex flex-wrap justify-center gap-3 px-4 sm:mb-16 sm:gap-4 md:mb-20">
             {Object.entries(activeLabels).map(([value, label]) => {
               const isActive = activeCategory === value;
 
@@ -108,12 +108,12 @@ export default async function ProgramsPage({ searchParams }: Props) {
                   }
                   className={`
               h-[42px]
-              px-8
+                  px-5 sm:px-8
               rounded-full
               flex
               items-center
               justify-center
-              text-[15px]
+                  text-[14px] sm:text-[15px]
               transition
               ${isActive
                       ? "bg-white text-black"
@@ -126,12 +126,15 @@ export default async function ProgramsPage({ searchParams }: Props) {
               );
             })}
           </div>
-          <ProgramsFeed
-            initialPrograms={programs}
-            initialHasMore={hasMore}
-            activeCategory={activeCategory}
-            searchQuery={searchQuery}
-          />
+          <div className="px-4 sm:px-6">
+            <ProgramsFeed
+              key={`${activeCategory}:${searchQuery}`}
+              initialPrograms={programs}
+              initialHasMore={hasMore}
+              activeCategory={activeCategory}
+              searchQuery={searchQuery}
+            />
+          </div>
         </section>
       </main>
 

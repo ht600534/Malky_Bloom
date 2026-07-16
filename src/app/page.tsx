@@ -7,12 +7,14 @@ import SafeProgramSection from "@/components/site/SafeProgramSection";
 import ContactConsultBox from "@/components/site/ContactConsultBox";
 import FaqSection from "@/components/site/FaqSection";
 import FooterNew from "@/components/site/FooterNew";
+import HomeLeadNudge from "@/components/site/home-lead-nudge";
 import { getPublishedPrograms } from "@/lib/data/programs";
 export default async function Home() {
   const programs = await getPublishedPrograms();
   return (
     <>
       <SiteHeader />
+      <HomeLeadNudge />
       <HeroSection />
       <TheaterImageBlock />
       <ProgramCategories />

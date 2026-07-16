@@ -13,13 +13,13 @@ export default function ContactConsultBox() {
     );
 
     return (
-        <div className="w-full  justify-center relative z-0" style={{ marginTop: "-100px" }}>
+        <div className="relative z-0 -mt-10 w-full justify-center overflow-x-clip sm:-mt-14 md:-mt-20 lg:-mt-[100px]">
             <div
-                className="bg-black rounded-[50px] max-w-5xl w-full px-8 md:px-16 py-6 flex flex-col items-center "
-                style={{ backgroundColor: "#000000", zIndex: 20, marginRight: '250px' }}
+                className="mx-auto flex w-[calc(100%-2rem)] max-w-5xl flex-col items-center rounded-[30px] bg-black px-5 py-8 sm:w-[calc(100%-3rem)] sm:rounded-[40px] sm:px-8 md:px-12 lg:px-16"
+                style={{ backgroundColor: "#000000", zIndex: 20 }}
             >
                 <h2
-                    className="text-4xl md:text-5xl font-bold text-center mb-4 pt-12"
+                    className="mb-4 pt-6 text-center text-4xl font-bold sm:pt-8 md:text-5xl lg:pt-12"
                     style={{
                         color: "#ff7a6b",
                         fontFamily: "'Placebo_FM', Arial, sans-serif",
@@ -29,17 +29,17 @@ export default function ContactConsultBox() {
                     מתלבטת?
                 </h2>
                 <div
-                    className="text-white text-center text-xl md:text-3xl font-light mb-8"
+                    className="mb-8 text-center text-lg font-light text-white sm:text-xl md:text-2xl lg:text-3xl"
                     style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                 >
                     צרי קשר להתייעצות והתאמה אישית!                </div>
-                <form action={formAction} className="w-full flex flex-col gap-4 md:flex-row justify-center items-center">
+                <form action={formAction} className="flex w-full flex-col items-center justify-center gap-4 lg:flex-row">
                     <input
                         name="name"
                         type="text"
                         placeholder="השם שלך"
                         required
-                        className="w-full md:w-44 px-4 py-2 rounded-full bg-white text-black text-center text-lg font-normal focus:outline-none focus:ring-2 focus:ring-[#4be6b5] transition"
+                        className="w-full rounded-full bg-white px-4 py-3 text-center text-base font-normal text-black transition focus:outline-none focus:ring-2 focus:ring-[#4be6b5] sm:text-lg lg:w-44"
                         style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                     />
                     <input
@@ -47,7 +47,7 @@ export default function ContactConsultBox() {
                         type="text"
                         placeholder="טלפון לשיחה"
                         required
-                        className="w-full md:w-44 px-4 py-2 rounded-full bg-white text-black text-center text-lg font-normal focus:outline-none focus:ring-2 focus:ring-[#4be6b5] transition"
+                        className="w-full rounded-full bg-white px-4 py-3 text-center text-base font-normal text-black transition focus:outline-none focus:ring-2 focus:ring-[#4be6b5] sm:text-lg lg:w-44"
                         style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                     />
                     <input
@@ -55,7 +55,7 @@ export default function ContactConsultBox() {
                         type="email"
                         placeholder="כתובת מייל"
                         required
-                        className="w-full md:w-44 px-4 py-2 rounded-full bg-white text-black text-center text-lg font-normal focus:outline-none focus:ring-2 focus:ring-[#4be6b5] transition"
+                        className="w-full rounded-full bg-white px-4 py-3 text-center text-base font-normal text-black transition focus:outline-none focus:ring-2 focus:ring-[#4be6b5] sm:text-lg lg:w-44"
                         style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                     />
                     <input
@@ -67,7 +67,7 @@ export default function ContactConsultBox() {
                     <button
                         type="submit"
                         disabled={pending}
-                        className="w-full md:w-34 px-4 py-2 rounded-full bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] text-black font-bold text-lg text-center transition hover:scale-105 disabled:opacity-60"
+                        className="w-full rounded-full bg-gradient-to-r from-[#4be6b5] to-[#4be6b5] px-4 py-3 text-center text-base font-bold text-black transition hover:scale-105 disabled:opacity-60 sm:text-lg lg:w-34"
                         style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                     >
                         {pending ? "שולח..." : "שלח"}
@@ -79,12 +79,12 @@ export default function ContactConsultBox() {
             </div>
 
 
-            <div style={{ width: '100%', height: '160px', backgroundColor: '#F7F7F7', marginTop: '-50px' }} >
+            <div className="-mt-8 h-[110px] w-full bg-[#F7F7F7] sm:-mt-10 sm:h-[130px] md:h-[160px]" >
 
                 <div
-                    className="bg-black  max-w-5xl w-full px-8 md:px-16 py-16 flex flex-col items-center "
+                    className="mx-auto flex w-[calc(100%-2rem)] max-w-5xl flex-col items-center bg-black px-8 py-10 sm:w-[calc(100%-3rem)] md:px-16 md:py-16"
                     style={{
-                        backgroundColor: "#000000", zIndex: 20, borderTopLeftRadius: 0, marginRight: '250px',
+                        backgroundColor: "#000000", zIndex: 20, borderTopLeftRadius: 0,
                         borderTopRightRadius: 0,
                         borderBottomLeftRadius: '30px',
                         borderBottomRightRadius: '30px'

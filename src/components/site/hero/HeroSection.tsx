@@ -2,58 +2,38 @@
 // קומפוננטת Hero Section – עיצוב ראשי מהפיגמה
 // אין לוגיקה, רק מבנה ותצוגה
 
-import ConstellationEffect from "./ConstellationEffect";
-
+// import ConstellationEffect from "./ConstellationEffect";
+//  {/* <ConstellationEffect /> */}
 export default function HeroSection() {
   return (
-    <section style={{
-      width: 'auto',
-      background: '#000',
-      position: 'relative',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexGrow: 1
-    }}>
-      <ConstellationEffect />
+    <section className="relative flex min-h-[540px] w-auto flex-grow flex-col items-center justify-center overflow-hidden bg-black px-4 pb-20 pt-24 sm:min-h-[620px] sm:px-6 sm:pb-24 sm:pt-28 md:min-h-[720px] md:pb-32 md:pt-36">
+    
 
       {/* שכבת תוכן */}
-      <div style={{
-        position: 'relative',
-        zIndex: 10,
-        marginTop: 0,
-        marginBottom: 0,
-        background: 'rgba(0,0,0,0)',
-        borderRadius: 40,
-        padding: '0',
-        // width: 800,
-        // maxWidth: '90vw',
-        boxShadow: 'none',
-        border: 'none',
-        textAlign: 'center',
-      }}>
-        <div style={{
-          fontWeight: 900,
-          fontSize: 80,
-          color: '#fff',
-          lineHeight: 0.99,
-          marginBottom: 0,
-          letterSpacing: '-2px',
-          textShadow: '0 2px 8px #0008',
-        }}>
-
-          <br /><span style={{ background: 'none', display: 'inline', fontFamily: "'Placebo_FM', Arial, sans-serif" }}>מאפס מאמץ ותקציב נמוך<br /></span>
-          <span style={{ background: 'none', display: 'inline', fontFamily: "'Placebo_FM', Arial, sans-serif" }}>עד לתוכנית <span style={{ color: '#ff7a6b', fontWeight: 900 }}>מוצלחת</span></span>
+      <div className="relative z-10 rounded-[40px] bg-transparent p-0 text-center shadow-none">
+        <div
+          className="text-white"
+          style={{
+            fontWeight: 900,
+            fontSize: 'clamp(2.6rem, 9vw, 5rem)',
+            lineHeight: 0.99,
+            marginBottom: 0,
+            letterSpacing: '-2px',
+            textShadow: '0 2px 8px #0008',
+          }}
+        >
+          <span style={{ background: 'none', display: 'block', fontFamily: "'Placebo_FM', Arial, sans-serif" }}>מאפס מאמץ ותקציב נמוך</span>
+          <span style={{ background: 'none', display: 'block', marginTop: '0.2em', fontFamily: "'Placebo_FM', Arial, sans-serif" }}>עד לתוכנית <span style={{ color: '#ff7a6b', fontWeight: 900 }}>מוצלחת</span></span>
         </div>
-        <div style={{
-          fontWeight: 800,
-          fontSize: 80,
-          color: '#4be6b5',
-          margin: '24px 0 0 0',
-          fontFamily: "'Placebo_FM', Arial, sans-serif",
-          lineHeight: 0.99,
-        }}>
+        <div
+          className="mt-7 text-[#4be6b5] sm:mt-8"
+          style={{
+            fontWeight: 800,
+            fontSize: 'clamp(2.4rem, 8.5vw, 5rem)',
+            fontFamily: "'Placebo_FM', Arial, sans-serif",
+            lineHeight: 0.99,
+          }}
+        >
           זה אף פעם <br /> לא היה פשוט יותר!
         </div>
         {/* <div style={{
@@ -63,9 +43,7 @@ export default function HeroSection() {
         }}>
           פתרון מלא לניהול תוכניות עם כלים חכמים ודקוק פשוט
         </div> */}
-        <br />
-        <br />
-        <br /><br />
+        <div className="h-16 sm:h-20 md:h-24" />
         {/* <div style={{display: 'flex', gap: 24, justifyContent: 'center', marginTop: 36}}>
           <button style={{
             color: '#fff',
@@ -99,16 +77,7 @@ export default function HeroSection() {
       <img
         src="/figma/Vector (13).svg"
         alt=""
-        style={{
-          marginTop: 20,
-          // position: "absolute",
-          marginBottom: '60px',
-          left: "12%",
-          width: 14,
-          pointerEvents: "none",
-          userSelect: "none",
-          // transform: "translateY(-6px)",
-        }}
+        className="pointer-events-none mt-6 mb-4 w-3.5 select-none sm:mt-8 sm:mb-8"
       />
     </section>
   );
