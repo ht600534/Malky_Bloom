@@ -225,7 +225,7 @@ export default function HomeLeadNudge() {
                   className="mt-3 text-center text-[11px] text-white/30"
                   style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                 >
-                  ללא התחייבות · עם התאמה מלאה · בחינם
+                  ללא התחייבות · עם התאמה מלאה 
                 </p>
               </div>
             </div>
