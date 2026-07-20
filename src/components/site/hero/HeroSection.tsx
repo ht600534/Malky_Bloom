@@ -1,9 +1,4 @@
-// HeroSection.tsx
-// קומפוננטת Hero Section – עיצוב ראשי מהפיגמה
-// אין לוגיקה, רק מבנה ותצוגה
 
-// import ConstellationEffect from "./ConstellationEffect";
-//  {/* <ConstellationEffect /> */}
 export default function HeroSection() {
   return (
     <section className="relative flex min-h-[420px] w-auto flex-grow flex-col items-center justify-center overflow-hidden bg-black px-4 pb-10 pt-16 sm:min-h-[480px] sm:px-6 sm:pb-14 sm:pt-20 md:min-h-[540px] md:pb-16 md:pt-24">
