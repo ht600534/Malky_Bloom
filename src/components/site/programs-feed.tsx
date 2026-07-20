@@ -38,6 +38,13 @@ function getInitialFeedState(
 
     const parsed = JSON.parse(cachedValue) as { programs?: Program[]; hasMore?: boolean };
     if (Array.isArray(parsed.programs) && parsed.programs.length >= initialPrograms.length) {
+      // אם השרת מחזיר תוכנית חדשה בראש הרשימה — מבטלים את הcache
+      const serverFirstId = initialPrograms[0]?.id;
+      const cacheFirstId = parsed.programs[0]?.id;
+      if (serverFirstId && cacheFirstId && serverFirstId !== cacheFirstId) {
+        window.sessionStorage.removeItem(getCacheKey(activeCategory, searchQuery));
+        return { programs: initialPrograms, hasMore: initialHasMore };
+      }
       return {
         programs: parsed.programs,
         hasMore: Boolean(parsed.hasMore),

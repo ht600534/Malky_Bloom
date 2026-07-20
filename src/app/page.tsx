@@ -10,6 +10,9 @@ import FooterNew from "@/components/site/FooterNew";
 import HomeLeadNudge from "@/components/site/home-lead-nudge";
 // import IntroSplash from "@/components/site/intro-splash";
 import { getPublishedPrograms } from "@/lib/data/programs";
+
+export const revalidate = 3600; // רענון אוטומטי כל 24 שעות
+
 export default async function Home() {
   const programs = await getPublishedPrograms();
   return (
