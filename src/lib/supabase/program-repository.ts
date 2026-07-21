@@ -47,10 +47,13 @@ function emptyToNull(value: string | undefined) {
   return trimmed ? trimmed : null;
 }
 
-export function programPayloadToRow(input: ProgramPayload) {
+export function programPayloadToRow(
+  input: ProgramPayload,
+  includeSlug = true,
+) {
   return {
     title: input.title.trim(),
-    slug: input.slug,
+    ...(includeSlug ? { slug: input.slug } : {}),
     short_description: emptyToNull(input.shortDescription),
     full_description: emptyToNull(input.fullDescription),
     topic: emptyToNull(input.topic),

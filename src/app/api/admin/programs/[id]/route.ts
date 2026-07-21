@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { ensureAdminRequest } from "@/lib/admin-api";
 import { isTrustedOrigin } from "@/lib/request-security";
 import {
@@ -52,13 +53,15 @@ export async function PUT(request: NextRequest, { params }: Params) {
 
   try {
     const supabase = getSupabaseServerClient();
-    const { error } = await supabase.from("programs").update(programPayloadToRow(parsed.data)).eq("id", id);
+    const { error } = await supabase.from("programs").update(programPayloadToRow(parsed.data, false)).eq("id", id);
 
     if (error) {
       return NextResponse.json({ message: error.message }, { status: 500 });
     }
 
     await syncProgramAssets(id, parsed.data);
+    revalidatePath("/");
+    revalidatePath("/programs");
   } catch (error) {
     const message = error instanceof Error ? error.message : "Supabase is not configured yet";
     return NextResponse.json({ message }, { status: 500 });
@@ -88,6 +91,9 @@ export async function DELETE(request: NextRequest, { params }: Params) {
         { status: 500 },
       );
     }
+    revalidatePath("/");
+    revalidatePath("/programs");
+    revalidatePath("/programs/[slug]", "page");
   } catch {
     return NextResponse.json({ message: "Supabase is not configured yet" }, { status: 500 });
   }

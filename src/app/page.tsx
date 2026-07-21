@@ -11,7 +11,7 @@ import HomeLeadNudge from "@/components/site/home-lead-nudge";
 // import IntroSplash from "@/components/site/intro-splash";
 import { getPublishedPrograms } from "@/lib/data/programs";
 
-export const revalidate = 3600; // רענון אוטומטי כל 24 שעות
+export const revalidate = 86400; // גיבוי: מתרענן כל 24 שעות אם לא היה שינוי
 
 export default async function Home() {
   const programs = await getPublishedPrograms();

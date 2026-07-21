@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { ensureAdminRequest } from "@/lib/admin-api";
 import { isTrustedOrigin } from "@/lib/request-security";
 import {
@@ -60,6 +61,8 @@ export async function POST(request: NextRequest) {
     }
 
     await syncProgramAssets(data.id, parsed.data);
+    revalidatePath("/");
+    revalidatePath("/programs");
   } catch (error) {
     const message = error instanceof Error ? error.message : "Supabase is not configured yet";
     return NextResponse.json({ message }, { status: 500 });
