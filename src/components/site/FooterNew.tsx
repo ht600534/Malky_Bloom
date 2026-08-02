@@ -42,14 +42,14 @@ export default async function SiteFooter() {
       />
 
       {/* ── Credits ── */}
-      <div className="relative z-20 mt-6 px-4 pb-4 text-center sm:mt-8">
+      <div className="relative z-20 mt-6 px-4 pb-2 text-center sm:mt-8">
         <a
-          href="mailto:henny600534@gmail.com"
+          href="mailto:website600534@gmail.com"
           className="text-green hover:text-[#ff7a6b] transition-colors text-sm tracking-wide"
-          style={{ fontFamily: "Tahoma, Geneva, sans-serif"}}
+          style={{ fontFamily: "Tahoma, Geneva, sans-serif",fontSize:"10px" }}
         >
           
-          עיצוב ובניית אתרים  — Henny600534@gmail.com
+          בניית אתרים    — website600534@gmail.com
         </a>
       </div>
     </section>
