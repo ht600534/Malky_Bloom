@@ -166,7 +166,17 @@ export async function sendContactRequestNotification(payload: {
   name: string;
   phone: string;
   email: string;
+  requestType?: string | null;
+  details?: string | null;
+  programName?: string | null;
 }): Promise<boolean> {
+  const requestTypeLabel =
+    payload.requestType === "proposal"
+      ? "הצעת תוכנית"
+      : payload.requestType === "details"
+        ? "קבלת פרטים על תוכנית"
+        : null;
+
   const subject = "בקשת קשר חדשה";
   const html = renderEmailShell({
     eyebrow: "טופס יצירת קשר",
@@ -177,6 +187,9 @@ export async function sendContactRequestNotification(payload: {
         ${renderDataRow("שם מלא", payload.name)}
         ${renderDataRow("טלפון", payload.phone)}
         ${renderDataRow("אימייל", payload.email)}
+        ${payload.programName ? renderDataRow("תוכנית", payload.programName) : ""}
+        ${requestTypeLabel ? renderDataRow("סוג הפנייה", requestTypeLabel) : ""}
+        ${payload.details ? renderDataRow("פירוט", payload.details) : ""}
       </table>
       
     `,

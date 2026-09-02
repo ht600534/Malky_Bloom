@@ -29,6 +29,8 @@ const initialForm: ProgramInput = {
   targetAudience: "",
   duration: "",
   notes: "",
+  creatorName: "",
+  seminarName: "",
   category: "events",
   status: "draft",
   images: [],
@@ -368,6 +370,27 @@ export function ProgramManager() {
               onChange={(e) => setForm((prev) => ({ ...prev, duration: e.target.value }))}
               className={styles.field}
               placeholder="לדוגמה: 3 שעות"
+            />
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2 mb-5">
+          <div>
+            <label className={styles.label}>שם היוצרת</label>
+            <input
+              value={form.creatorName ?? ""}
+              onChange={(e) => setForm((prev) => ({ ...prev, creatorName: e.target.value }))}
+              className={styles.field}
+              placeholder="לדוגמה: מלכי בלום"
+            />
+          </div>
+          <div>
+            <label className={styles.label}>שם הסמינר</label>
+            <input
+              value={form.seminarName ?? ""}
+              onChange={(e) => setForm((prev) => ({ ...prev, seminarName: e.target.value }))}
+              className={styles.field}
+              placeholder="לדוגמה: בית יעקב"
             />
           </div>
         </div>

@@ -24,6 +24,8 @@ const programSchemaBase = z.object({
   targetAudience: optionalText,
   duration: optionalText,
   notes: optionalText,
+  creatorName: optionalText,
+  seminarName: optionalText,
   category: z.string().optional(),
   status: z.enum(["draft", "published"]).default("draft"),
   images: z.array(programImageInputSchema).optional(),

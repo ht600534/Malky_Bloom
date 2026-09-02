@@ -6,6 +6,8 @@ type InsertContactLeadPayload = {
   phone: string;
   message?: string | null;
   programId?: string | null;
+  requestType?: string | null;
+  details?: string | null;
 };
 
 export type InsertContactLeadResult = {
@@ -21,6 +23,8 @@ export async function insertContactLead(payload: InsertContactLeadPayload): Prom
     email: payload.email,
     message: payload.message || "בקשת ייעוץ והתאמה אישית",
     program_id: payload.programId || null,
+    request_type: payload.requestType || null,
+    details: payload.details || null,
     status: "new",
   });
 

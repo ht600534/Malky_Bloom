@@ -33,7 +33,7 @@ export default function ContactConsultBox() {
                     style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
                 >
                     צרי קשר להתייעצות והתאמה אישית!                </div>
-                <form action={formAction} className="flex w-full flex-col items-center justify-center gap-4 lg:flex-row">
+                <form action={formAction} className="flex w-full flex-col items-center justify-center gap-4 lg:flex-row" id="consult-box-form">
                     <input
                         name="name"
                         type="text"
@@ -73,6 +73,27 @@ export default function ContactConsultBox() {
                         {pending ? "שולח..." : "שלח"}
                     </button>
                 </form>
+
+                <div className="mt-4 flex w-full flex-col items-center gap-3">
+                    <div className="flex flex-wrap items-center justify-center gap-6 text-white" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+                        <label className="flex items-center gap-2 text-base">
+                            <input type="radio" name="requestType" value="proposal" form="consult-box-form" defaultChecked />
+                            הצעת תוכנית
+                        </label>
+                        <label className="flex items-center gap-2 text-base">
+                            <input type="radio" name="requestType" value="details" form="consult-box-form" />
+                            קבלת פרטים על תוכנית
+                        </label>
+                    </div>
+                    <textarea
+                        name="details"
+                        form="consult-box-form"
+                        rows={2}
+                        placeholder="יש לך משהו לשאול? אפשר לפרט כאן"
+                        className="w-full rounded-2xl border-none bg-white px-4 py-3 text-base text-black placeholder:text-black/60 focus:outline-none focus:ring-2 focus:ring-[#4be6b5]"
+                        style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
+                    />
+                </div>
                 {state.message ? (
                   <div className={`text-sm ${state.ok ? "text-brand" : "text-brand-2"} mt-3`}>{state.message}</div>
                 ) : null}

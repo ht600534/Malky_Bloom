@@ -3,6 +3,7 @@
 import { contactSchema, newsletterSchema } from "@/lib/validations/forms";
 import { insertNewsletterSubscriber } from "@/lib/supabase/newsletter-repository";
 import { insertContactLead } from "@/lib/supabase/contact-repository";
+import { getProgramByIdAdmin } from "@/lib/supabase/program-repository";
 import { sendContactRequestNotification, sendNewsletterNotification } from "@/lib/email/resend";
 import { verifyTurnstileToken } from "@/lib/turnstile";
 import { headers } from "next/headers";
@@ -90,6 +91,8 @@ export async function createContactLead(formData: FormData): Promise<ActionResul
     email: getFormValue(formData, "email"),
     message: getFormValue(formData, "message"),
     programId: getFormValue(formData, "programId"),
+    requestType: getFormValue(formData, "requestType"),
+    details: getFormValue(formData, "details"),
     turnstileToken: getFormValue(formData, "cf-turnstile-response"),
   });
 
@@ -109,6 +112,8 @@ export async function createContactLead(formData: FormData): Promise<ActionResul
       email: parsed.data.email,
       message: parsed.data.message,
       programId: parsed.data.programId || null,
+      requestType: parsed.data.requestType || null,
+      details: parsed.data.details,
     });
 
     if (error) {
@@ -116,10 +121,19 @@ export async function createContactLead(formData: FormData): Promise<ActionResul
     }
 
     try {
+      let programName: string | null = null;
+      if (parsed.data.programId) {
+        const { data } = await getProgramByIdAdmin(parsed.data.programId);
+        programName = data?.title ?? null;
+      }
+
       const emailSent = await sendContactRequestNotification({
         name: parsed.data.name,
         phone: parsed.data.phone,
         email: parsed.data.email,
+        requestType: parsed.data.requestType,
+        details: parsed.data.details,
+        programName,
       });
 
       if (!emailSent) {

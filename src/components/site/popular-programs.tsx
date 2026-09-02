@@ -50,7 +50,10 @@ export default function PopularPrograms({ programs }: Props) {
       [...program.images, ...program.graphics].find((item) => item.isCover) ??
       [...program.images, ...program.graphics][0];
     return (
-      <div className="h-[480px] w-full max-w-[361px] min-w-0 flex-1 rounded-[30px] bg-[#0E0E0E] p-5 shadow-lg transition-all duration-300 hover:scale-[1.02]">
+      <Link
+        href={`/programs/${program.slug}`}
+        className="block h-[480px] w-full max-w-[361px] min-w-0 flex-1 rounded-[30px] bg-[#0E0E0E] p-5 shadow-lg transition-all duration-300 hover:scale-[1.02]"
+      >
         <div className="w-full h-[200px] overflow-hidden rounded-[12px] mb-5 bg-[#232326]">
           {coverAsset?.url ? (
             isPdfUrl(coverAsset.url) ? (
@@ -85,15 +88,14 @@ export default function PopularPrograms({ programs }: Props) {
           {program.shortDescription}
         </p>
         <div className="mt-6 w-full">
-          <Link
-            href={`/programs/${program.slug}`}
+          <span
             className={`block w-40 rounded-full py-3 text-center text-base font-bold transition-all duration-300 ${categoryStyle.buttonClassName}`}
             style={{ fontFamily: "Tahoma, Geneva, sans-serif", color: categoryStyle.buttonClassName.includes("text-white") ? "white" : "black" }}
           >
             לדף התוכנית ←
-          </Link>
+          </span>
         </div>
-      </div>
+      </Link>
     );
   }
 

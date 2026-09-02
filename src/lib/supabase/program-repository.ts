@@ -28,6 +28,8 @@ export type DbProgram = {
   target_audience: string | null;
   duration: string | null;
   notes: string | null;
+  creator_name: string | null;
+  seminar_name: string | null;
   category: string | null;
   status: "draft" | "published";
   created_at: string;
@@ -60,6 +62,8 @@ export function programPayloadToRow(
     target_audience: emptyToNull(input.targetAudience),
     duration: emptyToNull(input.duration),
     notes: emptyToNull(input.notes),
+    creator_name: emptyToNull(input.creatorName),
+    seminar_name: emptyToNull(input.seminarName),
     category: input.category ?? null,
     status: input.status,
     updated_at: new Date().toISOString(),
@@ -233,6 +237,8 @@ export function dbProgramToClient(row: DbProgram) {
     targetAudience: row.target_audience ?? "",
     duration: row.duration ?? "",
     notes: row.notes ?? "",
+    creatorName: row.creator_name ?? "",
+    seminarName: row.seminar_name ?? "",
     category,
     status: row.status,
     images,
@@ -252,6 +258,8 @@ export function dbProgramToAdminForm(row: DbProgram) {
     targetAudience: client.targetAudience,
     duration: client.duration,
     notes: client.notes,
+    creatorName: client.creatorName,
+    seminarName: client.seminarName,
     category: row.category ?? undefined,
     status: client.status,
     images: (row.program_images ?? [])

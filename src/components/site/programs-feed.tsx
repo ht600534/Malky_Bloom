@@ -159,8 +159,9 @@ export default function ProgramsFeed({ initialPrograms, initialHasMore, activeCa
           const coverAsset = [...program.images, ...program.graphics].find((item) => item.isCover) ?? [...program.images, ...program.graphics][0];
 
           return (
-            <div
+            <Link
               key={program.id}
+              href={`/programs/${program.slug}`}
               className="flex min-h-[460px] w-full flex-col rounded-[30px] bg-[#ffffff] p-4 shadow-lg transition-all duration-300 hover:scale-[1.02] sm:min-h-[480px] sm:p-5"
             >
               <div className="mb-5 h-[200px] w-full overflow-hidden rounded-[12px] bg-[#232326] sm:h-[220px]">
@@ -209,15 +210,14 @@ export default function ProgramsFeed({ initialPrograms, initialHasMore, activeCa
               </p>
 
               <div className="mt-6 w-full">
-                <Link
-                  href={`/programs/${program.slug}`}
+                <span
                   className={`block w-full rounded-full py-3 text-center text-base font-bold transition-all duration-300 sm:w-40 ${buttonClass}`}
                   style={{ fontFamily: "Tahoma, Geneva, sans-serif", color: buttonClass.includes("text-white") ? "white" : "black" }}
                 >
                   לדף התוכנית ←
-                </Link>
+                </span>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

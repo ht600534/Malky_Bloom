@@ -22,6 +22,8 @@ export type Program = {
   targetAudience: string;
   duration: string;
   notes: string;
+  creatorName: string;
+  seminarName: string;
   category: ProgramCategory | null;
   tags: string[];
   images: ProgramImage[];

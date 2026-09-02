@@ -25,5 +25,7 @@ export const contactSchema = z.object({
     .transform((value) => value.toLowerCase()),
   message: trimmedString.optional().transform((value) => (value ? value : null)),
   programId: trimmedString.optional(),
+  requestType: z.enum(["proposal", "details"]).optional(),
+  details: trimmedString.optional().transform((value) => (value ? value : null)),
   turnstileToken: trimmedString.optional(),
 });

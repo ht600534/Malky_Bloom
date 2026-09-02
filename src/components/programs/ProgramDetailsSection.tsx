@@ -252,6 +252,29 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                         </div>
                     </div>
 
+                    <div className="flex items-start gap-4">
+                        <div className="flex flex-wrap gap-1">
+                            <p className="text-[18px] font-medium text-black sm:text-[22px]">
+                                יוצרת:
+                            </p>
+
+                            <p className="text-[18px] text-black sm:text-[22px]">
+                                {program.creatorName || "-"}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="flex items-start gap-4">
+                        <div className="flex flex-wrap gap-1">
+                            <p className="text-[18px] font-medium text-black sm:text-[22px]">
+                                סמינר:
+                            </p>
+
+                            <p className="text-[18px] text-black sm:text-[22px]">
+                                {program.seminarName || "-"}
+                            </p>
+                        </div>
+                    </div>
 
                 </div>
             </section>
@@ -426,9 +449,10 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                             const relatedCover = [...item.images, ...item.graphics].find((asset) => asset.isCover) ?? [...item.images, ...item.graphics][0];
 
                             return (
-                            <article
+                            <Link
                                 key={item.id}
-                                className="overflow-hidden rounded-[32px] bg-white shadow-sm"
+                                href={`/programs/${item.slug}`}
+                                className="block overflow-hidden rounded-[32px] bg-white shadow-sm"
                             >
                                 <div className="relative mx-4 mt-4 h-[240px] overflow-hidden rounded-[28px] border border-[#f0f0f0] sm:mx-5 sm:mt-5 sm:h-[280px] sm:rounded-[32px]">
                                     {relatedCover?.url ? (
@@ -464,15 +488,14 @@ export default function ProgramDetailsSection({ program, relatedPrograms }: Prop
                                     <h3 className="mb-4 text-[24px] font-bold text-black sm:text-[28px]" style={{ fontFamily: "'Placebo_FM', Arial, sans-serif", color: relatedCategoryStyle.titleColor }}>{item.title}</h3>
                                     <p className="text-[#666] leading-7 line-clamp-3" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>{item.shortDescription}</p>
                                     <div className="mt-8 text-right">
-                                        <Link
-                                            href={`/programs/${item.slug}`}
+                                        <span
                                             className={`inline-flex rounded-full px-8 py-3 font-semibold sm:px-10 ${relatedCategoryStyle.buttonClassName}`}
                                         >
                                             לתוכנית
-                                        </Link>
+                                        </span>
                                     </div>
                                 </div>
-                            </article>
+                            </Link>
                         );})}
                     </div>
 
@@ -494,7 +517,7 @@ function InterestedForm({ programId }: { programId: string }) {
     );
 
     return (
-        <form action={formAction} className="mt-8 flex flex-wrap items-start justify-center gap-4 sm:mt-10">
+        <form action={formAction} className="mt-8 flex flex-wrap items-start justify-center gap-4 sm:mt-10" id="interested-form">
             <input type="hidden" name="programId" value={programId} />
 
             <input
@@ -532,6 +555,24 @@ function InterestedForm({ programId }: { programId: string }) {
             >
                 {pending ? "שולח..." : "שלח"}
             </button>
+
+            <div className="flex w-full flex-wrap items-center justify-center gap-6 text-white" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+                <label className="flex items-center gap-2 text-sm">
+                    <input type="radio" name="requestType" value="proposal" defaultChecked />
+                    הצעת תוכנית
+                </label>
+                <label className="flex items-center gap-2 text-sm">
+                    <input type="radio" name="requestType" value="details" />
+                    קבלת פרטים על תוכנית
+                </label>
+            </div>
+            <textarea
+                name="details"
+                rows={2}
+                placeholder="יש לך משהו לשאול? אפשר לפרט כאן"
+                className="h-[60px] w-full max-w-[500px] rounded-2xl bg-white px-5 py-3 text-center text-sm text-black transition focus:outline-none focus:ring-2 focus:ring-[#4be6b5]"
+                style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}
+            />
 
             {state.message && (
                 <div className="w-full text-center text-sm mt-2" style={{ color: state.ok ? '#4be6b5' : '#ff7a6b' }}>

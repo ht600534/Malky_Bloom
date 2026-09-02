@@ -72,7 +72,7 @@ export function ContactFormPage() {
             השאירי פרטים ונחזור אלייך בהקדם!
           </p>
 
-          <form action={formAction} className="flex w-full max-w-[900px] flex-col gap-3 md:flex-row md:items-center md:justify-center md:gap-[10px]">
+          <form action={formAction} className="flex w-full max-w-[900px] flex-col gap-3 md:flex-row md:items-center md:justify-center md:gap-[10px]" id="contact-page-form">
             <input
               name="name"
               type="text"
@@ -106,6 +106,27 @@ export function ContactFormPage() {
               {pending ? "שולח..." : "שלח"}
             </button>
           </form>
+
+          <div className="mt-4 flex w-full max-w-[900px] flex-col items-center gap-3">
+            <div className="flex flex-wrap items-center justify-center gap-6 text-white" style={{ fontFamily: "Tahoma, Geneva, sans-serif" }}>
+              <label className="flex items-center gap-2 text-[18px]">
+                <input type="radio" name="requestType" value="proposal" form="contact-page-form" defaultChecked />
+                הצעת תוכנית
+              </label>
+              <label className="flex items-center gap-2 text-[18px]">
+                <input type="radio" name="requestType" value="details" form="contact-page-form" />
+                קבלת פרטים על תוכנית
+              </label>
+            </div>
+            <textarea
+              name="details"
+              form="contact-page-form"
+              rows={3}
+              placeholder="יש לך משהו לשאול? אפשר לפרט כאן"
+              className="w-full max-w-[900px] rounded-2xl border-none bg-white px-6 py-3 text-[18px] text-black placeholder:text-black/60 focus:outline-none focus:ring-2 focus:ring-[#4be6b5]"
+              style={{ fontFamily: "Tahoma, Geneva, sans-serif", fontWeight: 300 }}
+            />
+          </div>
 
           <div className="mt-5 flex justify-center">
             <TurnstileWidget />
